@@ -1,6 +1,6 @@
 package br.android.ecommerce_marvel.br.android.ecommerce_marvel.model;
 
-public class ComicDataWrapperDTO {
+public class ResponseDTO {
     private int code;
     private String status;
     private String copyright;
@@ -8,17 +8,6 @@ public class ComicDataWrapperDTO {
     private String attributionHTML;
     private ComicDataContainer data;
     private String etag;
-
-    public ComicDataWrapperDTO(int code, String status, String copyright, String attributionText,
-                               String attributionHTML, ComicDataContainer data, String etag) {
-        this.code = code;
-        this.status = status;
-        this.copyright = copyright;
-        this.attributionText = attributionText;
-        this.attributionHTML = attributionHTML;
-        this.data = data;
-        this.etag = etag;
-    }
 
     public int getCode() {
         return code;
