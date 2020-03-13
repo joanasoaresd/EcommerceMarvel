@@ -1,4 +1,4 @@
-package br.android.ecommerce_marvel.br.android.ecommerce_marvel.model;
+package br.android.ecommerce_marvel.br.android.ecommerce_marvel.models;
 
 import java.util.ArrayList;
 
