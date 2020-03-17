@@ -11,7 +11,7 @@ public class Comics {
     private String Title;
     private String description;
     private int pageCount;
-    private ArrayList<Price> prices;
+    public ArrayList<Price> prices;
 
     public int getId() {
         return id;
@@ -31,10 +31,6 @@ public class Comics {
 
     public int getPageCount() {
         return pageCount;
-    }
-
-    public ArrayList<Price> getPrices() {
-        return prices;
     }
 
     public void setId(int id) {
