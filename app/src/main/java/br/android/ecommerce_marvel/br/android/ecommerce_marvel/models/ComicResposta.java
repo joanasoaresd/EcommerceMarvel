@@ -1,12 +1,12 @@
 package br.android.ecommerce_marvel.br.android.ecommerce_marvel.models;
 
-public class ResponseDTO {
+public class ComicResposta {
     private int code;
     private String status;
     private String copyright;
     private String attributionText;
     private String attributionHTML;
-    private ComicDataContainer data;
+    private Data data;
     private String etag;
 
     public int getCode() {
@@ -49,11 +49,11 @@ public class ResponseDTO {
         this.attributionHTML = attributionHTML;
     }
 
-    public ComicDataContainer getData() {
+    public Data getData() {
         return data;
     }
 
-    public void setData(ComicDataContainer data) {
+    public void setData(Data data) {
         this.data = data;
     }
 

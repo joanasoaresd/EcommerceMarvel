@@ -3,69 +3,67 @@ package br.android.ecommerce_marvel.br.android.ecommerce_marvel.models;
 
 import android.media.Image;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.ArrayList;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Comics {
 
     private int id;
-    private Image thumbnail;
-    private String Title;
+    private String title;
     private String description;
     private int pageCount;
-    public ArrayList<Price> prices;
+    private ArrayList<Price> prices;
+    private Thumbnail thumbnail;
+
 
     public int getId() {
         return id;
-    }
-
-    public Image getThumbnail() {
-        return thumbnail;
-    }
-
-    public String getTitle() {
-        return Title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public int getPageCount() {
-        return pageCount;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setThumbnail(Image thumbnail) {
+    public Thumbnail getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(Thumbnail thumbnail) {
         this.thumbnail = thumbnail;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
     public void setTitle(String title) {
-        Title = title;
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
+    public int getPageCount() {
+        return pageCount;
+    }
+
     public void setPageCount(int pageCount) {
         this.pageCount = pageCount;
+    }
+
+    public ArrayList<Price> getPrices() {
+        return prices;
     }
 
     public void setPrices(ArrayList<Price> prices) {
         this.prices = prices;
     }
-
-    @Override
-    public String toString() {
-        return "Comics{" +
-                "id=" + id +
-                ", thumbnail=" + thumbnail +
-                ", Title='" + Title + '\'' +
-                ", description='" + description + '\'' +
-                ", pageCount=" + pageCount +
-                ", prices=" + prices +
-                '}';
-    }
 }
+
