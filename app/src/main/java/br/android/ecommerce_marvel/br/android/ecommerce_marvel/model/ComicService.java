@@ -1,4 +1,4 @@
-package br.android.ecommerce_marvel.br.android.ecommerce_marvel.models;
+package br.android.ecommerce_marvel.br.android.ecommerce_marvel.model;
 
         import retrofit2.Call;
         import retrofit2.http.GET;

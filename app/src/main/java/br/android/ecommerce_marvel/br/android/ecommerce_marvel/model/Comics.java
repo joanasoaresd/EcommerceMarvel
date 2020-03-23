@@ -1,7 +1,5 @@
-package br.android.ecommerce_marvel.br.android.ecommerce_marvel.models;
+package br.android.ecommerce_marvel.br.android.ecommerce_marvel.model;
 
-
-import android.media.Image;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

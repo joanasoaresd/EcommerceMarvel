@@ -3,13 +3,57 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="1dp"
+    android:padding="16dp"
     android:orientation="vertical">
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:scaleType="fitXY"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_launcher_foreground"/>
+
+
+     <android.support.v7.widget.CardView
+         android:layout_height="wrap_content"
+         android:layout_width="match_parent">
+
+         <LinearLayout
+
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="vertical">
+             <TextView
+                 android:id="@+id/TextViewTitle"
+                 android:text="Titulo"
+                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"/>
+
+             <TextView
+                 android:id="@+id/TextViewId"
+                 android:text="ID"
+                 android:textAppearance="@style/TextAppearance.AppCompat"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"/>
+
+
+
+             <TextView
+                 android:id="@+id/TextViewDesc"
+                 android:text="Descrição"
+                 android:textAppearance="@style/TextAppearance.AppCompat"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"/>
+
+             <TextView
+                 android:id="@+id/TextViewCountPage"
+                 android:text="QTD páginas"
+                 android:textAppearance="@style/TextAppearance.AppCompat"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"/>
+
+             <TextView
+                 android:id="@+id/TextViewPrice"
+                 android:text="Preço"
+                 android:textAppearance="@style/TextAppearance.AppCompat"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"/>
+
+
+         </LinearLayout>
+     </android.support.v7.widget.CardView>
 </LinearLayout>
