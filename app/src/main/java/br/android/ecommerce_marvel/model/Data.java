@@ -1,7 +1,11 @@
-package br.android.ecommerce_marvel.br.android.ecommerce_marvel.model;
+package br.android.ecommerce_marvel.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Data {
 
     private int offset;
@@ -9,6 +13,18 @@ public class Data {
     private int total;
     private int count;
     private ArrayList<Comics> results;
+
+    public Data(int offset, int limit, int total, int count, ArrayList<Comics> results) {
+        this.offset = offset;
+        this.limit = limit;
+        this.total = total;
+        this.count = count;
+        this.results = results;
+    }
+
+    public Data() {
+        super();
+    }
 
     public int getOffset() {
         return offset;
@@ -42,10 +58,11 @@ public class Data {
         this.count = count;
     }
 
+    @JsonProperty(value = "results")
     public ArrayList<Comics> getResults() {
         return results;
     }
-
+    @JsonProperty(value = "results")
     public void setResults(ArrayList<Comics> results) {
         this.results = results;
     }

@@ -1,7 +1,8 @@
-package br.android.ecommerce_marvel.br.android.ecommerce_marvel.model;
+package br.android.ecommerce_marvel.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,27 @@ public class Comics {
     private ArrayList<Price> prices;
     private Thumbnail thumbnail;
 
+
+    public Comics() {
+        super();
+    }
+
+    public Comics(int id, String title, String description, int pageCount, ArrayList<Price> prices, Thumbnail thumbnail) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.pageCount = pageCount;
+        this.prices = prices;
+        this.thumbnail = thumbnail;
+    }
+
+    public Comics(int id, String title, String description, int pageCount, ArrayList<Price> prices) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.pageCount = pageCount;
+        this.prices = prices;
+    }
 
     public int getId() {
         return id;

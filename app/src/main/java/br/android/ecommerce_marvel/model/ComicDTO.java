@@ -1,6 +1,10 @@
-package br.android.ecommerce_marvel.br.android.ecommerce_marvel.model;
+package br.android.ecommerce_marvel.model;
 
-public class ComicResposta {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ComicDTO {
     private int code;
     private String status;
     private String copyright;
@@ -8,6 +12,20 @@ public class ComicResposta {
     private String attributionHTML;
     private Data data;
     private String etag;
+
+    public ComicDTO(int code, String status, String copyright, String attributionText, String attributionHTML, Data data, String etag) {
+        this.code = code;
+        this.status = status;
+        this.copyright = copyright;
+        this.attributionText = attributionText;
+        this.attributionHTML = attributionHTML;
+        this.data = data;
+        this.etag = etag;
+    }
+
+    public ComicDTO() {
+        super();
+    }
 
     public int getCode() {
         return code;
@@ -49,10 +67,11 @@ public class ComicResposta {
         this.attributionHTML = attributionHTML;
     }
 
+    @JsonProperty(value = "data")
     public Data getData() {
         return data;
     }
-
+    @JsonProperty(value = "data")
     public void setData(Data data) {
         this.data = data;
     }
