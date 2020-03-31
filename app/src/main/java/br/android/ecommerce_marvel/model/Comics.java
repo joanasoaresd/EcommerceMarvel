@@ -21,6 +21,11 @@ public class Comics {
         super();
     }
 
+    public Comics(String title, int pageCount) {
+        this.title = title;
+        this.pageCount = pageCount;
+    }
+
     public Comics(int id, String title, String description, int pageCount, ArrayList<Price> prices, Thumbnail thumbnail) {
         this.id = id;
         this.title = title;
@@ -37,6 +42,10 @@ public class Comics {
         this.pageCount = pageCount;
         this.prices = prices;
     }
+
+
+
+
 
     public int getId() {
         return id;

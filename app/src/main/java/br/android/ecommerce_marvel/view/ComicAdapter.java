@@ -26,13 +26,20 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
         this.context = context;
     }
 
+    //public ComicAdapter(Context context) {
+    //    this.context = context;
+   // }
 
+
+    public void setComics(ArrayList<Comics> comics) {
+        this.comics = comics;
+    }
 
     @NonNull
     @Override
     public ComicAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.activity_main, viewGroup, false);
+                .inflate(R.layout.row, viewGroup, false);
         return new ViewHolder(v);
 
     }
@@ -42,7 +49,11 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
         //comic é um elemento da lista comics
             comic = this.comics.get(i);
 
+            //TextView textView = viewHolder.tituloComic;
+            //textView.setText(comic.getTitle());
+
             viewHolder.tituloComic.setText(comic.getTitle());
+            viewHolder.paginas.setText(comic.getPageCount());
 
 
 
@@ -56,16 +67,15 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageButton imageComic;
-        private TextView tituloComic;
-        private TextView paginas;
+        private TextView tituloComic, paginas;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            imageComic = (ImageButton) itemView.findViewById(R.id.ib_ImagemComic);
-            tituloComic = (TextView) itemView.findViewById(R.id.tv_TitleComic);
-            paginas = (TextView) itemView.findViewById(R.id.tv_NumPaginas);
+            this.imageComic = (ImageButton) itemView.findViewById(R.id.ib_ImagemComic);
+            this.tituloComic = (TextView) itemView.findViewById(R.id.tv_TitleComic);
+            this.paginas = (TextView) itemView.findViewById(R.id.tv_NumPaginas);
 
         }
 
