@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import br.android.ecommerce_marvel.R;
+import br.android.ecommerce_marvel.controller.ComicService;
 import br.android.ecommerce_marvel.model.Comics;
 
 public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> {
@@ -24,6 +25,10 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
     public ComicAdapter(ArrayList<Comics> comics, Context context) {
         this.comics = comics;
         this.context = context;
+    }
+
+    public ComicAdapter(ArrayList<Comics> comicsList) {
+        this.comics = comicsList;
     }
 
     //public ComicAdapter(Context context) {
@@ -49,11 +54,10 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
         //comic é um elemento da lista comics
             comic = this.comics.get(i);
 
-            //TextView textView = viewHolder.tituloComic;
-            //textView.setText(comic.getTitle());
-
             viewHolder.tituloComic.setText(comic.getTitle());
-            viewHolder.paginas.setText(comic.getPageCount());
+//            viewHolder.paginas.setText(comic.getPageCount());
+
+        //ComicService comicService =  RetrofitConfig.getRetrofit().create(ComicService.class);
 
 
 

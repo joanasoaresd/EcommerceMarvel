@@ -9,11 +9,22 @@ import java.util.ArrayList;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Comics {
 
+    @JsonProperty(value = "id")
     private int id;
+
+    @JsonProperty(value = "title")
     private String title;
+
+    @JsonProperty(value = "description")
     private String description;
+
+    @JsonProperty(value = "pageCount")
     private int pageCount;
+
+    @JsonProperty(value = "prices")
     private ArrayList<Price> prices;
+
+    @JsonProperty(value = "thumbnail")
     private Thumbnail thumbnail;
 
 
@@ -34,6 +45,8 @@ public class Comics {
         this.prices = prices;
         this.thumbnail = thumbnail;
     }
+
+
 
     public Comics(int id, String title, String description, int pageCount, ArrayList<Price> prices) {
         this.id = id;

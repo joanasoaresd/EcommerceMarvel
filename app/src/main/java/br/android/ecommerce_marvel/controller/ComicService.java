@@ -11,5 +11,5 @@ public interface ComicService {
     public static final String BASE_URL="https://gateway.marvel.com:443/v1/public/";
     //DEFINE CONTRATO DA API
     @GET("comics")
-    Call<ComicDTO> getComics(@Query("ts") String ts, @Query("apikey") String apikey, @Query("hash") String hash);
+    Call<ComicDTO> getComics(@Query("limit") int id, @Query("ts") String ts, @Query("apikey") String apikey, @Query("hash") String hash);
 }

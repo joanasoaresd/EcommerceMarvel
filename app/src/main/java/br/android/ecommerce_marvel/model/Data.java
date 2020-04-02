@@ -12,6 +12,8 @@ public class Data {
     private int limit;
     private int total;
     private int count;
+
+    @JsonProperty(value = "results")
     private ArrayList<Comics> results;
 
     public Data(int offset, int limit, int total, int count, ArrayList<Comics> results) {
@@ -20,6 +22,15 @@ public class Data {
         this.total = total;
         this.count = count;
         this.results = results;
+    }
+
+    public String typeResultsComics(){
+        String types = " ";
+        for (int i = 0; i <= results.size(); i++){
+            if(i>0)
+                types = ", ";
+            types += results.get(i).getTitle();
+        } return types;
     }
 
     public Data() {
@@ -66,4 +77,6 @@ public class Data {
     public void setResults(ArrayList<Comics> results) {
         this.results = results;
     }
+
+
 }
