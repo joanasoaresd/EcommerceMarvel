@@ -55,7 +55,7 @@ public class ComicActivity extends AppCompatActivity {
     } private void obterDadosJson(){
         ComicService comicService =  RetrofitConfig.getRetrofit().create(ComicService.class);
 
-            final Call<ComicDTO> requestComics = comicService.getComics(100,TS,PUBLIC_KEY,HASH);
+            final Call<ComicDTO> requestComics = comicService.getComics(TS,PUBLIC_KEY,HASH);
             requestComics.enqueue(new Callback<ComicDTO>() {
                 /**
                  * Invoked for a received HTTP response.
