@@ -27,26 +27,22 @@ public class Comics {
     @JsonProperty(value = "thumbnail")
     private Thumbnail thumbnail;
 
+    private String url;
+
 
     public Comics() {
         super();
     }
 
-    public Comics(String title, int pageCount) {
-        this.title = title;
-        this.pageCount = pageCount;
-    }
-
-    public Comics(int id, String title, String description, int pageCount, ArrayList<Price> prices, Thumbnail thumbnail) {
+    public Comics(int id, String title, String description, int pageCount, ArrayList<Price> prices, Thumbnail thumbnail, String url) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.pageCount = pageCount;
         this.prices = prices;
         this.thumbnail = thumbnail;
+        this.url = url;
     }
-
-
 
     public Comics(int id, String title, String description, int pageCount, ArrayList<Price> prices) {
         this.id = id;
@@ -57,8 +53,13 @@ public class Comics {
     }
 
 
+    public String getUrl() {
+        return url;
+    }
 
-
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public int getId() {
         return id;

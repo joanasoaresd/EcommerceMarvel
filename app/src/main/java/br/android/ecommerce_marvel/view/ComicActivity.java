@@ -7,7 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -32,7 +34,6 @@ public class ComicActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ComicAdapter comicAdapter;
     ArrayList<Comics> comicsList = new ArrayList<>();
-    //RetrofitConfig retrofitConfig = new RetrofitConfig();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,18 +44,17 @@ public class ComicActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-
-       // retrofitConfig.obterDadosJson();
         comicAdapter = new ComicAdapter(comicsList);
         comicAdapter.notifyDataSetChanged();
         recyclerView.setAdapter(comicAdapter);
-
+      //  addListenerOnButton();
         obterDadosJson();
 
-       // addListenerOnButton();
-    } private void obterDadosJson(){
-        ComicService comicService =  RetrofitConfig.getRetrofit().create(ComicService.class);
 
+       // addListenerOnButton();
+    }
+    private void obterDadosJson(){
+        ComicService comicService =  RetrofitConfig.getRetrofit().create(ComicService.class);
             final Call<ComicDTO> requestComics = comicService.getComics(TS,PUBLIC_KEY,HASH);
             requestComics.enqueue(new Callback<ComicDTO>() {
                 /**
@@ -74,15 +74,16 @@ public class ComicActivity extends AppCompatActivity {
 
                     } else {
                         ArrayList<Comics> resposta = response.body().getData().getResults();
+                        Comics c = new Comics();
                         for (int i = 0; i < resposta.size(); i++) {
-                            Comics c = resposta.get(i);
-                           // Log.i(TAG, "ID: " + c.getId());
+                            c = resposta.get(i);
+                            Log.i(TAG, "ID: " + c.getId());
                             Log.i(TAG, "Title: " + c.getTitle());
-                            //Log.i(TAG, "Descrição: " + c.getDescription());
+                            Log.i(TAG, "Descrição: " + c.getDescription());
                             Log.i(TAG, "Páginas: " + c.getPageCount());
-                           // Log.i(TAG, String.format("Preço: %.2f", c.getPrices().get(0).getPrice()));
-                            //Log.i(TAG, "Preço: " + c.getPrices().get(0).getPrice());
-                            //Log.i(TAG, "Imagem: " + c.getThumbnail());
+                            Log.i(TAG, String.format("Preço: %.2f", c.getPrices().get(0).getPrice()));
+                            Log.i(TAG, "Imagem: " + c.getThumbnail().getPortraitFantastic());
+                            Log.i(TAG, "URL: " + c.getUrl());
                             comicsList.add(c);
                             comicAdapter.notifyDataSetChanged();
                         }
@@ -99,30 +100,31 @@ public class ComicActivity extends AppCompatActivity {
                  */
                 @Override
                 public void onFailure(Call<ComicDTO> call, Throwable t) {
-                    Log.e(TAG, "Erro: "+ t.getMessage());
+                    Log.e(TAG, "Erro: " + t.getMessage());
 
                 }
             });
-            }
-           // return comicsList;
+    }
+
+
+
+
 }
 
 
 
 
+   //   public void addListenerOnButton() {
+   //       imageComic = (ImageButton) findViewById(R.id.ib_ImagemComic);
+   //       imageComic.setOnClickListener(new View.OnClickListener() {
+   //           @Override
+   //           public void onClick(View v) {
 
-
-
-  //    public void addListenerOnButton() {
-  //      imageComic = (ImageButton) findViewById(R.id.ib_ImagemComic);
-  //      imageComic.setOnClickListener(new View.OnClickListener() {
-  //          @Override
-  //          public void onClick(View v) {
-
-   //             Toast.makeText(ComicActivity.this, "ImageComic is clicked!", Toast.LENGTH_SHORT).show();
-   //         }
-  //      });
-  //  }
+   //               Toast.makeText(ComicActivity.this, "ImageComic is clicked!", Toast.LENGTH_SHORT).show();
+   //           }
+  //        });
+  //    }
+//}
 
 
 
