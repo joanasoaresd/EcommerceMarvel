@@ -11,6 +11,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#000000"
             android:padding="16dp" >
 
                 <ImageView
@@ -32,7 +33,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:text="Title"
-                    android:textColor="#000"
+                    android:textColor="#FFFFFF"
                     android:textSize="12dp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/ib_ImagemComic"
@@ -45,7 +46,7 @@
                     android:layout_marginStart="85dp"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="50dp"
-                    android:textColor="#a9a9a9"
+                    android:textColor="#DCDCDC"
                     android:text="Page"
                     android:textSize="10sp"
                     app:layout_constraintStart_toStartOf="@+id/tv_TitleComic"

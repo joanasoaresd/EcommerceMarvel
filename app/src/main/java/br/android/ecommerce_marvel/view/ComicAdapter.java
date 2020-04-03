@@ -66,7 +66,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
             viewHolder.paginas.setText(Integer.toString(comic.getPageCount()) +" páginas");
 
             Glide.with(viewHolder.imageComic.getContext())
-                .load(comic.getThumbnail().getPortraitFantastic())
+                .load(comic.getThumbnail().getPortraitUncanny())
                 .error(R.drawable.not_found)
                 .into(viewHolder.imageComic);
 

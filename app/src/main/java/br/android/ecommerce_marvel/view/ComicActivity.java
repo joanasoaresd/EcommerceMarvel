@@ -50,8 +50,6 @@ public class ComicActivity extends AppCompatActivity {
       //  addListenerOnButton();
         obterDadosJson();
 
-
-       // addListenerOnButton();
     }
     private void obterDadosJson(){
         ComicService comicService =  RetrofitConfig.getRetrofit().create(ComicService.class);

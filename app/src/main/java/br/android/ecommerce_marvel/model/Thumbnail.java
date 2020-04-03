@@ -3,6 +3,7 @@ package br.android.ecommerce_marvel.model;
 public class Thumbnail {
     private static final String PORTRAIT_XLARGE = "portrait_xlarge";
     private static final String PORTRAIT_FANTASTIC = "portrait_fantastic";
+    private static final String PORTRAIT_UNCANNY = "portrait_uncanny";
 
     private String path;
     private String extension;
@@ -29,6 +30,10 @@ public class Thumbnail {
 
     public String getPortraitFantastic(){
         return getPath() +"/" + PORTRAIT_FANTASTIC + "." + getExtension();
+    }
+
+    public String getPortraitUncanny(){
+        return getPath() +"/" + PORTRAIT_UNCANNY + "." + getExtension();
     }
 
 }
