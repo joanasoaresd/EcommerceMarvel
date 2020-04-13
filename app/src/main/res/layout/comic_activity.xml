@@ -6,11 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#800000"
-    tools:context=".view.ComicActivity">
+    tools:context=".view.ComicActivity"
+    android:orientation="vertical">
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_listacomics"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
+
+
+
 </LinearLayout>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="16dp"
+    android:background="#000000"
+    android:orientation="vertical"
+    tools:context=".view.DetailsComicsActivity">
+
+
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="QTD"
+            android:textColorHint="@color/cardview_light_background"
+            android:textSize="10sp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="310dp"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/bt_buy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="310dp"
+            android:layout_marginStart="200dp"
+            android:text="Comprar" />
+
+    <Button
+        android:id="@+id/bt_carrinho"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="310dp"
+        android:layout_marginStart="60dp"
+        android:textSize="12dp"
+        android:text="Add ao carrinho" />
+
+
+
+
+
+    <ImageView
+        android:id="@+id/fotoImagemView"
+        android:background="@color/colorAccent"
+        android:layout_width="100dp"
+        android:layout_height="145dp"
+        android:layout_marginLeft="120dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@mipmap/ic_launcher_marvel_comics"/>
+
+    <TextView
+        android:id="@+id/tv_TitleComic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="150dp"
+        android:textStyle="bold"
+        android:textSize="12dp"
+        android:text="Titulo"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+                 android:id="@+id/tv_Id"
+                 android:text="ID: 001"
+                 android:textAppearance="@style/TextAppearance.AppCompat"
+                 android:layout_marginStart="10dp"
+                 android:layout_marginTop="180dp"
+                 android:textColor="#DCDCDC"
+                 android:textSize="12dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:textAllCaps="true"/>
+
+
+
+             <TextView
+                 android:id="@+id/tv_Desc"
+                 android:text="Descrição"
+                 android:textAppearance="@style/TextAppearance.AppCompat"
+                 android:textColor="#DCDCDC"
+                 android:layout_marginStart="10dp"
+                 android:layout_marginTop="200dp"
+                 android:textSize="12dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:textAllCaps="true"/>
+
+             <TextView
+                 android:id="@+id/tv_NumPaginas"
+                 android:text="QTD páginas"
+                 android:textAppearance="@style/TextAppearance.AppCompat"
+                 android:textColor="#DCDCDC"
+                 android:layout_marginStart="10dp"
+                 android:layout_marginTop="220dp"
+                 android:textSize="12dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:textAllCaps="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="____________________________________________________"
+            android:textColor="#DCDCDC"
+            android:layout_marginStart="10dp"
+            android:textSize="12dp"
+            android:layout_marginTop="240dp">
+
+        </TextView>
+
+             <TextView
+                 android:id="@+id/tv_Price"
+                 android:text="Preço: R$ 0,00"
+                 android:textAppearance="@style/TextAppearance.AppCompat"
+                 android:textColor="#DCDCDC"
+                 android:layout_marginStart="100dp"
+                 android:layout_marginTop="260dp"
+                 android:textSize="17dp"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:textAllCaps="true"/>
+
+
+
+
+
+
+</RelativeLayout>
