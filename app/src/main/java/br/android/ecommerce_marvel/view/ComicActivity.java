@@ -1,6 +1,7 @@
 package br.android.ecommerce_marvel.view;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -35,12 +36,20 @@ public class ComicActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.comic_activity);
+        logoActionBar();
+
 
         this.recyclerView = findViewById(R.id.rv_listacomics);
 
         obterDadosJson();
 
 
+    }
+
+    private void logoActionBar(){
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.logo);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
     }
 
     private void obterDadosJson() {
@@ -84,19 +93,7 @@ public class ComicActivity extends AppCompatActivity {
     }
 }
 
-    //               public void addListenerOnButton() {
-        //  imageComic = (ImageButton) findViewById(R.id.ib_ImagemComic);
-        //  imageComic.setOnClickListener(new View.OnClickListener() {
-        //      @Override
-        //      public void onClick(View v) {
-        //         Intent i = new Intent(ComicActivity.this, DetailsComics.class);
-                //  Toast.makeText(ComicActivity.this, "ImageComic is clicked!", Toast.LENGTH_SHORT).show();
-       //       startActivity(i);
-//
-           // }
-     //   });
-  //  }
-//}
+
 
 
 

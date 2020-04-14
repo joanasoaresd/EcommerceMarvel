@@ -107,7 +107,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
                     Context context = imageComic.getContext();
                     Intent i = new Intent(context, DetailsComicsActivity.class);
                     //passa os valores para a intent
-                    i.putExtra("position", 0);
+               //     i.putExtra("position", 0);
                     context.startActivity(i);
                 }
 
