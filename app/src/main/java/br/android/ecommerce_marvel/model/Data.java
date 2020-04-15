@@ -22,15 +22,7 @@ public class Data {
         this.total = total;
         this.count = count;
         this.results = results;
-    }
 
-    public String typeResultsComics(){
-        String types = " ";
-        for (int i = 0; i <= results.size(); i++){
-            if(i>0)
-                types = ", ";
-            types += results.get(i).getTitle();
-        } return types;
     }
 
     public Data() {

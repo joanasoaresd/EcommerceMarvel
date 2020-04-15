@@ -1,13 +1,18 @@
 package br.android.ecommerce_marvel.model;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Comics {
+public class Comics implements Parcelable {
+
 
     @JsonProperty(value = "id")
     private int id;
@@ -34,6 +39,12 @@ public class Comics {
         super();
     }
 
+    public Comics(String title, String pageCount) {
+        this.title = title;
+        pageCount = String.valueOf(this.pageCount);
+        this.thumbnail = thumbnail;
+    }
+
     public Comics(int id, String title, String description, int pageCount, ArrayList<Price> prices, Thumbnail thumbnail, String url) {
         this.id = id;
         this.title = title;
@@ -52,6 +63,26 @@ public class Comics {
         this.prices = prices;
     }
 
+
+    protected Comics(Parcel in) {
+        id = in.readInt();
+        title = in.readString();
+        description = in.readString();
+        pageCount = in.readInt();
+        url = in.readString();
+    }
+
+    public static final Creator<Comics> CREATOR = new Creator<Comics>() {
+        @Override
+        public Comics createFromParcel(Parcel in) {
+            return new Comics(in);
+        }
+
+        @Override
+        public Comics[] newArray(int size) {
+            return new Comics[size];
+        }
+    };
 
     public String getUrl() {
         return url;
@@ -107,6 +138,37 @@ public class Comics {
 
     public void setPrices(ArrayList<Price> prices) {
         this.prices = prices;
+    }
+
+    /**
+     * Describe the kinds of special objects contained in this Parcelable
+     * instance's marshaled representation. For example, if the object will
+     * include a file descriptor in the output of {@link #writeToParcel(Parcel, int)},
+     * the return value of this method must include the
+     * {@link #CONTENTS_FILE_DESCRIPTOR} bit.
+     *
+     * @return a bitmask indicating the set of special object types marshaled
+     * by this Parcelable object instance.
+     */
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    /**
+     * Flatten this object in to a Parcel.
+     *
+     * @param dest  The Parcel in which the object should be written.
+     * @param flags Additional flags about how the object should be written.
+     *              May be 0 or {@link #PARCELABLE_WRITE_RETURN_VALUE}.
+     */
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(title);
+        dest.writeString(description);
+        dest.writeInt(pageCount);
+        dest.writeString(url);
     }
 }
 

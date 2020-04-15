@@ -1,7 +1,6 @@
 package br.android.ecommerce_marvel.view;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -37,7 +36,6 @@ public class ComicActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.comic_activity);
         logoActionBar();
-
 
         this.recyclerView = findViewById(R.id.rv_listacomics);
 
