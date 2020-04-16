@@ -7,20 +7,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
-public class Thumbnail implements Parcelable {
+public class Thumbnail implements Parcelable{
     private static final String PORTRAIT_XLARGE = "portrait_xlarge";
     private static final String PORTRAIT_FANTASTIC = "portrait_fantastic";
 
     private String path;
     private String extension;
 
-    public Thumbnail(@JsonProperty("price")String thumbnail) {
+    public Thumbnail(@JsonProperty("thumbnail")String thumbnail) {
     }
 
     protected Thumbnail(Parcel in) {
         path = in.readString();
         extension = in.readString();
     }
+
 
     public static final Creator<Thumbnail> CREATOR = new Creator<Thumbnail>() {
         @Override
@@ -57,6 +58,7 @@ public class Thumbnail implements Parcelable {
     public String getPortraitFantastic(){
         return getPath() +"/" + PORTRAIT_FANTASTIC + "." + getExtension();
     }
+
 
     /**
      * Describe the kinds of special objects contained in this Parcelable

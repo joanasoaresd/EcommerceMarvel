@@ -18,9 +18,10 @@ import br.android.ecommerce_marvel.model.Comics;
 
 public class DetailsComicsActivity extends AppCompatActivity {
 
-    TextView tvTitle, tvDescr, tvPage, tvPreco, tvId;
-    ImageView imageComic;
     private Comics comics;
+    private  ImageView imageComic;
+    private TextView tvTitle, tvId, tvPreco, tvPage, tvDesc;
+
 
 
     @Override
@@ -28,47 +29,43 @@ public class DetailsComicsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detalhamento);
 
-       //Intent i = getIntent();
-      //  comics = i.getParcelableExtra("comicSelecionado");  if(i.hasExtra("comicSelecionado")){
-
         configuracao();
         resgatar();
-      voltarActionBar();
+        voltarActionBar();
 
     }
-
     private void resgatar(){
         Intent i = getIntent();
-        comics = i.getParcelableExtra("comicSelecionado");
+        comics =  i.getParcelableExtra("comicSelecionado");
+       loadingID(comics.getId());
 
-        String titulo = comics.getTitle();
-        String numPag = String.valueOf(comics.getPageCount());
-        tvTitle.setText(titulo);
-        tvPage.setText(numPag);
+       // Glide.with(getApplicationContext()).load(comics.getThumbnail().getPortraitFantastic()).into(imageComic);
+
+        loadingTitle(comics.getTitle());
+        loadingPage(comics.getPageCount());
+       loadingDescr(comics.getDescription());
+      // loadingPrice(comics.getPrices().get(0).getPrice());
+      //  loadingImage(comics.getThumbnail().getPortraitFantastic());
+
 
 
     }
 
-  //  protected void onResume() {
-  ///      super.onResume();
-  //      voltarActionBar();
-   // }
     private void voltarActionBar(){
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //mostrar botão
         getSupportActionBar().setHomeButtonEnabled(true); //ativar botão
         getSupportActionBar().setSubtitle("Detalhamento Comics");
-        Intent i = new Intent(this, ComicActivity.class);
-        startActivity(i);
-        finish();
+
     }
 
     private void configuracao() {
-        ImageView imageComic = findViewById(R.id.fotoImagemView);
-        TextView tvTitle = findViewById(R.id.tv_TitleComic);
-        TextView tvId =  findViewById(R.id.tv_Id);
-        TextView  tvPreco = findViewById(R.id.tv_Price);
-        TextView tvPage =  findViewById(R.id.tv_NumPaginas);
-        TextView tvDesc = findViewById(R.id.tv_Desc);
+         imageComic = findViewById(R.id.fotoImagemView);
+         tvTitle = findViewById(R.id.tv_TitleComic);
+         tvId =  findViewById(R.id.tv_Id);
+         tvPreco = findViewById(R.id.tv_Price);
+         tvPage =  findViewById(R.id.tv_NumPaginas);
+         tvDesc = findViewById(R.id.tv_Desc);
+
 
     }
 
@@ -79,6 +76,39 @@ public class DetailsComicsActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void loadingTitle(String title) {
+        TextView tvTitle = findViewById(R.id.tv_TitleComic);
+        tvTitle.setText(title);
+    }
+
+    private void loadingPrice(Double price) {
+        TextView  tvPreco = findViewById(R.id.tv_Price);
+        String preco = "Preço: R$"+String.format("%.2f", price);
+        tvPreco.setText(preco);
+    }
+
+    private void loadingPage(int page) {
+        TextView tvPage =  findViewById(R.id.tv_NumPaginas);
+        String pagina = page + "páginas";
+        tvPage.setText(pagina);
+    }
+
+    private void loadingID(int id) {
+        TextView tvId =  findViewById(R.id.tv_Id);
+        String idComic = "ID: "+ id;
+        tvId.setText(idComic);
+    }
+
+    private void loadingDescr(String descricao) {
+        TextView tvDesc = findViewById(R.id.tv_Desc);
+
+        if(descricao == null){
+            descricao = "Descrição Indisponivel.";
+        }
+
+        tvDesc.setText(descricao);
     }
 
     private void loadingImage(String url) {

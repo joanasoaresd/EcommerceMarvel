@@ -6,8 +6,10 @@ import android.os.Parcelable;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Price implements Parcelable {
+public class Price implements Parcelable{
 
     @JsonProperty(value = "type")
     private String type;
@@ -21,6 +23,7 @@ public class Price implements Parcelable {
         type = in.readString();
         price = in.readDouble();
     }
+
 
     public static final Creator<Price> CREATOR = new Creator<Price>() {
         @Override

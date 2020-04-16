@@ -39,11 +39,6 @@ public class Comics implements Parcelable {
         super();
     }
 
-    public Comics(String title, String pageCount) {
-        this.title = title;
-        pageCount = String.valueOf(this.pageCount);
-        this.thumbnail = thumbnail;
-    }
 
     public Comics(int id, String title, String description, int pageCount, ArrayList<Price> prices, Thumbnail thumbnail, String url) {
         this.id = id;
@@ -71,6 +66,7 @@ public class Comics implements Parcelable {
         pageCount = in.readInt();
         url = in.readString();
     }
+
 
     public static final Creator<Comics> CREATOR = new Creator<Comics>() {
         @Override
@@ -171,4 +167,5 @@ public class Comics implements Parcelable {
         dest.writeString(url);
     }
 }
+
 

@@ -6,6 +6,7 @@ import android.content.Intent;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,17 +21,17 @@ import java.util.ArrayList;
 
 import br.android.ecommerce_marvel.R;
 import br.android.ecommerce_marvel.model.Comics;
-import br.android.ecommerce_marvel.model.Thumbnail;
+
 
 public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> {
 
     private ArrayList<Comics> comics;
     private Comics comic;
     private Comics comicAnterior;
-    Context context;
 
-    public ComicAdapter(Context context) {
-        this.context = context;
+    public Comics getItem(int position){
+        return comics.get(position);
+
     }
 
     public ComicAdapter(ArrayList<Comics> comicsList) {
@@ -50,7 +51,6 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
-
         //comic é um elemento da lista comics
         comic = this.comics.get(i);
 
@@ -61,13 +61,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
                 .load(comic.getThumbnail().getPortraitFantastic())
                 .error(R.drawable.not_found)
                 .into(viewHolder.imageComic);
-        //    viewHolder.imageComic.setOnClickListener(new View.OnClickListener() {
-     //       @Override
-     //       public void onClick(View v) {
-       //         Intent i = new Intent(ComicAdapter.this, DetailsComics.class);
-      //          startActivity(i);
-      //      }
-      //  });
+
 
 
     }
@@ -84,7 +78,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
 
 
 
-        public ViewHolder(@NonNull View itemView) {
+        public ViewHolder(@NonNull final View itemView) {
             super(itemView);
 
             this.imageComic = (ImageView) itemView.findViewById(R.id.ib_ImagemComic);
@@ -93,25 +87,13 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
 
 
             imageComic.setOnClickListener(new View.OnClickListener() {
-                /**
-                 * Called when a view has been clicked.
-                 *
-                 * @param v The view that was clicked.
-                 */
+
                 @Override
-
                 public void onClick(View v) {
-                    String title_str = tituloComic.getText().toString();
-                    String page_int = paginas.getText().toString();
-                  //  Thumbnail image_thumbnail = imageComic.toString();
-                   Comics c = new Comics(title_str, page_int);
                     Context context = imageComic.getContext();
-
                     Intent i = new Intent(context, DetailsComicsActivity.class);
-                    i.putExtra("comicSelecionado", c);
-                    //passa os valores para a intent
-                  //  i.putExtras(bundle);
-                    //context.getApplicationContext().startActivity(i);
+                    //comic selecionado na posição
+                    i.putExtra("comicSelecionado", getItem(getAdapterPosition()));
                     context.startActivity(i);
                 }
 
