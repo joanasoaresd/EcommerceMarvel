@@ -66,18 +66,17 @@ public class ComicActivity extends AppCompatActivity {
                     comicAdapter = new ComicAdapter(comicsList);
                     recyclerView.setAdapter(comicAdapter);
                     recyclerView.setLayoutManager(new GridLayoutManager(ComicActivity.this, 3));
-                    Comics c = new Comics();
                     for (int i = 0; i < resposta.size(); i++) {
-                        c = resposta.get(i);
-                        Log.i(TAG, "ID: " + c.getId());
-                        Log.i(TAG, "Title: " + c.getTitle());
-                        Log.i(TAG, "Descrição: " + c.getDescription());
-                        Log.i(TAG, "Páginas: " + c.getPageCount());
-                        Log.i(TAG, String.format("Preço: %.2f", c.getPrices().get(0).getPrice()));
-                        Log.i(TAG, "Imagem: " + c.getThumbnail().getPortraitFantastic());
-                        Log.i(TAG, "URL: " + c.getUrl());
-                        comicsList.add(c);
-                        comicAdapter.notifyDataSetChanged();
+                          Comics  c = resposta.get(i);
+                            Log.i(TAG, "ID: " + c.getId());
+                            Log.i(TAG, "Title: " + c.getTitle());
+                            Log.i(TAG, "Descrição: " + c.getDescription());
+                            Log.i(TAG, "Páginas: " + c.getPageCount());
+                            Log.i(TAG, String.format("Preço: $ %.2f", c.getPrices().get(0).getPrice()));
+                            Log.i(TAG, "Imagem: " + c.getThumbnail().getPortraitFantastic());
+                           comicsList.add(c);
+                           comicAdapter.notifyDataSetChanged();
+
                     }
                 }
             }

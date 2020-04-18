@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -29,7 +30,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
     private Comics comic;
     private Comics comicAnterior;
 
-    public Comics getItem(int position){
+    public Comics getComicItem(int position){
         return comics.get(position);
 
     }
@@ -50,6 +51,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+
 
         //comic é um elemento da lista comics
         comic = this.comics.get(i);
@@ -93,7 +95,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
                     Context context = imageComic.getContext();
                     Intent i = new Intent(context, DetailsComicsActivity.class);
                     //comic selecionado na posição
-                    i.putExtra("comicSelecionado", getItem(getAdapterPosition()));
+                    i.putExtra("comicSelecionado", getComicItem(getAdapterPosition()));
                     context.startActivity(i);
                 }
 

@@ -1,8 +1,10 @@
 package br.android.ecommerce_marvel.model;
 
 
+import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.RequiresApi;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -32,22 +34,20 @@ public class Comics implements Parcelable {
     @JsonProperty(value = "thumbnail")
     private Thumbnail thumbnail;
 
-    private String url;
-
 
     public Comics() {
         super();
     }
 
-
-    public Comics(int id, String title, String description, int pageCount, ArrayList<Price> prices, Thumbnail thumbnail, String url) {
+    public Comics(int id, String title, String description, int pageCount, ArrayList<Price> prices, Thumbnail thumbnail) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.pageCount = pageCount;
         this.prices = prices;
         this.thumbnail = thumbnail;
-        this.url = url;
+
+
     }
 
     public Comics(int id, String title, String description, int pageCount, ArrayList<Price> prices) {
@@ -64,7 +64,10 @@ public class Comics implements Parcelable {
         title = in.readString();
         description = in.readString();
         pageCount = in.readInt();
-        url = in.readString();
+        thumbnail = in.readParcelable(Thumbnail.class.getClassLoader());
+        prices = new ArrayList<>();
+        in.readList(prices, Price.class.getClassLoader());
+
     }
 
 
@@ -79,14 +82,6 @@ public class Comics implements Parcelable {
             return new Comics[size];
         }
     };
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
     public int getId() {
         return id;
@@ -158,13 +153,16 @@ public class Comics implements Parcelable {
      * @param flags Additional flags about how the object should be written.
      *              May be 0 or {@link #PARCELABLE_WRITE_RETURN_VALUE}.
      */
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeString(title);
         dest.writeString(description);
         dest.writeInt(pageCount);
-        dest.writeString(url);
+        dest.writeParcelable(thumbnail, flags);
+        dest.writeList(prices);
+
     }
 }
 

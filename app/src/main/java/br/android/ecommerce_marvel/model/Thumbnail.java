@@ -8,14 +8,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 
 public class Thumbnail implements Parcelable{
-    private static final String PORTRAIT_XLARGE = "portrait_xlarge";
+
     private static final String PORTRAIT_FANTASTIC = "portrait_fantastic";
+    private static final String PORTRAIT_UNCANNY = "portrait_uncanny";
 
     private String path;
     private String extension;
 
-    public Thumbnail(@JsonProperty("thumbnail")String thumbnail) {
+    public Thumbnail(@JsonProperty("path")String path, @JsonProperty("extension")String extension) {
+        this.path = path;
+        this.extension = extension;
     }
+
 
     protected Thumbnail(Parcel in) {
         path = in.readString();
@@ -51,13 +55,14 @@ public class Thumbnail implements Parcelable{
         this.extension = extension;
     }
 
-    public String getPortraitXlarge(){
-        return getPath() +"/" + PORTRAIT_XLARGE + "." + getExtension();
-    }
-
     public String getPortraitFantastic(){
         return getPath() +"/" + PORTRAIT_FANTASTIC + "." + getExtension();
     }
+
+    public String getPortraitUncanny(){
+        return getPath() +"/" + PORTRAIT_UNCANNY + "." + getExtension();
+    }
+
 
 
     /**

@@ -1,56 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
+    android:background="#190000"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="16dp"
-    android:background="#242121"
-    android:orientation="vertical"
     tools:context=".view.DetailsComicsActivity">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="#190000"
+        android:padding="16dp"
+        android:orientation="vertical">
 
 
         <EditText
             android:id="@+id/editText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="QTD"
+            android:hint="Digite a quantidade"
             android:textColorHint="@color/cardview_light_background"
             android:textSize="10sp"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="310dp"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="270dp"
             android:inputType="number" />
 
         <Button
             android:id="@+id/bt_buy"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="350dp"
-            android:layout_marginStart="200dp"
+            android:layout_marginTop="380dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:text="Comprar"
             android:textColor="#FFFFFF"
             android:background="#b80404"/>
 
     <Button
         android:id="@+id/bt_carrinho"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="350dp"
-        android:layout_marginStart="60dp"
+        android:layout_marginTop="440dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
         android:textSize="12dp"
         android:text="Add ao carrinho"
-        android:textColor="#FFFFFF"
-        android:background="#b80404"/>
-
-
-
+        android:textColor="#b80404"
+        android:background="#FFFFFF"/>
 
 
     <ImageView
         android:id="@+id/fotoImagemView"
         android:background="@color/colorAccent"
-        android:layout_width="100dp"
-        android:layout_height="145dp"
+        android:layout_width="300px"
+        android:layout_height="450px"
         android:layout_marginLeft="120dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -62,9 +66,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="150dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="230dp"
         android:textStyle="bold"
-        android:textSize="12dp"
+        android:textSize="17dp"
         android:text="Titulo"
         android:textColor="#FFFFFF" />
 
@@ -73,7 +77,7 @@
                  android:text="ID: 001"
                  android:textAppearance="@style/TextAppearance.AppCompat"
                  android:layout_marginStart="10dp"
-                 android:layout_marginTop="180dp"
+                 android:layout_marginTop="280dp"
                  android:textColor="#DCDCDC"
                  android:textSize="12dp"
                  android:layout_width="wrap_content"
@@ -84,27 +88,41 @@
 
              <TextView
                  android:id="@+id/tv_Desc"
-                 android:text="Descrição"
+                 android:text="Texto descrição"
                  android:textAppearance="@style/TextAppearance.AppCompat"
                  android:textColor="#DCDCDC"
-                 android:layout_marginStart="10dp"
-                 android:layout_marginTop="200dp"
+                 android:layout_marginStart="70dp"
+                 android:layout_marginTop="525dp"
                  android:textSize="12dp"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:textAllCaps="true"/>
+                 />
 
-             <TextView
+        <TextView
+            android:id="@+id/tv_Descricao"
+            android:text="Descrição:"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textColor="#DCDCDC"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="525dp"
+            android:textSize="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            />
+
+
+        <TextView
                  android:id="@+id/tv_NumPaginas"
                  android:text="QTD páginas"
                  android:textAppearance="@style/TextAppearance.AppCompat"
                  android:textColor="#DCDCDC"
                  android:layout_marginStart="10dp"
-                 android:layout_marginTop="250dp"
+                 android:layout_marginTop="500dp"
                  android:textSize="12dp"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:textAllCaps="true"/>
+                 />
 
         <TextView
             android:layout_width="wrap_content"
@@ -113,7 +131,7 @@
             android:textColor="#DCDCDC"
             android:layout_marginStart="10dp"
             android:textSize="12dp"
-            android:layout_marginTop="260dp">
+            android:layout_marginTop="300dp">
 
         </TextView>
 
@@ -123,10 +141,11 @@
                  android:textAppearance="@style/TextAppearance.AppCompat"
                  android:textColor="#DCDCDC"
                  android:layout_marginStart="100dp"
-                 android:layout_marginTop="285dp"
-                 android:textSize="17dp"
+                 android:layout_marginTop="320dp"
+                 android:textSize="19dp"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
+                 android:textStyle="bold"
                  android:textAllCaps="true"/>
 
 
@@ -134,4 +153,5 @@
 
 
 
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

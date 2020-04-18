@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-import java.io.Serializable;
-
 import br.android.ecommerce_marvel.R;
 
 import br.android.ecommerce_marvel.model.Comics;
@@ -19,35 +17,26 @@ import br.android.ecommerce_marvel.model.Comics;
 public class DetailsComicsActivity extends AppCompatActivity {
 
     private Comics comics;
-    private  ImageView imageComic;
-    private TextView tvTitle, tvId, tvPreco, tvPage, tvDesc;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detalhamento);
 
-        configuracao();
         resgatar();
         voltarActionBar();
 
     }
     private void resgatar(){
         Intent i = getIntent();
-        comics =  i.getParcelableExtra("comicSelecionado");
-       loadingID(comics.getId());
+            comics = i.getParcelableExtra("comicSelecionado");
 
-       // Glide.with(getApplicationContext()).load(comics.getThumbnail().getPortraitFantastic()).into(imageComic);
-
-        loadingTitle(comics.getTitle());
-        loadingPage(comics.getPageCount());
-       loadingDescr(comics.getDescription());
-      // loadingPrice(comics.getPrices().get(0).getPrice());
-      //  loadingImage(comics.getThumbnail().getPortraitFantastic());
-
-
+            loadingImage(comics.getThumbnail().getPortraitUncanny());
+            loadingID(comics.getId());
+            loadingTitle(comics.getTitle());
+            loadingPage(comics.getPageCount());
+            loadingDescr(comics.getDescription());
+            loadingPrice(comics.getPrices().get(0).getPrice());
 
     }
 
@@ -55,17 +44,6 @@ public class DetailsComicsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //mostrar botão
         getSupportActionBar().setHomeButtonEnabled(true); //ativar botão
         getSupportActionBar().setSubtitle("Detalhamento Comics");
-
-    }
-
-    private void configuracao() {
-         imageComic = findViewById(R.id.fotoImagemView);
-         tvTitle = findViewById(R.id.tv_TitleComic);
-         tvId =  findViewById(R.id.tv_Id);
-         tvPreco = findViewById(R.id.tv_Price);
-         tvPage =  findViewById(R.id.tv_NumPaginas);
-         tvDesc = findViewById(R.id.tv_Desc);
-
 
     }
 
@@ -85,41 +63,41 @@ public class DetailsComicsActivity extends AppCompatActivity {
 
     private void loadingPrice(Double price) {
         TextView  tvPreco = findViewById(R.id.tv_Price);
-        String preco = "Preço: R$"+String.format("%.2f", price);
+        String preco = "Preço: $ " + String.format("%.2f", price);
         tvPreco.setText(preco);
     }
 
     private void loadingPage(int page) {
         TextView tvPage =  findViewById(R.id.tv_NumPaginas);
-        String pagina = page + "páginas";
+        String pagina = page + " páginas";
         tvPage.setText(pagina);
     }
 
     private void loadingID(int id) {
         TextView tvId =  findViewById(R.id.tv_Id);
-        String idComic = "ID: "+ id;
+        String idComic = "ID: " + id;
         tvId.setText(idComic);
     }
 
     private void loadingDescr(String descricao) {
         TextView tvDesc = findViewById(R.id.tv_Desc);
-
         if(descricao == null){
-            descricao = "Descrição Indisponivel.";
+            descricao = "Indisponível.";
+            tvDesc.setText(descricao);
         }
-
         tvDesc.setText(descricao);
     }
 
-    private void loadingImage(String url) {
+    private void loadingImage(String imageUrl) {
         ImageView imageComic = findViewById(R.id.fotoImagemView);
-        //CRIAR CONDIÇÃO PRA IMAGENS: http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available
-        Glide.with(getApplicationContext())
-                .load(comics.getThumbnail().getPortraitFantastic())
-                .error(R.drawable.not_found)
-                .into(imageComic);
-    }
+            Glide.with(this)
+                    .load(comics.getThumbnail().getPortraitUncanny())
+                    .error(R.drawable.not_found)
+                    .into(imageComic);
 
+
+
+    }
 
 }
 

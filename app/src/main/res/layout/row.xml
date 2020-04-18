@@ -14,20 +14,20 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="#242121"
+            android:background="#A50D18"
             android:padding="16dp" >
 
                 <ImageView
                     android:id="@+id/ib_ImagemComic"
-                    android:layout_width="90dp"
-                    android:layout_height="100dp"
+                    android:layout_width="168px"
+                    android:layout_height="252px"
                     android:onClick="showMessage"
                     android:scaleType="fitXY"
                     android:layout_marginTop="1dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@mipmap/ic_launcher_marvel_comics" />
+                    android:src="@mipmap/ic_launcher_marvel_comics"/>
 
                 <TextView
                     android:id="@+id/tv_TitleComic"
@@ -40,7 +40,7 @@
                     android:textStyle="bold"
                     android:gravity="center"
                     app:layout_constraintStart_toEndOf="@+id/ib_ImagemComic"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"  />
 
                 <TextView
                     android:id="@+id/tv_NumPaginas"

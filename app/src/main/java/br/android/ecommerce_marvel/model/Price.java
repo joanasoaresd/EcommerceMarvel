@@ -16,13 +16,18 @@ public class Price implements Parcelable{
     @JsonProperty(value = "price")
     private double price;
 
-    public Price(@JsonProperty("price")double price) {
+    public Price(@JsonProperty("price")double price, @JsonProperty("type")String type) {
+        this.type = type;
+        this.price = price;
     }
+
+
 
     protected Price(Parcel in) {
         type = in.readString();
         price = in.readDouble();
     }
+
 
 
     public static final Creator<Price> CREATOR = new Creator<Price>() {
@@ -36,6 +41,7 @@ public class Price implements Parcelable{
             return new Price[size];
         }
     };
+
 
     public String getType() {
         return type;
