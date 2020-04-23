@@ -15,17 +15,25 @@
         android:orientation="vertical">
 
 
-        <EditText
-            android:id="@+id/et_qtd"
+        <TextView
+            android:id="@+id/tv_qtdDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Digite a quantidade"
+            android:hint="0"
             android:textColorHint="@color/cardview_light_background"
-            android:textSize="10sp"
-            android:layout_marginStart="200dp"
+            android:textSize="18dp"
+            android:layout_marginStart="260dp"
             android:layout_marginTop="270dp"
             android:inputType="number"
             android:textColor="#FFFFFF"/>
+
+        <ImageButton
+            android:id="@+id/bt_qtdeDetails"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="280dp"
+            android:layout_marginTop="265dp"
+            android:src="@drawable/ic_mais" />
 
         <Button
             android:id="@+id/bt_buy"
@@ -37,6 +45,15 @@
             android:text="Comprar"
             android:textColor="#FFFFFF"
             android:background="#b80404"/>
+
+        <ImageButton
+            android:id="@+id/ib_qtdDetailsMenos"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_menos"
+            android:layout_marginTop="265dp"
+            android:layout_marginLeft="220dp"/>
+
 
     <Button
         android:id="@+id/bt_carrinho"

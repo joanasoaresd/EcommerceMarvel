@@ -28,7 +28,7 @@ public class DbDatabaseComic implements AddComic {
     public void inserirDados(int id, String title, String descr, int page, double price) {
         ContentValues valores = new ContentValues();
         //int id, String title, String descr, int page, double price
-        //long resultado;
+        long resultado;
 
         //getWritableDatabase p/ leitura e escrita de dados
         db = criarBanco.getWritableDatabase();
@@ -40,11 +40,11 @@ public class DbDatabaseComic implements AddComic {
             valores.put(DbOpenHelper.PRICE, price);
            // valores.put(DbOpenHelper.THUMBNAIL, thumbnail);
 
-           db.insert(DbOpenHelper.TABELA, null, valores);
-        //if (resultado ==-1)
-         //   Log.i(TAG_BD, "Erro ao inserir registro. " );
-       // else
-      //  Log.i(TAG_BD, "Registro inserido com sucesso!");
+          resultado = db.insert(DbOpenHelper.TABELA, null, valores);
+        if (resultado ==-1)
+           Log.i(TAG_BD, "Erro ao inserir registro. " );
+        else
+         Log.i(TAG_BD, "Registro inserido com sucesso!");
            // return "Registro Inserido com sucesso”;
 
         }

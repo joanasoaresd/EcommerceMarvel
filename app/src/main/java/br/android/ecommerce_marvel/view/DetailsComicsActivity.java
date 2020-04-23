@@ -1,4 +1,5 @@
 package br.android.ecommerce_marvel.view;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,20 +26,19 @@ public class DetailsComicsActivity extends AppCompatActivity {
 
     private Comics comics;
     private Button btComprar, btcarrinho;
+    private ImageButton bt_add_qtde, bt_diminuir_qtd;
     DbDatabaseComic dbDatabaseComic;
-  //  private EditText qtd;
-  //  DbDatabaseComic dbDatabaseComic;
+    private TextView tv_qtdecontador;
+    private int contador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detalhamento);
 
-        btComprar = findViewById(R.id.bt_buy);
-        btcarrinho = findViewById(R.id.bt_carrinho);
         dbDatabaseComic = new DbDatabaseComic(getApplicationContext());
-        //qtd = findViewById(R.id.et_qtd);
 
+        configuracao();
         resgatar();
         voltarActionBar();
 
@@ -47,6 +48,7 @@ public class DetailsComicsActivity extends AppCompatActivity {
         Intent i = getIntent();
         comics = i.getParcelableExtra("comicSelecionado");
 
+        //Carregar elementos do quadrinho selecionado
             loadingImage(comics.getThumbnail().getPortraitUncanny());
             loadingID(comics.getId());
             loadingTitle(comics.getTitle());
@@ -54,7 +56,29 @@ public class DetailsComicsActivity extends AppCompatActivity {
             loadingDescr(comics.getDescription());
             loadingPrice(comics.getPrices().get(0).getPrice());
 
+            //Adicionar (+1) na qtde
+            bt_add_qtde.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    contador ++;
+                        tv_qtdecontador.setText(""+contador);
+                }
+            });
 
+            //Diminuir (-1) na qtde
+            bt_diminuir_qtd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    contador --;
+                    if(contador <= -1) {
+                        contador = 0;
+                        tv_qtdecontador.setText(""+contador);
+                    }else
+                        tv_qtdecontador.setText(""+contador);
+                }
+            });
+
+            //Comprar adicionando ao carrinho e encaminhando para checkout
             btComprar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -66,7 +90,7 @@ public class DetailsComicsActivity extends AppCompatActivity {
                 }
             });
 
-
+            //Apenas adicionando ao carrinho
             btcarrinho.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -76,11 +100,20 @@ public class DetailsComicsActivity extends AppCompatActivity {
                 }
             });
     }
-    //adicionar ao carrinho seja em add ou buy
+
+    //inserindo dados para adicionar ao carrinho seja em add ou buy
     private void addCarrinho(int id, String title, String descr, int page, double price){
-        DbDatabaseComic dbDatabaseComic = new DbDatabaseComic(getApplicationContext());
+       // DbDatabaseComic dbDatabaseComic = new DbDatabaseComic(getApplicationContext());
         dbDatabaseComic.inserirDados(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrices().get(0).getPrice());
 
+    }
+    //inicializando butões e textos
+    private void configuracao(){
+        btComprar = findViewById(R.id.bt_buy);
+        btcarrinho = findViewById(R.id.bt_carrinho);
+        bt_add_qtde = findViewById(R.id.bt_qtdeDetails);
+        tv_qtdecontador = findViewById(R.id.tv_qtdDetails);
+        bt_diminuir_qtd = findViewById(R.id.ib_qtdDetailsMenos);
     }
 
     private void voltarActionBar(){

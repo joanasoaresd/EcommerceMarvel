@@ -6,7 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -55,8 +57,9 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageComic;
-        private TextView tituloComic, preco, id;
-        private EditText qtde;
+        private TextView tituloComic, preco, id, qtde;
+        private ImageButton adicionar;
+        //private EditText qtde;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -65,7 +68,8 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
             this.tituloComic = (TextView) itemView.findViewById(R.id.tv_titlecheckout);
             this.id = (TextView) itemView.findViewById(R.id.tv_idcheckout);
             this.preco = (TextView) itemView.findViewById(R.id.tv_Price);
-            this.qtde = (EditText) itemView.findViewById(R.id.et_qtd);
+            this.qtde = (TextView) itemView.findViewById(R.id.tv_qtdeCheckout);
+            this.adicionar = (ImageButton) itemView.findViewById(R.id.bt_quantidade);
         }
 
 
