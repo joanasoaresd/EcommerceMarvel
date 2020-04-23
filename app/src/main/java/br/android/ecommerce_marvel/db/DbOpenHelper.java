@@ -4,6 +4,12 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import org.jetbrains.annotations.NotNull;
+
+import static java.sql.Types.INTEGER;
+import static java.sql.Types.REAL;
+import static java.sql.Types.VARCHAR;
+
 
 //RESPONSÁVEL PELA CRIAÇÃO DO BANCO E TAMBÉM RESPONSÁVEL PELO VERSIONAMENTO DO MESMO
 public class DbOpenHelper extends SQLiteOpenHelper {
@@ -14,9 +20,9 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     public static final String ID = "id";
     public static final String TITLE = "title";
     public static final String DESCRIPTION = "description";
-    public static final int PAGE_COUNT = 10;
-    public static final double PRICE = 0.00;
-    public static final String THUMBNAIL = "thumbnail";
+    public static final String PAGE_COUNT = "page_count";
+    public static final String PRICE = "price";
+   // public static final String THUMBNAIL = "thumbnail";
     private static final int VERSAO = 1;
 
 
@@ -27,15 +33,15 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 
     // quando cria o bd pela primeira vez
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(@NotNull SQLiteDatabase db) {
         //CREATE TABLE IF NOT EXISTS
         String sql = "CREATE TABLE " + TABELA + "("
-                + _ID + "integer primary key autoincrement,"
-                + TITLE + "text,"
-                + DESCRIPTION + "text,"
-                + PAGE_COUNT + "integer,"
-                + PRICE + "real,"
-                + THUMBNAIL + "thumbnail" + ")";
+                + _ID + " INTEGER primary key autoincrement, "
+                + ID + " INTEGER NOT NULL " + ","
+                + TITLE + " TEXT " + ","
+                + DESCRIPTION + " TEXT " + ","
+                + PAGE_COUNT + " INTEGER " + ","
+                + PRICE + " REAL " +")";
 
         db.execSQL(sql);
     }

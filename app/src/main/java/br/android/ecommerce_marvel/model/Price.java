@@ -21,14 +21,10 @@ public class Price implements Parcelable{
         this.price = price;
     }
 
-
-
     protected Price(Parcel in) {
         type = in.readString();
         price = in.readDouble();
     }
-
-
 
     public static final Creator<Price> CREATOR = new Creator<Price>() {
         @Override

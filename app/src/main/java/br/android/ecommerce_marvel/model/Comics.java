@@ -34,28 +34,30 @@ public class Comics implements Parcelable {
     @JsonProperty(value = "thumbnail")
     private Thumbnail thumbnail;
 
+    private double price;
+
 
     public Comics() {
         super();
     }
 
-    public Comics(int id, String title, String description, int pageCount, ArrayList<Price> prices, Thumbnail thumbnail) {
+    public Comics(int id, String title, String description, int pageCount, double price, Thumbnail thumbnail) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.pageCount = pageCount;
-        this.prices = prices;
+        this.price = price;
         this.thumbnail = thumbnail;
 
 
     }
 
-    public Comics(int id, String title, String description, int pageCount, ArrayList<Price> prices) {
+    public Comics(int id, String title, String description, int pageCount, double price) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.pageCount = pageCount;
-        this.prices = prices;
+        this.price = price;
     }
 
 
@@ -82,6 +84,14 @@ public class Comics implements Parcelable {
             return new Comics[size];
         }
     };
+
+    public double getPrice(){
+        return getPrices().get(0).getPrice();
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
     public int getId() {
         return id;

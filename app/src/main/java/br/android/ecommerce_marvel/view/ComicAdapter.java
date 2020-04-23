@@ -28,7 +28,6 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
 
     private ArrayList<Comics> comics;
     private Comics comic;
-    private Comics comicAnterior;
 
     public Comics getComicItem(int position){
         return comics.get(position);
@@ -63,9 +62,6 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
                 .load(comic.getThumbnail().getPortraitFantastic())
                 .error(R.drawable.not_found)
                 .into(viewHolder.imageComic);
-
-
-
     }
 
     @Override

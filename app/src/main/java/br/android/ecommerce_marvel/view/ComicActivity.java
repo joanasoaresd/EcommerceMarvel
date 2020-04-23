@@ -3,6 +3,7 @@ package br.android.ecommerce_marvel.view;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
@@ -24,12 +25,9 @@ import static br.android.ecommerce_marvel.view.RetrofitConfig.TS;
 public class ComicActivity extends AppCompatActivity {
 
     private static final String TAG = "COMICS";
-    private ImageButton imageComic;
     private RecyclerView recyclerView;
     private ComicAdapter comicAdapter;
     ArrayList<Comics> comicsList = new ArrayList<>();
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +38,6 @@ public class ComicActivity extends AppCompatActivity {
         this.recyclerView = findViewById(R.id.rv_listacomics);
 
         obterDadosJson();
-
 
     }
 

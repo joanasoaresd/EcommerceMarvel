@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="#A50D18"
+            android:gravity="center"
             android:padding="16dp" >
 
                 <ImageView
@@ -23,7 +24,7 @@
                     android:layout_height="252px"
                     android:onClick="showMessage"
                     android:scaleType="fitXY"
-                    android:layout_marginTop="1dp"
+                    android:layout_marginTop="0dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -50,8 +51,9 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="115dp"
                     android:textColor="#DCDCDC"
+                    android:gravity="center"
                     android:text="Page"
-                    android:textSize="8sp"
+                    android:textSize="10dp"
                     app:layout_constraintStart_toStartOf="@+id/tv_TitleComic"
                     app:layout_constraintTop_toBottomOf="@+id/tv_TitleComic" />
 

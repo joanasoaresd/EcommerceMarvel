@@ -11,6 +11,8 @@ public class Thumbnail implements Parcelable{
 
     private static final String PORTRAIT_FANTASTIC = "portrait_fantastic";
     private static final String PORTRAIT_UNCANNY = "portrait_uncanny";
+    private static final  String STARDART_FANTASTIC = "standard_fantastic";
+
 
     private String path;
     private String extension;
@@ -61,6 +63,10 @@ public class Thumbnail implements Parcelable{
 
     public String getPortraitUncanny(){
         return getPath() +"/" + PORTRAIT_UNCANNY + "." + getExtension();
+    }
+
+    public String getStardartFantastic(){
+        return getPath() +"/" + STARDART_FANTASTIC + "." + getExtension();
     }
 
 
