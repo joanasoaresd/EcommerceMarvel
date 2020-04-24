@@ -67,10 +67,10 @@ public class DbDatabaseComic implements AddComic {
                 String title = cursor.getString(cursor.getColumnIndex(DbOpenHelper.TITLE));
                 int id = cursor.getInt(cursor.getColumnIndex(DbOpenHelper.ID));
                 int pageCount = cursor.getInt(cursor.getColumnIndex(DbOpenHelper.PAGE_COUNT));
-                //thumbnail = cursor.getString(cursor.getColumnIndex("THUMBNAIL"));
                 double price = cursor.getDouble(cursor.getColumnIndex(DbOpenHelper.PRICE));
                 String desc = cursor.getString(cursor.getColumnIndex(DbOpenHelper.DESCRIPTION));
                 aux.add(new Comics(id, title, desc, pageCount, price));
+
             } while (cursor.moveToNext());
         }
         cursor.close();

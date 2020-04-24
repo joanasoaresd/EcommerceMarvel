@@ -56,22 +56,25 @@ public class DetailsComicsActivity extends AppCompatActivity {
             loadingDescr(comics.getDescription());
             loadingPrice(comics.getPrices().get(0).getPrice());
 
+            //mudar para metodo
+            this.contador = 1;
             //Adicionar (+1) na qtde
             bt_add_qtde.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     contador ++;
-                        tv_qtdecontador.setText(""+contador);
+                    tv_qtdecontador.setText(""+contador);
                 }
             });
 
+            //mudar para metodo
             //Diminuir (-1) na qtde
             bt_diminuir_qtd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     contador --;
-                    if(contador <= -1) {
-                        contador = 0;
+                    if(contador <= 0) {
+                        contador = 1;
                         tv_qtdecontador.setText(""+contador);
                     }else
                         tv_qtdecontador.setText(""+contador);
@@ -83,10 +86,11 @@ public class DetailsComicsActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                    addCarrinho(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrices().get(0).getPrice());
-                    Intent intent = new Intent(getApplicationContext(), CheckoutActivity.class);
-                    //intent.putExtra("quantidade", qtd.getText().toString());
-                    startActivity(intent);
-                    finish();
+                   Intent intent = new Intent(getApplicationContext(), CheckoutActivity.class);
+                   String txt = tv_qtdecontador.getText().toString();
+                   intent.putExtra("quantidade", txt);
+                   startActivity(intent);
+                   finish();
                 }
             });
 
@@ -95,7 +99,7 @@ public class DetailsComicsActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                   addCarrinho(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrices().get(0).getPrice());
-                    Toast.makeText(getApplicationContext(),"Quadrinho adicionado ao carrinho!" ,Toast.LENGTH_SHORT).show();
+                  Toast.makeText(getApplicationContext(),"Quadrinho adicionado ao carrinho!" ,Toast.LENGTH_SHORT).show();
 
                 }
             });
@@ -103,7 +107,6 @@ public class DetailsComicsActivity extends AppCompatActivity {
 
     //inserindo dados para adicionar ao carrinho seja em add ou buy
     private void addCarrinho(int id, String title, String descr, int page, double price){
-       // DbDatabaseComic dbDatabaseComic = new DbDatabaseComic(getApplicationContext());
         dbDatabaseComic.inserirDados(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrices().get(0).getPrice());
 
     }

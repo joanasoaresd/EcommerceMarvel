@@ -1,6 +1,7 @@
 package br.android.ecommerce_marvel.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,18 +25,24 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
     private Comics comic;
     private ArrayList<Comics> comics;
     private Context context;
-
+    private Intent intent = new Intent();
+    private String quant;
 
     public CheckoutAdapter(Context context, ArrayList<Comics> comics) {
         this.context = context;
         this.comics = comics;
     }
 
+    public CheckoutAdapter(ArrayList<Comics> comics) {
+        this.comics = comics;
+    }
+
     @NonNull
     @Override
     public CheckoutAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.row_checkout, viewGroup, false);
-        return new CheckoutAdapter.ViewHolder(v);
+        View v = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.row_checkout, viewGroup, false);
+        return new ViewHolder(v);
     }
 
     @Override
@@ -43,10 +50,17 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
 
        comic = this.comics.get(i);
 
+       quant = this.intent.getStringExtra("quantidade");
+       viewHolder.qtde.setText(quant);
+
+        viewHolder.tituloComic.setText(comic.getTitle());
+        viewHolder.preco.setText("PREÇO: $ "+comic.getPrices().get(0).getPrice());
+
         Glide.with(viewHolder.imageComic.getContext())
                 .load(comic.getThumbnail().getPortraitFantastic())
                 .error(R.drawable.not_found)
                 .into(viewHolder.imageComic);
+
 
     }
 
@@ -57,8 +71,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageComic;
-        private TextView tituloComic, preco, id, qtde;
-        private ImageButton adicionar;
+        private TextView tituloComic, preco, qtde;
         //private EditText qtde;
 
         public ViewHolder(@NonNull View itemView) {
@@ -66,10 +79,9 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
 
             this.imageComic = (ImageView) itemView.findViewById(R.id.iv_thumb_checkout);
             this.tituloComic = (TextView) itemView.findViewById(R.id.tv_titlecheckout);
-            this.id = (TextView) itemView.findViewById(R.id.tv_idcheckout);
-            this.preco = (TextView) itemView.findViewById(R.id.tv_Price);
+            this.preco = (TextView) itemView.findViewById(R.id.tv_pricecheckout);
             this.qtde = (TextView) itemView.findViewById(R.id.tv_qtdeCheckout);
-            this.adicionar = (ImageButton) itemView.findViewById(R.id.bt_quantidade);
+
         }
 
 

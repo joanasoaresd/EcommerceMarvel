@@ -1,5 +1,6 @@
 package br.android.ecommerce_marvel.view;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -20,30 +22,33 @@ import br.android.ecommerce_marvel.model.Comics;
 
 public class CheckoutActivity extends AppCompatActivity {
 
-    DbDatabaseComic databaseComic;
-    RecyclerView recyclerViewCheckout;
-    CheckoutAdapter checkoutAdapter;
-    ArrayList<Comics> listaCheckout;
+    private DbDatabaseComic databaseComic;
+    private RecyclerView recyclerViewCheckout;
+    private CheckoutAdapter checkoutAdapter;
+    private ArrayList<Comics> listaCheckout = new ArrayList<>();
+  //  private TextView qtde;
+  //  private Intent i;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.checkout_activity);
 
+
+        this.recyclerViewCheckout = findViewById(R.id.rv_checkout);
+        ///qtde = (TextView) findViewById(R.id.tv_qtdeCheckout);
+      //  i = getIntent();
+       // String quant = i.getStringExtra("quantidade");
+      //  qtde.setText(""+quant);
+
         voltarActionBar();
 
-        databaseComic = new DbDatabaseComic(getApplicationContext());
-        //carregar dados = getAllComics
-        Cursor cursor = (Cursor) databaseComic.carregarDados();
-        String[] nomeCampos = new String[] {DbOpenHelper.ID, DbOpenHelper.TITLE, DbOpenHelper.PRICE};
-        int [] idViews = new int[]{R.id.tv_Id, R.id.tv_titlecheckout, R.id.tv_Price};
+      //  databaseComic = new DbDatabaseComic(getApplicationContext());
 
-        this.checkoutAdapter = new CheckoutAdapter(getApplicationContext(), this.listaCheckout);
-        this.recyclerViewCheckout = (RecyclerView) findViewById(R.id.rv_checkout);
+      // listaCheckout = databaseComic.carregarDados();
+        this.checkoutAdapter = new CheckoutAdapter(this.listaCheckout);
         this.recyclerViewCheckout.setAdapter(checkoutAdapter);
         this.recyclerViewCheckout.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-
-
     }
 
 

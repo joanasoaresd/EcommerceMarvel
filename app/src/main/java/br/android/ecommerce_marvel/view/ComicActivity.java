@@ -62,7 +62,7 @@ public class ComicActivity extends AppCompatActivity {
                     ArrayList<Comics> resposta = response.body().getData().getResults();
                     comicAdapter = new ComicAdapter(comicsList);
                     recyclerView.setAdapter(comicAdapter);
-                    recyclerView.setLayoutManager(new GridLayoutManager(ComicActivity.this, 3));
+                    recyclerView.setLayoutManager(new GridLayoutManager(ComicActivity.this, 2));
                     for (int i = 0; i < resposta.size(); i++) {
                           Comics  c = resposta.get(i);
                             Log.i(TAG, "ID: " + c.getId());

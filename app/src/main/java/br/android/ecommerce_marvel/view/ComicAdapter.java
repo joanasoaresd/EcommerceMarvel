@@ -59,7 +59,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
         viewHolder.paginas.setText(Integer.toString(comic.getPageCount()) + " páginas");
 
         Glide.with(viewHolder.imageComic.getContext())
-                .load(comic.getThumbnail().getPortraitFantastic())
+                .load(comic.getThumbnail().getLandscapeIncredible())
                 .error(R.drawable.not_found)
                 .into(viewHolder.imageComic);
     }
@@ -73,7 +73,6 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
 
         private ImageView imageComic;
         private TextView tituloComic, paginas;
-
 
 
         public ViewHolder(@NonNull final View itemView) {
