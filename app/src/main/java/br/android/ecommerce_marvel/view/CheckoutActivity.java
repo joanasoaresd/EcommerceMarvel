@@ -25,37 +25,44 @@ public class CheckoutActivity extends AppCompatActivity {
     private DbDatabaseComic databaseComic;
     private RecyclerView recyclerViewCheckout;
     private CheckoutAdapter checkoutAdapter;
-    private ArrayList<Comics> listaCheckout = new ArrayList<>();
-  //  private TextView qtde;
-  //  private Intent i;
+    private ArrayList<Comics> listaCheckout;
+    private TextView qtde;
+    private Intent i;
+  //   private String quant;
+ //    private TextView qtde;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.checkout_activity);
 
+        qtde = findViewById(R.id.tv_qtdeCheckout);
+
+     //   i = getIntent();
+   //     String quant = i.getStringExtra("quantidade");
+//        qtde.setText(""+quant);
+
 
         this.recyclerViewCheckout = findViewById(R.id.rv_checkout);
-        ///qtde = (TextView) findViewById(R.id.tv_qtdeCheckout);
-      //  i = getIntent();
-       // String quant = i.getStringExtra("quantidade");
-      //  qtde.setText(""+quant);
 
         voltarActionBar();
 
-      //  databaseComic = new DbDatabaseComic(getApplicationContext());
+        databaseComic = new DbDatabaseComic(getApplicationContext());
 
-      // listaCheckout = databaseComic.carregarDados();
+        listaCheckout = new ArrayList<>();
+        listaCheckout = databaseComic.carregarDados();
+
         this.checkoutAdapter = new CheckoutAdapter(this.listaCheckout);
         this.recyclerViewCheckout.setAdapter(checkoutAdapter);
         this.recyclerViewCheckout.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 
 
+
     private void voltarActionBar(){
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //mostrar botão
         getSupportActionBar().setHomeButtonEnabled(true); //ativar botão
-        getSupportActionBar().setSubtitle("Detalhamento Comics");
+        getSupportActionBar().setSubtitle("Checkout Comics");
     }
 
     public boolean onOptionsItemSelected(MenuItem item){

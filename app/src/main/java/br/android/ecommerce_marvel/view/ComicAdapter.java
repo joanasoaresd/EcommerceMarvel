@@ -66,14 +66,13 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return this.comics != null ? this.comics.size() : 0;
+        return this.comics.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imageComic;
         private TextView tituloComic, paginas;
-
 
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);

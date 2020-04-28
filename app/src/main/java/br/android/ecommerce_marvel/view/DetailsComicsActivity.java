@@ -85,12 +85,15 @@ public class DetailsComicsActivity extends AppCompatActivity {
             btComprar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   addCarrinho(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrices().get(0).getPrice());
-                   Intent intent = new Intent(getApplicationContext(), CheckoutActivity.class);
-                   String txt = tv_qtdecontador.getText().toString();
-                   intent.putExtra("quantidade", txt);
-                   startActivity(intent);
-                   finish();
+                    addCarrinho(contador, comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrice());
+                    Intent intent = new Intent(getApplicationContext(), CheckoutActivity.class);
+                    String txt = tv_qtdecontador.getText().toString();
+                   // intent.putExtra("title", comics.getTitle());
+                   // intent.putExtra("price", comics.getPrices().get(0).getPrice());
+                    intent.putExtra("quantidade", txt);
+                    startActivity(intent);
+                    finish();
+
                 }
             });
 
@@ -98,16 +101,18 @@ public class DetailsComicsActivity extends AppCompatActivity {
             btcarrinho.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                  addCarrinho(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrices().get(0).getPrice());
-                  Toast.makeText(getApplicationContext(),"Quadrinho adicionado ao carrinho!" ,Toast.LENGTH_SHORT).show();
+                    addCarrinho(contador, comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrice());
+                    Toast.makeText(getApplicationContext(),"Quadrinho adicionado ao carrinho!" ,Toast.LENGTH_SHORT).show();
 
                 }
             });
     }
 
+
+
     //inserindo dados para adicionar ao carrinho seja em add ou buy
-    private void addCarrinho(int id, String title, String descr, int page, double price){
-        dbDatabaseComic.inserirDados(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrices().get(0).getPrice());
+    private void addCarrinho(int qtde, int id, String title, String descr, int page, double price){
+        dbDatabaseComic.inserirDados(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrice());
 
     }
     //inicializando butões e textos
@@ -169,10 +174,10 @@ public class DetailsComicsActivity extends AppCompatActivity {
     //carrega imagem do item selecionado
     private void loadingImage(String imageUrl) {
         ImageView imageComic = findViewById(R.id.fotoImagemView);
-            Glide.with(this)
-                    .load(comics.getThumbnail().getPortraitUncanny())
-                    .error(R.drawable.not_found)
-                    .into(imageComic);
+        Glide.with(this)
+                .load(comics.getThumbnail().getPortraitUncanny())
+                .error(R.drawable.not_found)
+                .into(imageComic);
     }
 }
 

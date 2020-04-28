@@ -86,7 +86,7 @@ public class Comics implements Parcelable {
     };
 
     public double getPrice(){
-        return getPrices().get(0).getPrice();
+        return this.price;
     }
 
     public void setPrice(double price) {
