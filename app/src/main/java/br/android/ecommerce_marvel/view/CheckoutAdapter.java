@@ -55,14 +55,16 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
         int quant = intent.getExtras().getInt("quantidade");
         viewHolder.qtde.setText(""+quant);
 
-        String title = intent.getStringExtra("title");
-        viewHolder.tituloComic.setText(title);
+        //String title = intent.getStringExtra("title");
+      //  viewHolder.tituloComic.setText(title);
 
-        double price = intent.getExtras().getDouble("price");
-        viewHolder.preco.setText(String.format("$ %.2f " , price));
+        viewHolder.tituloComic.setText(comic.getTitle());
+        viewHolder.preco.setText(String.format("$ %.2f " , comic.getPrice()));
+       // double price = intent.getExtras().getDouble("price");
+       // viewHolder.preco.setText(String.format("$ %.2f " , price));
 
-        String image = intent.getStringExtra("image");
-        Glide.with(context).load(image).error(R.drawable.not_found).into(viewHolder.imageComic);
+       // String image = intent.getStringExtra("image");
+        Glide.with(context).load(comic.getThumbnail().getPortraitFantastic()).error(R.drawable.not_found).into(viewHolder.imageComic);
 
     }
 
@@ -74,7 +76,6 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageComic;
         private TextView tituloComic, preco, qtde;
-        //private EditText qtde;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

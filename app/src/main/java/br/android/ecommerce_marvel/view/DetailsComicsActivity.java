@@ -84,11 +84,11 @@ public class DetailsComicsActivity extends AppCompatActivity {
             btComprar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    addCarrinho(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrice());
+                    addCarrinho(new Comics(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrices().get(0).getPrice(), comics.getThumbnail().getPortraitFantastic()), contador);
                     Intent intent = new Intent(getApplicationContext(), CheckoutActivity.class);
-                    intent.putExtra("title", comics.getTitle());
-                    intent.putExtra("price", comics.getPrices().get(0).getPrice());
-                    intent.putExtra("image", comics.getThumbnail().getPortraitFantastic());
+                   // intent.putExtra("title", comics.getTitle());
+                 //   intent.putExtra("price", comics.getPrices().get(0).getPrice());
+                  //  intent.putExtra("image", comics.getThumbnail().getPortraitFantastic());
                     intent.putExtra("quantidade", contador);
                     startActivity(intent);
                     finish();
@@ -100,7 +100,7 @@ public class DetailsComicsActivity extends AppCompatActivity {
             btcarrinho.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    addCarrinho(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrice());
+                    addCarrinho(new Comics(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrices().get(0).getPrice(), comics.getThumbnail().getPortraitFantastic()), contador);
                     Toast.makeText(getApplicationContext(),"Quadrinho adicionado ao carrinho!" ,Toast.LENGTH_SHORT).show();
 
                 }
@@ -110,8 +110,8 @@ public class DetailsComicsActivity extends AppCompatActivity {
 
 
     //inserindo dados para adicionar ao carrinho seja em add ou buy
-    private void addCarrinho(int id, String title, String descr, int page, double price){
-        dbDatabaseComic.inserirDados(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrice());
+    private void addCarrinho(Comics c, int quant){
+        dbDatabaseComic.inserirDados(new Comics(c.getId(), c.getTitle(), c.getDescription(), c.getPageCount(), c.getPrice(), c.getThumb()), quant);
 
     }
 

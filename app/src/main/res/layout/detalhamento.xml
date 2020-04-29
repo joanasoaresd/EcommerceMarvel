@@ -12,8 +12,7 @@
         android:layout_height="match_parent"
         android:background="#190000"
         android:gravity="center"
-        android:padding="16dp">
-
+        android:padding="12dp">
 
         <TextView
             android:id="@+id/tv_qtdDetails"
@@ -36,6 +35,14 @@
             android:layout_marginTop="290dp"
             android:layout_marginStart="140dp"
             android:src="@drawable/ic_mais" />
+        <ImageButton
+            android:id="@+id/ib_qtdDetailsMenos"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_menos"
+            android:layout_marginStart="90dp"
+            android:layout_marginTop="290dp"
+            android:layout_marginLeft="220dp"/>
 
         <Button
             android:id="@+id/bt_buy"
@@ -48,14 +55,7 @@
             android:textColor="#FFFFFF"
             android:background="#b80404"/>
 
-        <ImageButton
-            android:id="@+id/ib_qtdDetailsMenos"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_menos"
-            android:layout_marginStart="90dp"
-            android:layout_marginTop="290dp"
-            android:layout_marginLeft="220dp"/>
+
 
 
     <Button

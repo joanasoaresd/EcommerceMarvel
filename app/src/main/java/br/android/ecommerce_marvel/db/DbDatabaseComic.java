@@ -24,7 +24,7 @@ public class DbDatabaseComic implements DAO {
 
     //inserir dados no banco
     @Override
-    public void inserirDados(int id, String title, String descr, int page, double price) {
+    public void inserirDados(Comics comics, int quant) {
         ContentValues valores = new ContentValues();
         //int id, String title, String descr, int page, double price
         long resultado;
@@ -32,12 +32,13 @@ public class DbDatabaseComic implements DAO {
         //getWritableDatabase p/ leitura e escrita de dados
         db = criarBanco.getWritableDatabase();
 
-        valores.put(DbOpenHelper.ID, id);
-        valores.put(DbOpenHelper.TITLE, title);
-        valores.put(DbOpenHelper.DESCRIPTION, descr);
-        valores.put(DbOpenHelper.PAGE_COUNT, page);
-        valores.put(DbOpenHelper.PRICE, price);
-        // valores.put(DbOpenHelper.THUMBNAIL, thumbnail);
+        valores.put(DbOpenHelper.ID, comics.getTitle());
+        valores.put(DbOpenHelper.TITLE, comics.getTitle());
+        valores.put(DbOpenHelper.DESCRIPTION, comics.getDescription());
+        valores.put(DbOpenHelper.PAGE_COUNT, comics.getPageCount());
+        valores.put(DbOpenHelper.PRICE, comics.getPrice());
+        valores.put(DbOpenHelper.THUMBNAIL, comics.getThumb());
+        valores.put(DbOpenHelper.QTDE, quant);
 
         resultado = db.insert(DbOpenHelper.TABELA, null, valores);
         if (resultado == -1)
@@ -52,11 +53,13 @@ public class DbDatabaseComic implements DAO {
     @Override
     public ArrayList<Comics> carregarDados() {
 
-
+       // itemLiswtView();
         //getReadable database leitura de dados.
         SQLiteDatabase db = criarBanco.getReadableDatabase();
-
         ArrayList<Comics> aux = new ArrayList<>();
+
+
+
         String sql = "SELECT id, title, description, page_count, price FROM " + DbOpenHelper.TABELA;
 
 //new String[]{}
@@ -71,7 +74,10 @@ public class DbDatabaseComic implements DAO {
                 int pageCount = cursor.getInt(cursor.getColumnIndex(DbOpenHelper.PAGE_COUNT));
                 double price = cursor.getDouble(cursor.getColumnIndex(DbOpenHelper.PRICE));
                 String desc = cursor.getString(cursor.getColumnIndex(DbOpenHelper.DESCRIPTION));
-                aux.add(new Comics(id, title, desc, pageCount, price));
+                String thumbnail = cursor.getString(cursor.getColumnIndex(DbOpenHelper.THUMBNAIL));
+                aux.add(new Comics(id, title, desc, pageCount, price, thumbnail));
+
+                int qtde = cursor.getInt(cursor.getColumnIndex(DbOpenHelper.QTDE));
 
             } while (cursor.moveToNext());
         }
@@ -80,15 +86,6 @@ public class DbDatabaseComic implements DAO {
         return aux;
     }
 
-    public void itemListView() {
-        ArrayList itemIds = new ArrayList<>();
-        Cursor cursor = null;
-        while (cursor.moveToNext()) {
-            long itemId = cursor.getLong(
-                    cursor.getColumnIndexOrThrow(DbOpenHelper._ID));
-            itemIds.add(itemId);
-        }
-        cursor.close();
-    }
+
 
 }

@@ -36,18 +36,24 @@ public class Comics implements Parcelable {
 
     private double price;
 
+    public String getThumb() {
+        return thumb;
+    }
+
+    private String thumb;
+
 
     public Comics() {
         super();
     }
 
-    public Comics(int id, String title, String description, int pageCount, double price, Thumbnail thumbnail) {
+    public Comics(int id, String title, String description, int pageCount, double price, String thumbnail) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.pageCount = pageCount;
         this.price = price;
-        this.thumbnail = thumbnail;
+        this.thumb = thumbnail;
 
 
     }
