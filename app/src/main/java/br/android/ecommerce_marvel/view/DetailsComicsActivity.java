@@ -20,6 +20,7 @@ import br.android.ecommerce_marvel.R;
 
 import br.android.ecommerce_marvel.db.DbDatabaseComic;
 import br.android.ecommerce_marvel.model.Comics;
+import br.android.ecommerce_marvel.model.Thumbnail;
 
 
 public class DetailsComicsActivity extends AppCompatActivity {
@@ -29,7 +30,7 @@ public class DetailsComicsActivity extends AppCompatActivity {
     private ImageButton bt_add_qtde, bt_diminuir_qtd;
     DbDatabaseComic dbDatabaseComic;
     private TextView tv_qtdecontador;
-    private int contador;
+    private int contador = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +57,7 @@ public class DetailsComicsActivity extends AppCompatActivity {
             loadingDescr(comics.getDescription());
             loadingPrice(comics.getPrices().get(0).getPrice());
 
-            //mudar para metodo
-            this.contador = 1;
-            //Adicionar (+1) na qtde
+           //Adicionar (+1) na qtde
             bt_add_qtde.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -67,7 +66,7 @@ public class DetailsComicsActivity extends AppCompatActivity {
                 }
             });
 
-            //mudar para metodo
+
             //Diminuir (-1) na qtde
             bt_diminuir_qtd.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -85,12 +84,12 @@ public class DetailsComicsActivity extends AppCompatActivity {
             btComprar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    addCarrinho(contador, comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrice());
+                    addCarrinho(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrice());
                     Intent intent = new Intent(getApplicationContext(), CheckoutActivity.class);
-                    String txt = tv_qtdecontador.getText().toString();
-                   // intent.putExtra("title", comics.getTitle());
-                   // intent.putExtra("price", comics.getPrices().get(0).getPrice());
-                    intent.putExtra("quantidade", txt);
+                    intent.putExtra("title", comics.getTitle());
+                    intent.putExtra("price", comics.getPrices().get(0).getPrice());
+                    intent.putExtra("image", comics.getThumbnail().getPortraitFantastic());
+                    intent.putExtra("quantidade", contador);
                     startActivity(intent);
                     finish();
 
@@ -101,7 +100,7 @@ public class DetailsComicsActivity extends AppCompatActivity {
             btcarrinho.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    addCarrinho(contador, comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrice());
+                    addCarrinho(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrice());
                     Toast.makeText(getApplicationContext(),"Quadrinho adicionado ao carrinho!" ,Toast.LENGTH_SHORT).show();
 
                 }
@@ -111,10 +110,12 @@ public class DetailsComicsActivity extends AppCompatActivity {
 
 
     //inserindo dados para adicionar ao carrinho seja em add ou buy
-    private void addCarrinho(int qtde, int id, String title, String descr, int page, double price){
+    private void addCarrinho(int id, String title, String descr, int page, double price){
         dbDatabaseComic.inserirDados(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrice());
 
     }
+
+
     //inicializando butões e textos
     private void configuracao(){
         btComprar = findViewById(R.id.bt_buy);

@@ -22,7 +22,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     public static final String DESCRIPTION = "description";
     public static final String PAGE_COUNT = "page_count";
     public static final String PRICE = "price";
-    public static final String QTDE = "qtde";
+    public static final String ITEM = "item";
    // public static final String THUMBNAIL = "thumbnail";
     private static final int VERSAO = 1;
 
@@ -43,7 +43,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
                 + DESCRIPTION + " TEXT " + ","
                 + PAGE_COUNT + " INTEGER " + ","
                 + PRICE + " REAL " + ","
-                + QTDE + " INTEGER " + ")";
+                + ITEM + " INTEGER " + ")";
 
         db.execSQL(sql);
     }

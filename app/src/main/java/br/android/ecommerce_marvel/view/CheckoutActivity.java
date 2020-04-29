@@ -1,17 +1,10 @@
 package br.android.ecommerce_marvel.view;
 
-import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.SimpleCursorAdapter;
-import android.widget.TextView;
-
 import java.util.ArrayList;
 
 import br.android.ecommerce_marvel.R;
@@ -25,38 +18,22 @@ public class CheckoutActivity extends AppCompatActivity {
     private DbDatabaseComic databaseComic;
     private RecyclerView recyclerViewCheckout;
     private CheckoutAdapter checkoutAdapter;
-    private ArrayList<Comics> listaCheckout;
-    private TextView qtde;
-    private Intent i;
-  //   private String quant;
- //    private TextView qtde;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.checkout_activity);
 
-        qtde = findViewById(R.id.tv_qtdeCheckout);
-
-     //   i = getIntent();
-   //     String quant = i.getStringExtra("quantidade");
-//        qtde.setText(""+quant);
-
-
         this.recyclerViewCheckout = findViewById(R.id.rv_checkout);
 
         voltarActionBar();
-
         databaseComic = new DbDatabaseComic(getApplicationContext());
+        ArrayList<Comics> listaCheckout = databaseComic.carregarDados();
 
-        listaCheckout = new ArrayList<>();
-        listaCheckout = databaseComic.carregarDados();
-
-        this.checkoutAdapter = new CheckoutAdapter(this.listaCheckout);
+        this.checkoutAdapter = new CheckoutAdapter(getApplicationContext(), listaCheckout, getIntent());
         this.recyclerViewCheckout.setAdapter(checkoutAdapter);
         this.recyclerViewCheckout.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
-
 
 
     private void voltarActionBar(){

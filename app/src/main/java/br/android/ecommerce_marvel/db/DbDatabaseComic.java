@@ -9,10 +9,9 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import br.android.ecommerce_marvel.model.Comics;
-import br.android.ecommerce_marvel.model.Thumbnail;
 
 //CONTÉM CONTEÚDOS DE MANIPULAÇÃO DOS DADOS NO BANCO
-public class DbDatabaseComic implements AddComic {
+public class DbDatabaseComic implements DAO {
 
     private SQLiteDatabase db;
     private DbOpenHelper criarBanco;
@@ -52,14 +51,17 @@ public class DbDatabaseComic implements AddComic {
     //select
     @Override
     public ArrayList<Comics> carregarDados() {
-        // int id, page;
-        // String title, description, thumbnail;
-        //  double price;
-        ArrayList<Comics> aux = new ArrayList<>();
-        String sql = "SELECT * FROM " + DbOpenHelper.TABELA;
 
+
+        //getReadable database leitura de dados.
         SQLiteDatabase db = criarBanco.getReadableDatabase();
+
+        ArrayList<Comics> aux = new ArrayList<>();
+        String sql = "SELECT id, title, description, page_count, price FROM " + DbOpenHelper.TABELA;
+
+//new String[]{}
         Cursor cursor = db.rawQuery(sql, null);
+
 
         if (cursor.moveToFirst()) {
             do {
@@ -78,5 +80,15 @@ public class DbDatabaseComic implements AddComic {
         return aux;
     }
 
+    public void itemListView() {
+        ArrayList itemIds = new ArrayList<>();
+        Cursor cursor = null;
+        while (cursor.moveToNext()) {
+            long itemId = cursor.getLong(
+                    cursor.getColumnIndexOrThrow(DbOpenHelper._ID));
+            itemIds.add(itemId);
+        }
+        cursor.close();
+    }
 
 }
