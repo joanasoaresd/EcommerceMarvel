@@ -11,6 +11,7 @@ import br.android.ecommerce_marvel.R;
 import br.android.ecommerce_marvel.db.DbDatabaseComic;
 import br.android.ecommerce_marvel.db.DbOpenHelper;
 import br.android.ecommerce_marvel.model.Comics;
+import br.android.ecommerce_marvel.model.Item;
 
 
 public class CheckoutActivity extends AppCompatActivity {
@@ -28,7 +29,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
         voltarActionBar();
         databaseComic = new DbDatabaseComic(getApplicationContext());
-        ArrayList<Comics> listaCheckout = databaseComic.carregarDados();
+        ArrayList<Item> listaCheckout = databaseComic.carregarDados();
 
         this.checkoutAdapter = new CheckoutAdapter(getApplicationContext(), listaCheckout, getIntent());
         this.recyclerViewCheckout.setAdapter(checkoutAdapter);

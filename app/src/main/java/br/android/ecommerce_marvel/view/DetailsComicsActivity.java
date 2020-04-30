@@ -89,7 +89,7 @@ public class DetailsComicsActivity extends AppCompatActivity {
                    // intent.putExtra("title", comics.getTitle());
                  //   intent.putExtra("price", comics.getPrices().get(0).getPrice());
                   //  intent.putExtra("image", comics.getThumbnail().getPortraitFantastic());
-                    intent.putExtra("quantidade", contador);
+                  //  intent.putExtra("quantidade", contador);
                     startActivity(intent);
                     finish();
 

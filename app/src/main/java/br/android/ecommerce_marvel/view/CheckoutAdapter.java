@@ -17,22 +17,22 @@ import java.util.ArrayList;
 import br.android.ecommerce_marvel.R;
 
 import br.android.ecommerce_marvel.model.Comics;
+import br.android.ecommerce_marvel.model.Item;
 import br.android.ecommerce_marvel.model.Thumbnail;
 
 
 public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHolder> {
 
-    private Comics comic;
-    private ArrayList<Comics> comics;
+    private Item item;
+    private ArrayList<Item> listaItem;
     private Context context;
     private Intent intent;
 
 
 
-    public CheckoutAdapter(Context context, ArrayList<Comics> comics, Intent i) {
+    public CheckoutAdapter(Context context, ArrayList<Item> itens, Intent i) {
         this.context = context;
-        this.comics = comics;
-        this.intent = new Intent();
+        this.listaItem = itens;
         this.intent = i;
 
     }
@@ -50,27 +50,18 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull CheckoutAdapter.ViewHolder viewHolder, int i) {
 
-        comic = this.comics.get(i);
+        item = this.listaItem.get(i);
 
-        int quant = intent.getExtras().getInt("quantidade");
-        viewHolder.qtde.setText(""+quant);
-
-        //String title = intent.getStringExtra("title");
-      //  viewHolder.tituloComic.setText(title);
-
-        viewHolder.tituloComic.setText(comic.getTitle());
-        viewHolder.preco.setText(String.format("$ %.2f " , comic.getPrice()));
-       // double price = intent.getExtras().getDouble("price");
-       // viewHolder.preco.setText(String.format("$ %.2f " , price));
-
-       // String image = intent.getStringExtra("image");
-        Glide.with(context).load(comic.getThumbnail().getPortraitFantastic()).error(R.drawable.not_found).into(viewHolder.imageComic);
+        viewHolder.qtde.setText(""+item.getQuantidade());
+        viewHolder.tituloComic.setText(item.getComics().getTitle());
+        viewHolder.preco.setText(String.format("$ %.2f " , item.getComics().getPrice()));
+        Glide.with(viewHolder.imageComic.getContext()).load(item.getComics().getThumb()).error(R.drawable.not_found).into(viewHolder.imageComic);
 
     }
 
     @Override
     public int getItemCount() {
-        return this.comics.size();
+        return this.listaItem.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

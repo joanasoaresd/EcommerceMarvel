@@ -46,6 +46,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
                 + THUMBNAIL + " TEXT " + ","
                 + QTDE + " INTEGER " + ")";
 
+
         db.execSQL(sql);
     }
 
