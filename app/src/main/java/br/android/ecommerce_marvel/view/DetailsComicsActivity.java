@@ -1,27 +1,18 @@
 package br.android.ecommerce_marvel.view;
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
-
 import br.android.ecommerce_marvel.R;
-
 import br.android.ecommerce_marvel.db.DbDatabaseComic;
 import br.android.ecommerce_marvel.model.Comics;
-import br.android.ecommerce_marvel.model.Thumbnail;
-
 
 public class DetailsComicsActivity extends AppCompatActivity {
 
@@ -66,7 +57,6 @@ public class DetailsComicsActivity extends AppCompatActivity {
                 }
             });
 
-
             //Diminuir (-1) na qtde
             bt_diminuir_qtd.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -86,10 +76,6 @@ public class DetailsComicsActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     addCarrinho(new Comics(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrices().get(0).getPrice(), comics.getThumbnail().getPortraitFantastic()), contador);
                     Intent intent = new Intent(getApplicationContext(), CheckoutActivity.class);
-                   // intent.putExtra("title", comics.getTitle());
-                 //   intent.putExtra("price", comics.getPrices().get(0).getPrice());
-                  //  intent.putExtra("image", comics.getThumbnail().getPortraitFantastic());
-                  //  intent.putExtra("quantidade", contador);
                     startActivity(intent);
                     finish();
 
@@ -106,8 +92,6 @@ public class DetailsComicsActivity extends AppCompatActivity {
                 }
             });
     }
-
-
 
     //inserindo dados para adicionar ao carrinho seja em add ou buy
     private void addCarrinho(Comics c, int quant){

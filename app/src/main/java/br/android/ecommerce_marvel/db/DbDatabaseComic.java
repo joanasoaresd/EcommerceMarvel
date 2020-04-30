@@ -4,11 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.renderscript.Script;
-import android.util.Log;
-
 import java.util.ArrayList;
-
 import br.android.ecommerce_marvel.model.Comics;
 import br.android.ecommerce_marvel.model.Item;
 
@@ -35,7 +31,7 @@ public class DbDatabaseComic implements DAO {
         db = criarBanco.getWritableDatabase();
 
         if (temId(comics.getId())) {
-            valores.put(DbOpenHelper.ID, comics.getTitle());
+            valores.put(DbOpenHelper.ID, comics.getId());
             valores.put(DbOpenHelper.TITLE, comics.getTitle());
             valores.put(DbOpenHelper.DESCRIPTION, comics.getDescription());
             valores.put(DbOpenHelper.PAGE_COUNT, comics.getPageCount());
@@ -48,16 +44,19 @@ public class DbDatabaseComic implements DAO {
         } else {
 
             String sql = " SELECT qtde FROM " + DbOpenHelper.TABELA + " WHERE " + DbOpenHelper.ID + " = " + comics.getId();
-
             Cursor cursor1 = db.rawQuery(sql, null);
-            int valorCursor = cursor1.getInt(0);
-            int soma = valorCursor + quant;
 
-            String sqlUpdate = "UPDATE " + DbOpenHelper.TABELA + " SET COLUMN " + DbOpenHelper.QTDE + " = soma "
-            +" WHERE " + DbOpenHelper.ID + " = " + comics.getId();
+            if(cursor1.moveToFirst()) {
+                //cursor1.moveToFirst();
+                int valorCursor = cursor1.getInt(0);
+                int soma = valorCursor + quant;
 
-            db.execSQL(sqlUpdate);
+                String sqlUpdate = "UPDATE " + DbOpenHelper.TABELA + " SET " + DbOpenHelper.QTDE + " = " + soma
+                        + " WHERE " + DbOpenHelper.ID + " = " + comics.getId();
 
+                db.execSQL(sqlUpdate);
+               // db.rawQuery(sqlUpdate, null);
+            }
         }
 
     }

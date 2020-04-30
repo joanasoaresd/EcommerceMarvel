@@ -1,7 +1,5 @@
 package br.android.ecommerce_marvel.model;
 
-import java.util.ArrayList;
-
 public class Item {
 
     private Comics comics;

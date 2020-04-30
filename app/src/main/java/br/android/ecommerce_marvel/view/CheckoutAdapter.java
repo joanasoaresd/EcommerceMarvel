@@ -9,17 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
-
 import java.util.ArrayList;
-
 import br.android.ecommerce_marvel.R;
-
-import br.android.ecommerce_marvel.model.Comics;
 import br.android.ecommerce_marvel.model.Item;
-import br.android.ecommerce_marvel.model.Thumbnail;
-
 
 public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHolder> {
 
@@ -28,15 +21,12 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
     private Context context;
     private Intent intent;
 
-
-
     public CheckoutAdapter(Context context, ArrayList<Item> itens, Intent i) {
         this.context = context;
         this.listaItem = itens;
         this.intent = i;
 
     }
-
 
     @NonNull
     @Override
