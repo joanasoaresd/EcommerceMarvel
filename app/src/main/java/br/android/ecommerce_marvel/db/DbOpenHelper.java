@@ -27,7 +27,6 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     private static final int VERSAO = 1;
 
 
-
     public DbOpenHelper(Context context) {
         super(context, NOME_BANCO, null, VERSAO);
     }

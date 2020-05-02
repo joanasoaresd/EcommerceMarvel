@@ -95,10 +95,9 @@ public class DetailsComicsActivity extends AppCompatActivity {
 
     //inserindo dados para adicionar ao carrinho seja em add ou buy
     private void addCarrinho(Comics c, int quant){
-        dbDatabaseComic.inserirDados(new Comics(c.getId(), c.getTitle(), c.getDescription(), c.getPageCount(), c.getPrice(), c.getThumb()), quant);
+        dbDatabaseComic.atualizarQTDE(new Comics(c.getId(), c.getTitle(), c.getDescription(), c.getPageCount(), c.getPrice(), c.getThumb()), quant);
 
     }
-
 
     //inicializando butões e textos
     private void configuracao(){

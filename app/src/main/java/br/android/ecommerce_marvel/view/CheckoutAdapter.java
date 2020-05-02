@@ -1,12 +1,12 @@
 package br.android.ecommerce_marvel.view;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
@@ -19,12 +19,12 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
     private Item item;
     private ArrayList<Item> listaItem;
     private Context context;
-    private Intent intent;
 
-    public CheckoutAdapter(Context context, ArrayList<Item> itens, Intent i) {
+
+    public CheckoutAdapter(Context context, ArrayList<Item> itens) {
         this.context = context;
         this.listaItem = itens;
-        this.intent = i;
+
 
     }
 
@@ -46,7 +46,6 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
         viewHolder.tituloComic.setText(item.getComics().getTitle());
         viewHolder.preco.setText(String.format("$ %.2f " , item.getComics().getPrice()));
         Glide.with(viewHolder.imageComic.getContext()).load(item.getComics().getThumb()).error(R.drawable.not_found).into(viewHolder.imageComic);
-
     }
 
     @Override
@@ -57,6 +56,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageComic;
         private TextView tituloComic, preco, qtde;
+        private ImageButton  bt_del;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -65,7 +65,16 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
             this.tituloComic = (TextView) itemView.findViewById(R.id.tv_titlecheckout);
             this.preco = (TextView) itemView.findViewById(R.id.tv_pricecheckout);
             this.qtde = (TextView) itemView.findViewById(R.id.tv_qtdeCheckout);
+            bt_del = (ImageButton) itemView.findViewById(R.id.bt_apagar);
 
+            bt_del.setOnClickListener(new View.OnClickListener() {
+                @Override
+               public void onClick(View v) {
+                    // for (int i = 0 ; i < listaCheckout.size(); i++) {
+                   // deletarRegistros(listaCheckout.get(i).getComics());
+                    //  }
+                }
+           });
         }
 
 
