@@ -91,27 +91,23 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
                      }
             });
 
-            qtde.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            qtde.setOnClickListener(new View.OnClickListener() {
+
                 @Override
-                public void onFocusChange(View v, boolean hasFocus) {
+                public void onClick(View v) {
                     int numero = Integer.parseInt(qtde.getText().toString());
-                    if(numero <= 0){
+                    if (numero <= 0) {
                         Toast.makeText(context, "Não é possível inserir esta quantidade.", Toast.LENGTH_LONG).show();
                         listaItem = databaseComic.carregarDados();
                         notifyDataSetChanged();
 
-                        //atualizar valor da quantidade
+                    } else{
+                        databaseComic.atualizarLista(listaItem.get(getAdapterPosition()), numero);
+                        listaItem = databaseComic.carregarDados();
+                        notifyDataSetChanged();
 
-                    } else {
-                        for(int i = 0; i < listaItem.size(); i++) {
-                            databaseComic.atualizarQTDE(listaItem.get(i).getComics(), numero);
-                            listaItem = databaseComic.carregarDados();
-                            notifyDataSetChanged();
-                        }
-                    }
-                }
+                }}
             });
-
         }
     }
 }

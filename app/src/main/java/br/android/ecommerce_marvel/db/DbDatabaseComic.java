@@ -38,6 +38,7 @@ public class DbDatabaseComic implements DAO {
 
     }
 
+    //define quantidade com soma
     public void atualizarQTDE(Comics c, int qtde) {
         db = criarBanco.getWritableDatabase();
         if (nTemId(c.getId())) {
@@ -116,22 +117,14 @@ public class DbDatabaseComic implements DAO {
 
         }
 
-        //atualizar depois do delete especifico
-        public void atualizarLista(Item i) {
+        //atualizar quantidade digitada
+        public void atualizarLista(Item i, int qtde) {
             db = criarBanco.getReadableDatabase();
-            ContentValues valores = new ContentValues();
+            String sqlUpdate = "UPDATE " + DbOpenHelper.TABELA + " SET " + DbOpenHelper.QTDE + " = " + qtde
+                    + " WHERE " + DbOpenHelper.ID + " = " + i.getComics().getId();
 
-            valores.put(DbOpenHelper.ID, i.getComics().getId());
-            valores.put(DbOpenHelper.TITLE, i.getComics().getTitle());
-            valores.put(DbOpenHelper.DESCRIPTION, i.getComics().getDescription());
-            valores.put(DbOpenHelper.PAGE_COUNT, i.getComics().getPageCount());
-            valores.put(DbOpenHelper.PRICE, i.getComics().getPrice());
-            valores.put(DbOpenHelper.THUMBNAIL, i.getComics().getThumb());
-            valores.put(DbOpenHelper.QTDE, i.getQuantidade());
-
-            if (db.update(DbOpenHelper.TABELA, valores, "_id=?", new String[]{i.getComics().getId() + ""}) != 0) {
-                db.close();
+            db.execSQL(sqlUpdate);
             }
 
         }
-}
+

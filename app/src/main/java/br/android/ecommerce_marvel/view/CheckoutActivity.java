@@ -32,7 +32,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
         configurar();
         gerarLista();
-        somaTotal();
+        atualizarValorTotal(this.valorTotal);
         voltarActionBar();
 
     }
@@ -50,21 +50,27 @@ public class CheckoutActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(CheckoutActivity.this, "Compra realizada com sucesso!", Toast.LENGTH_SHORT).show();
                 databaseComic.deletarTodosRegistros();
-                listaCheckout.clear();
-                valorTotal.setText("0");
+                gerarLista();
+                //databaseComic.atualizarLista(listaCheckout.get(i));
+                valorTotal.setText(String.format("$ %.2f " , somaTotal()));
                 checkoutAdapter.notifyDataSetChanged();
             }
         });
     }
 
+    private void atualizarValorTotal(TextView valorTotal){
+        valorTotal.setText(String.format("$ %.2f " , somaTotal()));
+    }
+
     //valor total será qtde de itens * valor do item
-    private void somaTotal(){
+    private double somaTotal(){
         double soma = 0;
         for (int i = 0; i < this.listaCheckout.size(); i++) {
             double valor = this.listaCheckout.get(i).getComics().getPrice() * this.listaCheckout.get(i).getQuantidade();
             soma = valor+soma;
-            this.valorTotal.setText(String.format("$ %.2f " , soma));
-        } //return soma
+           // this.valorTotal.setText(String.format("$ %.2f " , soma));
+
+        } return soma;
     }
 
     private void configurar(){
