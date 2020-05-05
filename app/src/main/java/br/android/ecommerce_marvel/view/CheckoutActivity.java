@@ -41,7 +41,7 @@ public class CheckoutActivity extends AppCompatActivity {
         this.databaseComic = new DbDatabaseComic(getApplicationContext());
         this.listaCheckout = databaseComic.carregarDados();
 
-        this.checkoutAdapter = new CheckoutAdapter(getApplicationContext(), this.listaCheckout);
+        this.checkoutAdapter = new CheckoutAdapter(getApplicationContext(), this.listaCheckout, databaseComic);
         this.recyclerViewCheckout.setAdapter(checkoutAdapter);
         this.recyclerViewCheckout.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
@@ -57,18 +57,6 @@ public class CheckoutActivity extends AppCompatActivity {
         });
     }
 
-    //private int pegarQtdeItens(){
-    //        int qtde = 0;
-    //        for (int i = 0; i<listaCheckout.size(); i++){
-    //           int valor = databaseComic.selectQtdeporId(this.listaCheckout.get(i), listaCheckout.get(i).getQuantidade());
-    //           databaseComic.atualizarQTDE(this.listaCheckout.get(i).getComics(), listaCheckout.get(i).getQuantidade());
-    //            checkoutAdapter.notifyDataSetChanged();
-    //           qtde = valor+qtde;
-    //
-    //        }
-    //        return qtde;
-    //    }
-
     //valor total será qtde de itens * valor do item
     private void somaTotal(){
         double soma = 0;
@@ -76,7 +64,7 @@ public class CheckoutActivity extends AppCompatActivity {
             double valor = this.listaCheckout.get(i).getComics().getPrice() * this.listaCheckout.get(i).getQuantidade();
             soma = valor+soma;
             this.valorTotal.setText(String.format("$ %.2f " , soma));
-        }
+        } //return soma
     }
 
     private void configurar(){

@@ -45,42 +45,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="12dp"
             android:text="Qtde:"
             android:textSize="14dp" />
 
-        <TextView
-            android:id="@+id/tv_qtdeCheckout"
+        <EditText
+            android:id="@+id/et_qtdeCheckout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="75dp"
+            android:layout_marginLeft="40dp"
             android:layout_marginTop="1dp"
             android:inputType="number"
+
             android:text="0"
-            android:textSize="14dp" />
+            android:textSize="13dp" />
 
-        <ImageButton
-            android:id="@+id/ib_qtde_checkout_add"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginStart="90dp"
-            android:src="@drawable/ic_mais" />
-
-        <ImageButton
-            android:id="@+id/ib_qtd_checkout_dim"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginTop="1dp"
-            android:src="@drawable/ic_menos"
-            android:layout_marginStart="45dp"
-            android:drawablePadding="50dp"/>
     </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="280dp">
+            android:layout_marginStart="280dp"
+            android:layout_marginTop="20dp">
 
 
             <ImageButton

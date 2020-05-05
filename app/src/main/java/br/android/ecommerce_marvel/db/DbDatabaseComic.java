@@ -101,40 +101,37 @@ public class DbDatabaseComic implements DAO {
             return count == 0;
         }
 
-        public void deletarRegistros (Comics c) {
-            db = criarBanco.getWritableDatabase();
+        //deletar registros especificos
+        public void deletarRegistros (int id) {
+            db = criarBanco.getReadableDatabase();
+            db.delete(DbOpenHelper.TABELA, "id=?", new String[]{id + ""});
+            db.close();
 
-            String sql = " SELECT * FROM " + DbOpenHelper.TABELA + " WHERE " + DbOpenHelper.ID + " = " + c.getId();
-            Cursor cursor = db.rawQuery(sql, null);
-
-            if (cursor.moveToFirst()) {
-
-                String sqlDel = " DELETE * FROM " + DbOpenHelper.TABELA + " WHERE " + DbOpenHelper.ID + " = " + c.getId();
-
-                db.execSQL(sqlDel);
-
-            }
-
-        }
-
+    }
+        //deletar ao finallizar compras
         public void deletarTodosRegistros(){
-            SQLiteDatabase db = criarBanco.getWritableDatabase();
+                db = criarBanco.getWritableDatabase();
                 db.execSQL("DELETE FROM " + DbOpenHelper.TABELA);
                 db.close();
 
         }
 
-        public int selectQtdeporId(Item i, int qtde){
+        //atualizar depois do delete especifico
+        public void atualizarLista(Item i) {
             db = criarBanco.getReadableDatabase();
-            String sql = " SELECT qtde FROM " + DbOpenHelper.TABELA + " WHERE " + DbOpenHelper.ID + " = " + i.getComics().getId();
-            Cursor cursor1 = db.rawQuery(sql, null);
+            ContentValues valores = new ContentValues();
 
-            if (cursor1.moveToFirst()) {
-                qtde = cursor1.getInt(0);
+            valores.put(DbOpenHelper.ID, i.getComics().getId());
+            valores.put(DbOpenHelper.TITLE, i.getComics().getTitle());
+            valores.put(DbOpenHelper.DESCRIPTION, i.getComics().getDescription());
+            valores.put(DbOpenHelper.PAGE_COUNT, i.getComics().getPageCount());
+            valores.put(DbOpenHelper.PRICE, i.getComics().getPrice());
+            valores.put(DbOpenHelper.THUMBNAIL, i.getComics().getThumb());
+            valores.put(DbOpenHelper.QTDE, i.getQuantidade());
 
-                return  qtde;
+            if (db.update(DbOpenHelper.TABELA, valores, "_id=?", new String[]{i.getComics().getId() + ""}) != 0) {
+                db.close();
             }
-            return qtde;
+
         }
-        
 }
