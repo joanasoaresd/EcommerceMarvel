@@ -25,14 +25,15 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
     private ArrayList<Item> listaItem;
     private Context context;
     DbDatabaseComic databaseComic;
+    TextView total;
 
 
 
-    public CheckoutAdapter(Context context, ArrayList<Item> itens, DbDatabaseComic database) {
+    public CheckoutAdapter(Context context, ArrayList<Item> itens, DbDatabaseComic database, TextView total) {
         this.context = context;
         this.listaItem = itens;
         this.databaseComic = database;
-
+        this.total = total;
 
     }
 
@@ -61,6 +62,16 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
         return this.listaItem.size();
     }
 
+    private double somaTotal(){
+        double soma = 0;
+        for (int i = 0; i < this.listaItem.size(); i++) {
+            double valor = this.listaItem.get(i).getComics().getPrice() * this.listaItem.get(i).getQuantidade();
+            soma = valor+soma;
+            // this.valorTotal.setText(String.format("$ %.2f " , soma));
+
+        } return soma;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageComic;
         private TextView tituloComic, preco;
@@ -81,9 +92,13 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
                 public void onClick(View v) {
                     databaseComic.deletarRegistros(listaItem.get(getAdapterPosition()).getComics().getId());
                     listaItem = databaseComic.carregarDados();
+                    total.setText(String.format("$ %.2f " , somaTotal()));
                     notifyDataSetChanged();
-                     if(listaItem.size() == 0) {
 
+                     if(listaItem.size() == 0) {
+                        databaseComic.carregarDados();
+                        total.setText(String.format("$ %.2f " , somaTotal()));
+                        notifyDataSetChanged();
                          //total = 0 set total...
 
                      }
@@ -103,6 +118,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
                     } else{
                         databaseComic.atualizarLista(listaItem.get(getAdapterPosition()), numero);
                         listaItem = databaseComic.carregarDados();
+                        total.setText(String.format("$ %.2f " , somaTotal()));
                         notifyDataSetChanged();
                 }}
             });

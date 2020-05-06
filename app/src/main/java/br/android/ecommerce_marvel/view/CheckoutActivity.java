@@ -41,7 +41,7 @@ public class CheckoutActivity extends AppCompatActivity {
         this.databaseComic = new DbDatabaseComic(getApplicationContext());
         this.listaCheckout = databaseComic.carregarDados();
 
-        this.checkoutAdapter = new CheckoutAdapter(getApplicationContext(), this.listaCheckout, databaseComic);
+        this.checkoutAdapter = new CheckoutAdapter(getApplicationContext(), this.listaCheckout, databaseComic, valorTotal);
         this.recyclerViewCheckout.setAdapter(checkoutAdapter);
         this.recyclerViewCheckout.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
@@ -51,7 +51,6 @@ public class CheckoutActivity extends AppCompatActivity {
                 Toast.makeText(CheckoutActivity.this, "Compra realizada com sucesso!", Toast.LENGTH_SHORT).show();
                 databaseComic.deletarTodosRegistros();
                 gerarLista();
-                //databaseComic.atualizarLista(listaCheckout.get(i));
                 valorTotal.setText(String.format("$ %.2f " , somaTotal()));
                 checkoutAdapter.notifyDataSetChanged();
             }
