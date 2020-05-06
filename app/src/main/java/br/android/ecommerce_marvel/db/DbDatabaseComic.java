@@ -33,6 +33,7 @@ public class DbDatabaseComic implements DAO {
             valores.put(DbOpenHelper.PRICE, comics.getPrice());
             valores.put(DbOpenHelper.THUMBNAIL, comics.getThumb());
             valores.put(DbOpenHelper.QTDE, quant);
+            valores.put(DbOpenHelper.RARO, comics.getRaro());
 
             db.insert(DbOpenHelper.TABELA, null, valores);
 
@@ -83,8 +84,9 @@ public class DbDatabaseComic implements DAO {
                     double price = cursor.getDouble(cursor.getColumnIndex(DbOpenHelper.PRICE));
                     String desc = cursor.getString(cursor.getColumnIndex(DbOpenHelper.DESCRIPTION));
                     String thumbnail = cursor.getString(cursor.getColumnIndex(DbOpenHelper.THUMBNAIL));
+                    boolean rare = cursor.getInt(cursor.getColumnIndex(DbOpenHelper.RARO))>0;
                     int qtde = cursor.getInt(cursor.getColumnIndex(DbOpenHelper.QTDE));
-                    aux.add(new Item(new Comics(id, title, desc, pageCount, price, thumbnail), qtde));
+                    aux.add(new Item(new Comics(id, title, desc, pageCount, price, thumbnail, rare), qtde));
 
                 } while (cursor.moveToNext());
             }
@@ -109,11 +111,11 @@ public class DbDatabaseComic implements DAO {
             db.close();
 
     }
-        //deletar ao finallizar compras
+        //deletar ao finalizar compras
         public void deletarTodosRegistros(){
-                db = criarBanco.getWritableDatabase();
-                db.execSQL("DELETE FROM " + DbOpenHelper.TABELA);
-                db.close();
+            db = criarBanco.getWritableDatabase();
+            db.execSQL("DELETE FROM " + DbOpenHelper.TABELA);
+            db.close();
 
         }
 

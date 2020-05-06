@@ -24,6 +24,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     public static final String PRICE = "price";
     public static final String QTDE = "qtde";
     public static final String THUMBNAIL = "thumbnail";
+    public static final String RARO = "raro";
     private static final int VERSAO = 1;
 
 
@@ -43,8 +44,8 @@ public class DbOpenHelper extends SQLiteOpenHelper {
                 + PAGE_COUNT + " INTEGER " + ","
                 + PRICE + " REAL " + ","
                 + THUMBNAIL + " TEXT " + ","
-                + QTDE + " INTEGER " + ")";
-
+                + QTDE + " INTEGER " + ","
+                + RARO + " BOOLEAN NOT NULL CHECK ( " + RARO + " IN (0,1)))";
 
         db.execSQL(sql);
     }

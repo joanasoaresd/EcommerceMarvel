@@ -9,7 +9,6 @@ import android.support.annotation.RequiresApi;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -36,32 +35,45 @@ public class Comics implements Parcelable {
 
     private double price;
 
-    public String getThumb() {
-        return thumb;
-    }
-
     private String thumb;
+
+    //12% das revistas em quadrinhos carregadas devem ser marcadas como raras (aleatoriamente no próprio fonte ao carregar o REST)
+    private boolean raro;
 
 
     public Comics() {
         super();
     }
 
-    public Comics(int id, String title, String description, int pageCount, double price, String thumbnail) {
+    public Comics(int id, String title, String description, int pageCount, double price, String thumbnail, boolean raro) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.pageCount = pageCount;
         this.price = price;
         this.thumb = thumbnail;
+        this.raro = raro;
     }
 
-    public Comics(int id, String title, String description, int pageCount, double price) {
+    public Comics(int id, String title, String description, int pageCount, double price, boolean raro) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.pageCount = pageCount;
         this.price = price;
+        this.raro = raro;
+    }
+
+    public boolean getRaro() {
+        return raro;
+    }
+
+    public void setRaro(boolean raro) {
+        this.raro = raro;
+    }
+
+    public String getThumb() {
+        return thumb;
     }
 
 

@@ -80,7 +80,6 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
                 @Override
                 public void onClick(View v) {
                     databaseComic.deletarRegistros(listaItem.get(getAdapterPosition()).getComics().getId());
-                   // databaseComic.atualizarLista(listaItem.get(getAdapterPosition()));
                     listaItem = databaseComic.carregarDados();
                     notifyDataSetChanged();
                      if(listaItem.size() == 0) {
@@ -105,7 +104,6 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
                         databaseComic.atualizarLista(listaItem.get(getAdapterPosition()), numero);
                         listaItem = databaseComic.carregarDados();
                         notifyDataSetChanged();
-
                 }}
             });
         }

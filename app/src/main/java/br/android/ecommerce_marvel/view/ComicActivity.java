@@ -3,31 +3,29 @@ package br.android.ecommerce_marvel.view;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-
-import android.widget.ImageButton;
 
 
 import java.util.ArrayList;
 
 import br.android.ecommerce_marvel.R;
 import br.android.ecommerce_marvel.controller.ComicService;
+import br.android.ecommerce_marvel.controller.RetrofitConfig;
 import br.android.ecommerce_marvel.model.ComicDTO;
 import br.android.ecommerce_marvel.model.Comics;
 import retrofit2.Call;
 import retrofit2.Callback;
-import static br.android.ecommerce_marvel.view.RetrofitConfig.HASH;
-import static br.android.ecommerce_marvel.view.RetrofitConfig.PUBLIC_KEY;
-import static br.android.ecommerce_marvel.view.RetrofitConfig.TS;
+import static br.android.ecommerce_marvel.controller.RetrofitConfig.HASH;
+import static br.android.ecommerce_marvel.controller.RetrofitConfig.PUBLIC_KEY;
+import static br.android.ecommerce_marvel.controller.RetrofitConfig.TS;
 
 public class ComicActivity extends AppCompatActivity {
 
     private static final String TAG = "COMICS";
     private RecyclerView recyclerView;
     private ComicAdapter comicAdapter;
-    ArrayList<Comics> comicsList = new ArrayList<>();
+    ArrayList<Comics> comicsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +34,7 @@ public class ComicActivity extends AppCompatActivity {
         logoActionBar();
 
         this.recyclerView = findViewById(R.id.rv_listacomics);
+        comicsList = new ArrayList<>();
 
         obterDadosJson();
 
@@ -43,7 +42,7 @@ public class ComicActivity extends AppCompatActivity {
 
     private void logoActionBar(){
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.logo);
+        getSupportActionBar().setLogo(R.drawable.ic_marvel_simbolo);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
     }
 
@@ -71,6 +70,7 @@ public class ComicActivity extends AppCompatActivity {
                             Log.i(TAG, "Páginas: " + c.getPageCount());
                             Log.i(TAG, String.format("Preço: $ %.2f", c.getPrices().get(0).getPrice()));
                             Log.i(TAG, "Imagem: " + c.getThumbnail().getPortraitFantastic());
+                            Log.i(TAG, "É Raro? " + c.getRaro());
                            comicsList.add(c);
                            comicAdapter.notifyDataSetChanged();
 
