@@ -20,7 +20,7 @@ public class CheckoutActivity extends AppCompatActivity {
     private DbDatabaseComic databaseComic;
     private RecyclerView recyclerViewCheckout;
     private CheckoutAdapter checkoutAdapter;
-    private ArrayList<Item> listaCheckout = new ArrayList<>();
+    private ArrayList<Item> listaCheckout;
     private TextView valorTotal;
     private Button bt_finalizar_compra;
 
@@ -32,18 +32,19 @@ public class CheckoutActivity extends AppCompatActivity {
 
         configurar();
         gerarLista();
-        atualizarValorTotal(this.valorTotal);
         voltarActionBar();
 
     }
 
     private void gerarLista() {
         this.databaseComic = new DbDatabaseComic(getApplicationContext());
+        listaCheckout = new ArrayList<>();
         this.listaCheckout = databaseComic.carregarDados();
 
-        this.checkoutAdapter = new CheckoutAdapter(getApplicationContext(), this.listaCheckout, databaseComic, valorTotal);
+        this.checkoutAdapter = new CheckoutAdapter(getApplicationContext(), this.listaCheckout, this.databaseComic, this.valorTotal);
         this.recyclerViewCheckout.setAdapter(checkoutAdapter);
         this.recyclerViewCheckout.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        this.checkoutAdapter.somaTotal(this.valorTotal);
 
         bt_finalizar_compra.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,25 +52,9 @@ public class CheckoutActivity extends AppCompatActivity {
                 Toast.makeText(CheckoutActivity.this, "Compra realizada com sucesso!", Toast.LENGTH_SHORT).show();
                 databaseComic.deletarTodosRegistros();
                 gerarLista();
-                valorTotal.setText(String.format("$ %.2f " , somaTotal()));
                 checkoutAdapter.notifyDataSetChanged();
             }
         });
-    }
-
-    private void atualizarValorTotal(TextView valorTotal){
-        valorTotal.setText(String.format("$ %.2f " , somaTotal()));
-    }
-
-    //valor total será qtde de itens * valor do item
-    private double somaTotal(){
-        double soma = 0;
-        for (int i = 0; i < this.listaCheckout.size(); i++) {
-            double valor = this.listaCheckout.get(i).getComics().getPrice() * this.listaCheckout.get(i).getQuantidade();
-            soma = valor+soma;
-           // this.valorTotal.setText(String.format("$ %.2f " , soma));
-
-        } return soma;
     }
 
     private void configurar(){

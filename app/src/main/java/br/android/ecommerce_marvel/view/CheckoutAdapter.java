@@ -14,6 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import br.android.ecommerce_marvel.R;
 import br.android.ecommerce_marvel.db.DbDatabaseComic;
@@ -62,14 +65,13 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
         return this.listaItem.size();
     }
 
-    private double somaTotal(){
+    public void somaTotal(TextView total){
         double soma = 0;
         for (int i = 0; i < this.listaItem.size(); i++) {
             double valor = this.listaItem.get(i).getComics().getPrice() * this.listaItem.get(i).getQuantidade();
             soma = valor+soma;
-            // this.valorTotal.setText(String.format("$ %.2f " , soma));
 
-        } return soma;
+        }  total.setText(String.format("$ %.2f " , soma));
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -92,12 +94,14 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
                 public void onClick(View v) {
                     databaseComic.deletarRegistros(listaItem.get(getAdapterPosition()).getComics().getId());
                     listaItem = databaseComic.carregarDados();
-                    total.setText(String.format("$ %.2f " , somaTotal()));
+                    //total.setText(String.format("$ %.2f " , somaTotal()));
+                    somaTotal(total);
                     notifyDataSetChanged();
 
                      if(listaItem.size() == 0) {
                         databaseComic.carregarDados();
-                        total.setText(String.format("$ %.2f " , somaTotal()));
+                       // total.setText(String.format("$ %.2f " , somaTotal()));
+                         somaTotal(total);
                         notifyDataSetChanged();
                          //total = 0 set total...
 
@@ -118,7 +122,8 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
                     } else{
                         databaseComic.atualizarLista(listaItem.get(getAdapterPosition()), numero);
                         listaItem = databaseComic.carregarDados();
-                        total.setText(String.format("$ %.2f " , somaTotal()));
+                        //total.setText(String.format("$ %.2f " , somaTotal()));
+                        somaTotal(total);
                         notifyDataSetChanged();
                 }}
             });
