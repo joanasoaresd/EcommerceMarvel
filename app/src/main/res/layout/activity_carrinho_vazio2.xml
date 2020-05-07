@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.Carrinho_vazio">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:elevation="10dp"
+        android:src="@drawable/ic_emo" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_carrinho"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="110dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Carrinho Vazio"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="240dp"
+        android:textStyle="bold"
+        android:textSize="25sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Continue em busca de um quadrinho, voltando para a página inicial."
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="310dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="5dp"
+        android:textSize="20dp"    />
+
+    <Button
+        android:id="@+id/bt_voltar_inicial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="400dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:text="Página Inicial"
+        android:textColor="#FFFFFF"
+        android:background="#b80404"/>
+
+</RelativeLayout>

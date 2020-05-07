@@ -76,6 +76,14 @@ public class Comics implements Parcelable {
         return thumb;
     }
 
+    public String mostrarRaro(){
+        String text = "Comum";
+        if(getRaro() == true){
+            text = "Raro";
+            return text;
+        } return text;
+    }
+
 
     protected Comics(Parcel in) {
         id = in.readInt();

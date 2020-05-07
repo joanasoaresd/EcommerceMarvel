@@ -11,8 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".view.DetailsComicsActivity" />
+        <activity android:name=".view.Carrinho_vazio"
+            android:parentActivityName=".view.ComicActivity"></activity>
+        <activity android:name=".view.DetailsComicsActivity"
+            android:parentActivityName=".view.ComicActivity"/>
         <activity android:name=".view.ComicActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,7 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.CheckoutActivity" />
+        <activity android:name=".view.CheckoutActivity"></activity>
+        <activity android:name=".view.CompraFinalizada"
+            android:parentActivityName=".view.ComicActivity"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

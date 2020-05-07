@@ -56,7 +56,8 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
         comic = this.comics.get(i);
 
         viewHolder.tituloComic.setText(comic.getTitle());
-        viewHolder.paginas.setText(Integer.toString(comic.getPageCount()) + " páginas");
+        viewHolder.preco.setText(String.format("$ %.2f ", comic.getPrices().get(0).getPrice()));
+        viewHolder.raro.setText(comic.mostrarRaro());
 
         Glide.with(viewHolder.imageComic.getContext())
                 .load(comic.getThumbnail().getLandscapeIncredible())
@@ -72,14 +73,15 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imageComic;
-        private TextView tituloComic, paginas;
+        private TextView tituloComic, preco, raro;
 
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);
 
             this.imageComic = (ImageView) itemView.findViewById(R.id.ib_ImagemComic);
             this.tituloComic = (TextView) itemView.findViewById(R.id.tv_TitleComic);
-            this.paginas = (TextView) itemView.findViewById(R.id.tv_NumPaginas);
+            this.preco = (TextView) itemView.findViewById(R.id.tv_price_inicial);
+            this.raro = (TextView) itemView.findViewById(R.id.tv_raro);
 
 
             imageComic.setOnClickListener(new View.OnClickListener() {

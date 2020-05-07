@@ -1,10 +1,14 @@
 package br.android.ecommerce_marvel.view;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 
 import java.util.ArrayList;
@@ -12,8 +16,10 @@ import java.util.ArrayList;
 import br.android.ecommerce_marvel.R;
 import br.android.ecommerce_marvel.controller.ComicService;
 import br.android.ecommerce_marvel.controller.RetrofitConfig;
+import br.android.ecommerce_marvel.db.DbDatabaseComic;
 import br.android.ecommerce_marvel.model.ComicDTO;
 import br.android.ecommerce_marvel.model.Comics;
+import br.android.ecommerce_marvel.model.Item;
 import retrofit2.Call;
 import retrofit2.Callback;
 import static br.android.ecommerce_marvel.controller.RetrofitConfig.HASH;
@@ -26,6 +32,9 @@ public class ComicActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ComicAdapter comicAdapter;
     ArrayList<Comics> comicsList;
+    FloatingActionButton fab;
+    ArrayList<Item> listaCheckout;
+    DbDatabaseComic databaseComic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +42,12 @@ public class ComicActivity extends AppCompatActivity {
         setContentView(R.layout.comic_activity);
         logoActionBar();
 
+        this.databaseComic = new DbDatabaseComic(getApplicationContext());
         this.recyclerView = findViewById(R.id.rv_listacomics);
+        this.fab = findViewById(R.id.fab);
+
+        listaCheckout = new ArrayList<>();
+        listaCheckout = databaseComic.carregarDados();
         comicsList = new ArrayList<>();
 
         obterDadosJson();
@@ -62,6 +76,7 @@ public class ComicActivity extends AppCompatActivity {
                     comicAdapter = new ComicAdapter(comicsList);
                     recyclerView.setAdapter(comicAdapter);
                     recyclerView.setLayoutManager(new GridLayoutManager(ComicActivity.this, 2));
+
                     for (int i = 0; i < resposta.size(); i++) {
                           Comics  c = resposta.get(i);
                             Log.i(TAG, "ID: " + c.getId());
@@ -73,6 +88,22 @@ public class ComicActivity extends AppCompatActivity {
                             Log.i(TAG, "É Raro? " + c.getRaro());
                            comicsList.add(c);
                            comicAdapter.notifyDataSetChanged();
+                           fab.setOnClickListener(new View.OnClickListener() {
+                               @Override
+                               public void onClick(View v) {
+                                   if(quantidadeItens() == 0){
+                                        Intent i = new Intent(getApplicationContext(), Carrinho_vazio.class);
+                                        startActivity(i);
+
+                                   } else{
+                                       Intent i = new Intent(getApplicationContext(), CheckoutActivity.class);
+                                       startActivity(i);
+                                      // finish();
+
+
+                                   }
+                            }
+                        });
 
                     }
                 }
@@ -84,6 +115,14 @@ public class ComicActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private int quantidadeItens(){
+        int contador = 0;
+        for(int i = 0; i < listaCheckout.size(); i++){
+            contador += 1;
+
+        }return contador;
     }
 }
 

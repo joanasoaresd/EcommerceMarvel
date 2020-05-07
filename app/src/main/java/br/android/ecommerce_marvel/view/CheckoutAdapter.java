@@ -1,6 +1,8 @@
 package br.android.ecommerce_marvel.view;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,9 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import br.android.ecommerce_marvel.R;
 import br.android.ecommerce_marvel.db.DbDatabaseComic;
@@ -100,9 +99,13 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
 
                      if(listaItem.size() == 0) {
                         databaseComic.carregarDados();
-                       // total.setText(String.format("$ %.2f " , somaTotal()));
-                         somaTotal(total);
-                        notifyDataSetChanged();
+                        Context c = bt_del.getContext();
+                       //  somaTotal(total);
+                        Intent i = new Intent(c, Carrinho_vazio.class);
+                        c.startActivity(i);
+                         ((Activity)c).finish();
+
+                       // notifyDataSetChanged();
                          //total = 0 set total...
 
                      }
@@ -122,7 +125,6 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
                     } else{
                         databaseComic.atualizarLista(listaItem.get(getAdapterPosition()), numero);
                         listaItem = databaseComic.carregarDados();
-                        //total.setText(String.format("$ %.2f " , somaTotal()));
                         somaTotal(total);
                         notifyDataSetChanged();
                 }}
