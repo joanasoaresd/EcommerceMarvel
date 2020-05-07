@@ -46,7 +46,7 @@ public class ComicActivity extends AppCompatActivity {
         this.recyclerView = findViewById(R.id.rv_listacomics);
         this.fab = findViewById(R.id.fab);
 
-       // listaCheckout = new ArrayList<>();
+        listaCheckout = new ArrayList<>();
         listaCheckout = databaseComic.carregarDados();
         comicsList = new ArrayList<>();
 
@@ -91,14 +91,14 @@ public class ComicActivity extends AppCompatActivity {
                            fab.setOnClickListener(new View.OnClickListener() {
                                @Override
                                public void onClick(View v) {
-                                   if(quantidadeItens() == 0){
+                                   if(quantidadeItens() == 0 || listaCheckout == null){
                                         Intent i = new Intent(getApplicationContext(), Carrinho_vazio.class);
                                         startActivity(i);
 
-                                   } else{
+                                   } else if(quantidadeItens() > 0){
                                        Intent i = new Intent(getApplicationContext(), CheckoutActivity.class);
                                        startActivity(i);
-                                      // finish();
+                                       finish();
 
 
                                    }
@@ -122,7 +122,9 @@ public class ComicActivity extends AppCompatActivity {
         for(int i = 0; i < listaCheckout.size(); i++){
             contador += 1;
 
-        }return contador;
+        }
+        System.out.println("cont "+ contador);
+        return contador;
     }
 }
 
