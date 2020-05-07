@@ -6,28 +6,24 @@ import android.content.Intent;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
-
-import java.io.IOException;
 import java.util.ArrayList;
-
-
 import br.android.ecommerce_marvel.R;
+import br.android.ecommerce_marvel.db.DbDatabaseComic;
 import br.android.ecommerce_marvel.model.Comics;
+import br.android.ecommerce_marvel.model.Item;
 
 
 public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> {
 
     private ArrayList<Comics> comics;
     private Comics comic;
+
 
     public Comics getComicItem(int position){
         return comics.get(position);
@@ -36,6 +32,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
 
     public ComicAdapter(ArrayList<Comics> comicsList) {
         this.comics = comicsList;
+
     }
 
 

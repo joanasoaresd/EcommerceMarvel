@@ -22,12 +22,13 @@ public class DbDatabaseComic implements DAO {
         criarBanco = new DbOpenHelper(context);
         this.read = criarBanco.getReadableDatabase();
         this.write = criarBanco.getWritableDatabase();
+        System.out.println("Instanciaa");
     }
 
     public static DbDatabaseComic getInstance(Context context) {
         if(instance == null){
             instance = new DbDatabaseComic(context.getApplicationContext());
-    }   System.out.println("Instanciaa");
+    }
         return instance;
     }
 

@@ -50,8 +50,8 @@ public class CheckoutActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(CheckoutActivity.this, "Compra realizada com sucesso!", Toast.LENGTH_SHORT).show();
                 databaseComic.deletarTodosRegistros();
-               // gerarLista();
-                //checkoutAdapter.notifyDataSetChanged();
+                gerarLista();
+                checkoutAdapter.notifyDataSetChanged();
                 Intent intent = new Intent(getApplicationContext(), CompraFinalizada.class);
                 startActivity(intent);
                 finish();

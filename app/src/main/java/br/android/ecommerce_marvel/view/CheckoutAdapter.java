@@ -102,7 +102,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
                        //  somaTotal(total);
                         Intent i = new Intent(c, Carrinho_vazio.class);
                         c.startActivity(i);
-                         ((Activity)c).finish();
+                        ((Activity)c).finish();
 
                        // notifyDataSetChanged();
                          //total = 0 set total...
