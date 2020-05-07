@@ -27,6 +27,8 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     public static final String RARO = "raro";
     private static final int VERSAO = 1;
 
+    //private Context context;
+    //private static DbOpenHelper instance;
 
     public DbOpenHelper(Context context) {
         super(context, NOME_BANCO, null, VERSAO);

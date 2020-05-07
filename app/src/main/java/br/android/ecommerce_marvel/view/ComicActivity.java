@@ -42,11 +42,11 @@ public class ComicActivity extends AppCompatActivity {
         setContentView(R.layout.comic_activity);
         logoActionBar();
 
-        this.databaseComic = new DbDatabaseComic(getApplicationContext());
+        this.databaseComic = DbDatabaseComic.getInstance(getApplicationContext());
         this.recyclerView = findViewById(R.id.rv_listacomics);
         this.fab = findViewById(R.id.fab);
 
-        listaCheckout = new ArrayList<>();
+       // listaCheckout = new ArrayList<>();
         listaCheckout = databaseComic.carregarDados();
         comicsList = new ArrayList<>();
 

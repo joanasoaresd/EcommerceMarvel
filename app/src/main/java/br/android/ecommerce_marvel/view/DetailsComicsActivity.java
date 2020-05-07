@@ -28,7 +28,7 @@ public class DetailsComicsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.detalhamento);
 
-        dbDatabaseComic = new DbDatabaseComic(getApplicationContext());
+        dbDatabaseComic = DbDatabaseComic.getInstance(getApplicationContext());
 
         configuracao();
         resgatar();

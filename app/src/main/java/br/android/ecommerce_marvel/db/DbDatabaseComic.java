@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
 import java.util.ArrayList;
 import br.android.ecommerce_marvel.model.Comics;
 import br.android.ecommerce_marvel.model.Item;
@@ -12,10 +14,20 @@ import br.android.ecommerce_marvel.model.Item;
 public class DbDatabaseComic implements DAO {
 
     private SQLiteDatabase db;
-    private DbOpenHelper criarBanco;
+    private static DbOpenHelper criarBanco;
+    private static DbDatabaseComic instance;
 
-    public DbDatabaseComic(Context context) {
+
+    private DbDatabaseComic(Context context) {
         criarBanco = new DbOpenHelper(context);
+    }
+
+    public static DbDatabaseComic getInstance(Context context) {
+        if(instance == null){
+            System.out.println("Instanciaa");
+            return instance;
+    }System.out.println("Instanciaa");
+        return instance;
     }
 
     //inserir dados no banco

@@ -24,8 +24,6 @@ public class CheckoutActivity extends AppCompatActivity {
     private ArrayList<Item> listaCheckout;
     private TextView valorTotal;
     private Button bt_finalizar_compra;
-    FrameLayout frameLayout;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +37,7 @@ public class CheckoutActivity extends AppCompatActivity {
     }
 
     private void gerarLista() {
-        this.databaseComic = new DbDatabaseComic(getApplicationContext());
+        this.databaseComic =  DbDatabaseComic.getInstance(getApplicationContext());
         listaCheckout = new ArrayList<>();
         this.listaCheckout = databaseComic.carregarDados();
 
