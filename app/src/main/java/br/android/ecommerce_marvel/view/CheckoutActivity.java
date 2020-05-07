@@ -35,11 +35,16 @@ public class CheckoutActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        this.listaCheckout = databaseComic.carregarDados();
+    }
+
     private void gerarLista() {
         this.databaseComic =  DbDatabaseComic.getInstance(getApplicationContext());
         listaCheckout = new ArrayList<>();
-        this.listaCheckout = databaseComic.carregarDados();
-
+        onResume();
         this.checkoutAdapter = new CheckoutAdapter(getApplicationContext(), this.listaCheckout, this.databaseComic, this.valorTotal);
         this.recyclerViewCheckout.setAdapter(checkoutAdapter);
         this.recyclerViewCheckout.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));

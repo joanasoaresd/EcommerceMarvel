@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:background="#190000"
+        android:background="#242121"
         android:gravity="center"
         android:padding="12dp">
 

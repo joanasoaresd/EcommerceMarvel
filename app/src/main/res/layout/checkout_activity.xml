@@ -23,7 +23,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:elevation="16dp"
-            android:background="#242121">
+            android:background="#000000">
 
             <Button
                 android:id="@+id/bt_finalizar_compra"
@@ -74,7 +74,7 @@
     android:layout_height="match_parent"
     tools:context=".view.CheckoutActivity"
     android:orientation="vertical"
-    android:background="#242121">
+    android:background="#000000">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_checkout"

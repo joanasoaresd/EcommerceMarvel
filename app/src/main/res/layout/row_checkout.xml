@@ -8,14 +8,14 @@
     app:cardCornerRadius="3dp"
     app:cardElevation="3dp"
     app:cardUseCompatPadding="true"
-    android:background="#242121">
+    android:background="#000000">
 
     <RelativeLayout
         android:id="@+id/RelativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
-        android:background="#190000">
+        android:background="#242121">
 
         <ImageView
             android:id="@+id/iv_thumb_checkout"
