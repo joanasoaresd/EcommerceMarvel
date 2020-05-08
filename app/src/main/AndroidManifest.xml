@@ -15,16 +15,17 @@
             android:parentActivityName=".view.ComicActivity"></activity>
         <activity android:name=".view.DetailsComicsActivity"
             android:parentActivityName=".view.ComicActivity"/>
-        <activity android:name=".view.ComicActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".view.ComicActivity"/>
         <activity android:name=".view.CheckoutActivity"></activity>
         <activity android:name=".view.CompraFinalizada"
             android:parentActivityName=".view.ComicActivity"></activity>
+        <activity android:name=".view.SplashScreenActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

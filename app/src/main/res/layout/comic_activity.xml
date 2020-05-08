@@ -24,7 +24,6 @@
         </TextView>
     </LinearLayout>
 
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_listacomics"
         android:layout_width="match_parent"
@@ -39,7 +38,7 @@
         android:layout_margin = "16dp"
         android:src="@drawable/ic_carrinho"
         app:borderWidth="0dp"
-        android:backgroundTint="#FFA500"/>
+        android:backgroundTint="#ffdb58"/>
 
 
 
