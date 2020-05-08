@@ -44,16 +44,9 @@ public class ComicActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.comic_activity);
+
         logoActionBar();
-
-        this.databaseComic = DbDatabaseComic.getInstance(getApplicationContext());
-        this.recyclerView = findViewById(R.id.rv_listacomics);
-        this.fab = findViewById(R.id.fab);
-
-
-        listaCheckout = new ArrayList<>();
-        comicsList = new ArrayList<>();
-
+        inicializar();
         obterDadosJson();
 
     }
@@ -134,6 +127,14 @@ public class ComicActivity extends AppCompatActivity {
         }
         System.out.println("cont "+ contador);
         return contador;
+    }
+
+    public void inicializar(){
+        this.databaseComic = DbDatabaseComic.getInstance(getApplicationContext());
+        this.recyclerView = findViewById(R.id.rv_listacomics);
+        this.fab = findViewById(R.id.fab);
+        listaCheckout = new ArrayList<>();
+        comicsList = new ArrayList<>();
     }
 }
 
