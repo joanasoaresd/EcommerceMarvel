@@ -1,4 +1,4 @@
-package br.android.ecommerce_marvel.view;
+package br.android.ecommerce_marvel.controller;
 
 import android.util.Log;
 

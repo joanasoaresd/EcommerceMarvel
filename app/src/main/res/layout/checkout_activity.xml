@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.DetailsComicsActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="460dp"
+        android:layout_alignParentEnd="true"
+        android:background="#242121">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:elevation="16dp"
+            android:background="#000000">
+
+            <Button
+                android:id="@+id/bt_finalizar_compra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="70dp"
+                android:layout_marginEnd="30dp"
+                android:text="Finalizar compra"
+                android:background="#03bb85"
+                android:textColor="#FFFFFF">
+
+            </Button>
+
+            <TextView
+                android:id="@+id/tv_valor_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="90dp"
+                android:layout_marginTop="10dp"
+                android:text="$ 00,00"
+                android:textSize="20dp"
+                android:textColor="#FFFFFF">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/tv_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:text="Total: "
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF">
+
+            </TextView>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="150dp"
+    android:background="#242121">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.CheckoutActivity"
+    android:orientation="vertical"
+    android:background="#000000">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_checkout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
+</android.support.v7.widget.CardView>
+
+
+</RelativeLayout>
