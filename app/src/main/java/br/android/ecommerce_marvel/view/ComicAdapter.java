@@ -56,8 +56,13 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
         viewHolder.preco.setText(String.format("$ %.2f ", comic.getPrices().get(0).getPrice()));
         viewHolder.raro.setText(comic.mostrarRaro());
 
+<<<<<<< HEAD
         Glide.with(viewHolder.imageComic.getContext())
                 .load(comic.getThumbnail().getLandscapeIncredible())
+=======
+            Glide.with(viewHolder.imageComic.getContext())
+                .load(comic.getThumbnail().getPortraitUncanny())
+>>>>>>> develop
                 .error(R.drawable.not_found)
                 .into(viewHolder.imageComic);
     }

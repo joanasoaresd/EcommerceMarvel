@@ -12,8 +12,13 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
+<<<<<<< HEAD
             android:layout_height="match_parent"
             android:background="#242121"
+=======
+            android:layout_height="wrap_content"
+            android:background="#000000"
+>>>>>>> develop
             android:padding="16dp" >
 
                 <TextView
@@ -54,6 +59,7 @@
                     app:layout_constraintStart_toEndOf="@+id/ib_ImagemComic"
                     app:layout_constraintTop_toTopOf="parent" />
 
+<<<<<<< HEAD
 
                 <LinearLayout
                 android:layout_width="wrap_content"
@@ -77,6 +83,20 @@
                                 app:layout_constraintTop_toBottomOf="@+id/tv_TitleComic" />
 
         </LinearLayout>
+=======
+                <TextView
+                    android:id="@+id/tv_NumPaginas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="85dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="50dp"
+                    android:textColor="#DCDCDC"
+                    android:text="Page"
+                    android:textSize="10sp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_TitleComic"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_TitleComic" />
+>>>>>>> develop
 
         </RelativeLayout>
 

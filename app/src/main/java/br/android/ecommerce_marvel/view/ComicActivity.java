@@ -49,6 +49,7 @@ public class ComicActivity extends AppCompatActivity {
         inicializar();
         obterDadosJson();
 
+<<<<<<< HEAD
     }
 
     @Override
@@ -61,6 +62,8 @@ public class ComicActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.ic_marvel_simbolo);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+=======
+>>>>>>> develop
     }
 
     private void obterDadosJson() {
