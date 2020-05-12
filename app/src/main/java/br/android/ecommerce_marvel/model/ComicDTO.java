@@ -71,6 +71,7 @@ public class ComicDTO {
     public Data getData() {
         return data;
     }
+
     @JsonProperty(value = "data")
     public void setData(Data data) {
         this.data = data;

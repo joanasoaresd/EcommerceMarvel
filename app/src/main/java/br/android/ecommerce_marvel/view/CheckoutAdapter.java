@@ -15,7 +15,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
+
 import br.android.ecommerce_marvel.R;
 import br.android.ecommerce_marvel.db.DbDatabaseComic;
 import br.android.ecommerce_marvel.model.Item;
@@ -27,7 +29,6 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
     private Context context;
     DbDatabaseComic databaseComic;
     TextView total;
-
 
 
     public CheckoutAdapter(Context context, ArrayList<Item> itens, DbDatabaseComic database, TextView total) {
@@ -52,9 +53,9 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
 
         item = this.listaItem.get(i);
 
-        viewHolder.qtde.setText(""+item.getQuantidade());
+        viewHolder.qtde.setText("" + item.getQuantidade());
         viewHolder.tituloComic.setText(item.getComics().getTitle());
-        viewHolder.preco.setText(String.format("$ %.2f " , item.getComics().getPrice()));
+        viewHolder.preco.setText(String.format("$ %.2f ", item.getComics().getPrice()));
         Glide.with(viewHolder.imageComic.getContext()).load(item.getComics().getThumb()).error(R.drawable.not_found).into(viewHolder.imageComic);
     }
 
@@ -63,13 +64,14 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
         return this.listaItem.size();
     }
 
-    public void somaTotal(TextView total){
+    public void somaTotal(TextView total) {
         double soma = 0;
         for (int i = 0; i < this.listaItem.size(); i++) {
             double valor = this.listaItem.get(i).getComics().getPrice() * this.listaItem.get(i).getQuantidade();
-            soma = valor+soma;
+            soma = valor + soma;
 
-        }  total.setText(String.format("$ %.2f " , soma));
+        }
+        total.setText(String.format("$ %.2f ", soma));
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -92,23 +94,18 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
                 public void onClick(View v) {
                     databaseComic.deletarRegistros(listaItem.get(getAdapterPosition()).getComics().getId());
                     listaItem = databaseComic.carregarDados();
-                    //total.setText(String.format("$ %.2f " , somaTotal()));
                     somaTotal(total);
                     notifyDataSetChanged();
 
-                     if(listaItem.size() == 0) {
+                    if (listaItem.size() == 0) {
                         databaseComic.carregarDados();
                         Context c = bt_del.getContext();
-                       //  somaTotal(total);
                         Intent i = new Intent(c, Carrinho_vazio.class);
                         c.startActivity(i);
-                        ((Activity)c).finish();
+                        ((Activity) c).finish();
 
-                       // notifyDataSetChanged();
-                         //total = 0 set total...
-
-                     }
-                     }
+                    }
+                }
             });
 
             qtde.setOnClickListener(new View.OnClickListener() {
@@ -121,12 +118,13 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
                         listaItem = databaseComic.carregarDados();
                         notifyDataSetChanged();
 
-                    } else{
+                    } else {
                         databaseComic.atualizarLista(listaItem.get(getAdapterPosition()), numero);
                         listaItem = databaseComic.carregarDados();
                         somaTotal(total);
                         notifyDataSetChanged();
-                }}
+                    }
+                }
             });
         }
     }

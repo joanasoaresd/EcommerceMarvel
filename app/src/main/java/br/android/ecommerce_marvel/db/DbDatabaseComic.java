@@ -4,13 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-
 import java.util.ArrayList;
 import br.android.ecommerce_marvel.model.Comics;
 import br.android.ecommerce_marvel.model.Item;
 
-//CONTÉM CONTEÚDOS DE MANIPULAÇÃO DOS DADOS NO BANCO
+
 public class DbDatabaseComic implements DAO {
 
     private SQLiteDatabase read;
@@ -26,36 +24,32 @@ public class DbDatabaseComic implements DAO {
     }
 
     public static DbDatabaseComic getInstance(Context context) {
-        if(instance == null){
+        if (instance == null) {
             instance = new DbDatabaseComic(context.getApplicationContext());
-    }
+        }
         return instance;
     }
 
-    //inserir dados no banco
+
     @Override
     public void inserirDados(Comics comics, int quant) {
 
         ContentValues valores = new ContentValues();
-        //getWritableDatabase p/ leitura e escrita de dados
-       // db = criarBanco.getWritableDatabase();
 
-            valores.put(DbOpenHelper.ID, comics.getId());
-            valores.put(DbOpenHelper.TITLE, comics.getTitle());
-            valores.put(DbOpenHelper.DESCRIPTION, comics.getDescription());
-            valores.put(DbOpenHelper.PAGE_COUNT, comics.getPageCount());
-            valores.put(DbOpenHelper.PRICE, comics.getPrice());
-            valores.put(DbOpenHelper.THUMBNAIL, comics.getThumb());
-            valores.put(DbOpenHelper.QTDE, quant);
-            valores.put(DbOpenHelper.RARO, comics.getRaro());
+        valores.put(DbOpenHelper.ID, comics.getId());
+        valores.put(DbOpenHelper.TITLE, comics.getTitle());
+        valores.put(DbOpenHelper.DESCRIPTION, comics.getDescription());
+        valores.put(DbOpenHelper.PAGE_COUNT, comics.getPageCount());
+        valores.put(DbOpenHelper.PRICE, comics.getPrice());
+        valores.put(DbOpenHelper.THUMBNAIL, comics.getThumb());
+        valores.put(DbOpenHelper.QTDE, quant);
+        valores.put(DbOpenHelper.RARO, comics.getRaro());
 
-            write.insert(DbOpenHelper.TABELA, null, valores);
+        write.insert(DbOpenHelper.TABELA, null, valores);
 
     }
 
-    //define quantidade com soma
     public void atualizarQTDE(Comics c, int qtde) {
-       // db = criarBanco.getWritableDatabase();
         if (nTemId(c.getId())) {
 
             inserirDados(c, qtde);
@@ -78,69 +72,58 @@ public class DbDatabaseComic implements DAO {
             }
         }
     }
-        //select
-        @Override
-        public ArrayList<Item> carregarDados () {
 
-            //getReadable database leitura de dados.
-           // SQLiteDatabase db = criarBanco.getReadableDatabase();
-            ArrayList<Item> aux = new ArrayList<>();
+    @Override
+    public ArrayList<Item> carregarDados() {
+        ArrayList<Item> aux = new ArrayList<>();
 
-            String sql = "SELECT * FROM " + DbOpenHelper.TABELA;
+        String sql = "SELECT * FROM " + DbOpenHelper.TABELA;
 
-            Cursor cursor = read.rawQuery(sql, null);
+        Cursor cursor = read.rawQuery(sql, null);
 
-            if (cursor.moveToFirst()) {
-                do {
-                    String title = cursor.getString(cursor.getColumnIndex(DbOpenHelper.TITLE));
-                    int id = cursor.getInt(cursor.getColumnIndex(DbOpenHelper.ID));
-                    int pageCount = cursor.getInt(cursor.getColumnIndex(DbOpenHelper.PAGE_COUNT));
-                    double price = cursor.getDouble(cursor.getColumnIndex(DbOpenHelper.PRICE));
-                    String desc = cursor.getString(cursor.getColumnIndex(DbOpenHelper.DESCRIPTION));
-                    String thumbnail = cursor.getString(cursor.getColumnIndex(DbOpenHelper.THUMBNAIL));
-                    boolean rare = cursor.getInt(cursor.getColumnIndex(DbOpenHelper.RARO))>0;
-                    int qtde = cursor.getInt(cursor.getColumnIndex(DbOpenHelper.QTDE));
-                    aux.add(new Item(new Comics(id, title, desc, pageCount, price, thumbnail, rare), qtde));
+        if (cursor.moveToFirst()) {
+            do {
+                String title = cursor.getString(cursor.getColumnIndex(DbOpenHelper.TITLE));
+                int id = cursor.getInt(cursor.getColumnIndex(DbOpenHelper.ID));
+                int pageCount = cursor.getInt(cursor.getColumnIndex(DbOpenHelper.PAGE_COUNT));
+                double price = cursor.getDouble(cursor.getColumnIndex(DbOpenHelper.PRICE));
+                String desc = cursor.getString(cursor.getColumnIndex(DbOpenHelper.DESCRIPTION));
+                String thumbnail = cursor.getString(cursor.getColumnIndex(DbOpenHelper.THUMBNAIL));
+                boolean rare = cursor.getInt(cursor.getColumnIndex(DbOpenHelper.RARO)) > 0;
+                int qtde = cursor.getInt(cursor.getColumnIndex(DbOpenHelper.QTDE));
+                aux.add(new Item(new Comics(id, title, desc, pageCount, price, thumbnail, rare), qtde));
 
-                } while (cursor.moveToNext());
-            }
-
-           // read.close();
-            return aux;
+            } while (cursor.moveToNext());
         }
 
-        //select onde id
-        public boolean nTemId (int id){
-
-            Cursor rawQuery = read.rawQuery("SELECT id FROM " + DbOpenHelper.TABELA + " WHERE id = ?", new String[]{String.valueOf(id)});
-            int count = rawQuery.getCount();
-
-            return count == 0;
-        }
-
-        //deletar registros especificos
-        public void deletarRegistros (int id) {
-            //db = criarBanco.getReadableDatabase();
-            read.delete(DbOpenHelper.TABELA, "id=?", new String[]{id + ""});
-           // read.close();
-
+        return aux;
     }
-        //deletar ao finalizar compras
-        public void deletarTodosRegistros(){
-            //db = criarBanco.getWritableDatabase();
-            write.execSQL("DELETE FROM " + DbOpenHelper.TABELA);
-           // write.close();
 
-        }
+    public boolean nTemId(int id) {
 
-        //atualizar quantidade digitada
-        public void atualizarLista(Item i, int qtde) {
-            //db = criarBanco.getReadableDatabase();
-            String sqlUpdate = "UPDATE " + DbOpenHelper.TABELA + " SET " + DbOpenHelper.QTDE + " = " + qtde
-                    + " WHERE " + DbOpenHelper.ID + " = " + i.getComics().getId();
+        Cursor rawQuery = read.rawQuery("SELECT id FROM " + DbOpenHelper.TABELA + " WHERE id = ?", new String[]{String.valueOf(id)});
+        int count = rawQuery.getCount();
 
-            read.execSQL(sqlUpdate);
-            }
+        return count == 0;
+    }
 
-        }
+    public void deletarRegistros(int id) {
+        read.delete(DbOpenHelper.TABELA, "id=?", new String[]{id + ""});
+    }
+
+
+    public void deletarTodosRegistros() {
+        write.execSQL("DELETE FROM " + DbOpenHelper.TABELA);
+    }
+
+
+    public void atualizarLista(Item i, int qtde) {
+
+        String sqlUpdate = "UPDATE " + DbOpenHelper.TABELA + " SET " + DbOpenHelper.QTDE + " = " + qtde
+                + " WHERE " + DbOpenHelper.ID + " = " + i.getComics().getId();
+
+        read.execSQL(sqlUpdate);
+    }
+
+}
 

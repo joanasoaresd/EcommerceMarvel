@@ -37,7 +37,6 @@ public class Comics implements Parcelable {
 
     private String thumb;
 
-    //12% das revistas em quadrinhos carregadas devem ser marcadas como raras (aleatoriamente no próprio fonte ao carregar o REST)
     private boolean raro;
 
 
@@ -76,12 +75,13 @@ public class Comics implements Parcelable {
         return thumb;
     }
 
-    public String mostrarRaro(){
+    public String mostrarRaro() {
         String text = "Comum";
-        if(getRaro() == true){
+        if (getRaro() == true) {
             text = "Raro";
             return text;
-        } return text;
+        }
+        return text;
     }
 
 
@@ -109,7 +109,7 @@ public class Comics implements Parcelable {
         }
     };
 
-    public double getPrice(){
+    public double getPrice() {
         return this.price;
     }
 

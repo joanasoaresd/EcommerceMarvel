@@ -1,4 +1,5 @@
 package br.android.ecommerce_marvel.view;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.ArrayList;
+
 import br.android.ecommerce_marvel.R;
 import br.android.ecommerce_marvel.db.DbDatabaseComic;
 import br.android.ecommerce_marvel.model.Item;
@@ -36,13 +39,13 @@ public class CheckoutActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         this.listaCheckout = databaseComic.carregarDados();
     }
 
     private void gerarLista() {
-        this.databaseComic =  DbDatabaseComic.getInstance(getApplicationContext());
+        this.databaseComic = DbDatabaseComic.getInstance(getApplicationContext());
         listaCheckout = new ArrayList<>();
         onResume();
         this.checkoutAdapter = new CheckoutAdapter(getApplicationContext(), this.listaCheckout, this.databaseComic, this.valorTotal);
@@ -64,21 +67,21 @@ public class CheckoutActivity extends AppCompatActivity {
         });
     }
 
-    private void configurar(){
+    private void configurar() {
         this.recyclerViewCheckout = findViewById(R.id.rv_checkout);
         this.bt_finalizar_compra = findViewById(R.id.bt_finalizar_compra);
         this.valorTotal = findViewById(R.id.tv_valor_total);
 
     }
 
-    private void voltarActionBar(){
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //mostrar botão
-        getSupportActionBar().setHomeButtonEnabled(true); //ativar botão
+    private void voltarActionBar() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setSubtitle("Checkout Comics");
     }
 
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 return true;
