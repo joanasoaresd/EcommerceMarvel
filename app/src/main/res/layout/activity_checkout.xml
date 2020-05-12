@@ -38,7 +38,7 @@
             </Button>
 
             <TextView
-                android:id="@+id/tv_valor_total"
+                android:id="@+id/tv_value_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="90dp"
