@@ -11,8 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
+
 import br.android.ecommerce_marvel.R;
 import br.android.ecommerce_marvel.db.DbDatabaseComic;
 import br.android.ecommerce_marvel.model.Comics;
@@ -25,7 +28,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
     private Comics comic;
 
 
-    public Comics getComicItem(int position){
+    public Comics getComicItem(int position) {
         return comics.get(position);
 
     }

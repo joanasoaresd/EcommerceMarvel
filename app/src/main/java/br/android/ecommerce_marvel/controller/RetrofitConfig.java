@@ -23,8 +23,8 @@ public class RetrofitConfig {
     public static final String TS = "1584109605";
 
 
-//retrofit
-  public static Retrofit getRetrofit(){
+    //retrofit
+    public static Retrofit getRetrofit() {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -35,10 +35,10 @@ public class RetrofitConfig {
     }
 
 
- //  public static ComicService comicService(){
-  //   return getRetrofit().create(ComicService.class);
- //  }
-  //  1 - retornar um arraylist de comics, que você vai colocar no adapter depois, ou
+    //  public static ComicService comicService(){
+    //   return getRetrofit().create(ComicService.class);
+    //  }
+    //  1 - retornar um arraylist de comics, que você vai colocar no adapter depois, ou
 //2 - receber como parâmetro um arraylist de comics, que você vai preencher dentro do método, e colocar no adapter depois
 
 }

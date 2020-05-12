@@ -26,6 +26,7 @@ import br.android.ecommerce_marvel.model.Comics;
 import br.android.ecommerce_marvel.model.Item;
 import retrofit2.Call;
 import retrofit2.Callback;
+
 import static br.android.ecommerce_marvel.controller.RetrofitConfig.HASH;
 import static br.android.ecommerce_marvel.controller.RetrofitConfig.PUBLIC_KEY;
 import static br.android.ecommerce_marvel.controller.RetrofitConfig.TS;
@@ -52,12 +53,12 @@ public class ComicActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         listaCheckout = databaseComic.carregarDados();
     }
 
-    private void logoActionBar(){
+    private void logoActionBar() {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.ic_marvel_simbolo);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
@@ -80,30 +81,30 @@ public class ComicActivity extends AppCompatActivity {
                     recyclerView.setAdapter(comicAdapter);
                     recyclerView.setLayoutManager(new GridLayoutManager(ComicActivity.this, 2));
                     for (int i = 0; i < resposta.size(); i++) {
-                          Comics  c = resposta.get(i);
-                            Log.i(TAG, "ID: " + c.getId());
-                            Log.i(TAG, "Title: " + c.getTitle());
-                            Log.i(TAG, "Descrição: " + c.getDescription());
-                            Log.i(TAG, "Páginas: " + c.getPageCount());
-                            Log.i(TAG, String.format("Preço: $ %.2f", c.getPrices().get(0).getPrice()));
-                            Log.i(TAG, "Imagem: " + c.getThumbnail().getPortraitFantastic());
-                            Log.i(TAG, "É Raro? " + c.getRaro());
-                           comicsList.add(c);
-                           comicAdapter.notifyDataSetChanged();
-                           fab.setOnClickListener(new View.OnClickListener() {
-                               @Override
-                               public void onClick(View v) {
-                                   if(quantidadeItens() == 0){
-                                        Intent i = new Intent(getApplicationContext(), Carrinho_vazio.class);
-                                        startActivity(i);
+                        Comics c = resposta.get(i);
+                        Log.i(TAG, "ID: " + c.getId());
+                        Log.i(TAG, "Title: " + c.getTitle());
+                        Log.i(TAG, "Descrição: " + c.getDescription());
+                        Log.i(TAG, "Páginas: " + c.getPageCount());
+                        Log.i(TAG, String.format("Preço: $ %.2f", c.getPrices().get(0).getPrice()));
+                        Log.i(TAG, "Imagem: " + c.getThumbnail().getPortraitFantastic());
+                        Log.i(TAG, "É Raro? " + c.getRaro());
+                        comicsList.add(c);
+                        comicAdapter.notifyDataSetChanged();
+                        fab.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                if (quantidadeItens() == 0) {
+                                    Intent i = new Intent(getApplicationContext(), Carrinho_vazio.class);
+                                    startActivity(i);
 
-                                   } else if(quantidadeItens() > 0){
-                                       Intent i = new Intent(getApplicationContext(), CheckoutActivity.class);
-                                       startActivity(i);
-                                       //finish();
+                                } else if (quantidadeItens() > 0) {
+                                    Intent i = new Intent(getApplicationContext(), CheckoutActivity.class);
+                                    startActivity(i);
+                                    //finish();
 
 
-                                   }
+                                }
                             }
                         });
 
@@ -119,17 +120,17 @@ public class ComicActivity extends AppCompatActivity {
         });
     }
 
-    private int quantidadeItens(){
+    private int quantidadeItens() {
         int contador = 0;
-        for(int i = 0; i < listaCheckout.size(); i++){
+        for (int i = 0; i < listaCheckout.size(); i++) {
             contador += 1;
 
         }
-        System.out.println("cont "+ contador);
+        System.out.println("cont " + contador);
         return contador;
     }
 
-    public void inicializar(){
+    public void inicializar() {
         this.databaseComic = DbDatabaseComic.getInstance(getApplicationContext());
         this.recyclerView = findViewById(R.id.rv_listacomics);
         this.fab = findViewById(R.id.fab);

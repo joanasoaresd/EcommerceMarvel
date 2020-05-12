@@ -7,17 +7,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
-public class Thumbnail implements Parcelable{
+public class Thumbnail implements Parcelable {
 
     private static final String PORTRAIT_FANTASTIC = "portrait_fantastic";
     private static final String PORTRAIT_UNCANNY = "portrait_uncanny";
-    private static final  String STARDART_FANTASTIC = "standard_fantastic";
+    private static final String STARDART_FANTASTIC = "standard_fantastic";
     private static final String LANDSCAPE_INCREDIBLE = "landscape_incredible";
 
     private String path;
     private String extension;
 
-    public Thumbnail(@JsonProperty("path")String path, @JsonProperty("extension")String extension) {
+    public Thumbnail(@JsonProperty("path") String path, @JsonProperty("extension") String extension) {
         this.path = path;
         this.extension = extension;
     }
@@ -57,22 +57,21 @@ public class Thumbnail implements Parcelable{
         this.extension = extension;
     }
 
-    public String getPortraitFantastic(){
-        return getPath() +"/" + PORTRAIT_FANTASTIC + "." + getExtension();
+    public String getPortraitFantastic() {
+        return getPath() + "/" + PORTRAIT_FANTASTIC + "." + getExtension();
     }
 
-    public String getPortraitUncanny(){
-        return getPath() +"/" + PORTRAIT_UNCANNY + "." + getExtension();
+    public String getPortraitUncanny() {
+        return getPath() + "/" + PORTRAIT_UNCANNY + "." + getExtension();
     }
 
-    public String getStardartFantastic(){
-        return getPath() +"/" + STARDART_FANTASTIC + "." + getExtension();
+    public String getStardartFantastic() {
+        return getPath() + "/" + STARDART_FANTASTIC + "." + getExtension();
     }
 
-    public String getLandscapeIncredible(){
-        return getPath() +"/" + LANDSCAPE_INCREDIBLE + "." + getExtension();
+    public String getLandscapeIncredible() {
+        return getPath() + "/" + LANDSCAPE_INCREDIBLE + "." + getExtension();
     }
-
 
 
     /**

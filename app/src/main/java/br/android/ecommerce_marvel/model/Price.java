@@ -7,14 +7,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Price implements Parcelable{
+public class Price implements Parcelable {
 
     @JsonProperty(value = "type")
     private String type;
     @JsonProperty(value = "price")
     private double price;
 
-    public Price(@JsonProperty("price")double price, @JsonProperty("type")String type) {
+    public Price(@JsonProperty("price") double price, @JsonProperty("type") String type) {
         this.type = type;
         this.price = price;
     }

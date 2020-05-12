@@ -76,12 +76,13 @@ public class Comics implements Parcelable {
         return thumb;
     }
 
-    public String mostrarRaro(){
+    public String mostrarRaro() {
         String text = "Comum";
-        if(getRaro() == true){
+        if (getRaro() == true) {
             text = "Raro";
             return text;
-        } return text;
+        }
+        return text;
     }
 
 
@@ -109,7 +110,7 @@ public class Comics implements Parcelable {
         }
     };
 
-    public double getPrice(){
+    public double getPrice() {
         return this.price;
     }
 

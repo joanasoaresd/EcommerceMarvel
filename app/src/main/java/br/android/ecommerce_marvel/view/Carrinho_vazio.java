@@ -33,15 +33,15 @@ public class Carrinho_vazio extends AppCompatActivity {
 
     }
 
-    private void voltarActionBar(){
+    private void voltarActionBar() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //mostrar botão
         getSupportActionBar().setHomeButtonEnabled(true); //ativar botão
-       // getSupportActionBar().setSubtitle("Detalhamento Comics");
+        // getSupportActionBar().setSubtitle("Detalhamento Comics");
 
     }
 
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch (item.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 return true;
