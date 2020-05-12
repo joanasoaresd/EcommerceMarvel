@@ -10,15 +10,8 @@ public class Thumbnail implements Parcelable {
 
     private static final String PORTRAIT_FANTASTIC = "portrait_fantastic";
     private static final String PORTRAIT_UNCANNY = "portrait_uncanny";
-<<<<<<< HEAD
     private static final String STARDART_FANTASTIC = "standard_fantastic";
-=======
-<<<<<<< HEAD
-    private static final  String STARDART_FANTASTIC = "standard_fantastic";
->>>>>>> develop
     private static final String LANDSCAPE_INCREDIBLE = "landscape_incredible";
-=======
->>>>>>> develop
 
     private String path;
     private String extension;
@@ -71,14 +64,8 @@ public class Thumbnail implements Parcelable {
         return getPath() + "/" + PORTRAIT_UNCANNY + "." + getExtension();
     }
 
-<<<<<<< HEAD
     public String getStardartFantastic() {
         return getPath() + "/" + STARDART_FANTASTIC + "." + getExtension();
-=======
-<<<<<<< HEAD
-    public String getStardartFantastic(){
-        return getPath() +"/" + STARDART_FANTASTIC + "." + getExtension();
->>>>>>> develop
     }
 
     public String getLandscapeIncredible() {
@@ -113,7 +100,4 @@ public class Thumbnail implements Parcelable {
         dest.writeString(path);
         dest.writeString(extension);
     }
-=======
->>>>>>> develop
 }
-
