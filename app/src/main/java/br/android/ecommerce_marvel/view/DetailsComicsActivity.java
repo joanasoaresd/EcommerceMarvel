@@ -143,13 +143,13 @@ public class DetailsComicsActivity extends AppCompatActivity {
         tvId.setText(idComic);
     }
 
-    private void loadingDescr(String descricao) {
+    private void loadingDescr(String description) {
         TextView tvDesc = findViewById(R.id.tv_Desc);
-        if (descricao == null) {
-            descricao = "Indisponível.";
-            tvDesc.setText(descricao);
+        if (description == null) {
+            description = "Indisponível.";
+            tvDesc.setText(description);
         }
-        tvDesc.setText(descricao);
+        tvDesc.setText(description);
     }
 
     private void loadingImage(String imageUrl) {
