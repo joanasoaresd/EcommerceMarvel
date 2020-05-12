@@ -1,7 +1,5 @@
 package br.android.ecommerce_marvel.model;
 
-import android.util.Log;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -33,11 +31,9 @@ public class Data {
 
     }
 
-    //fazer o random de 20 números(tamanho da lista) e os 12% sorteados serão indices dos raros, remover o que for saindo para n ir para o mesmo indice
     public int getRandomInt() {
         Random random = new Random();
         int max = results.size();
-        //nextInt(20-0)+0
         int randomNumbers = random.nextInt(max);
         System.out.println("Random " + randomNumbers);
         return randomNumbers;

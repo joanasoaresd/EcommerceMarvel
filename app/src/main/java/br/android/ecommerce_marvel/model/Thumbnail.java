@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.io.Serializable;
 
 public class Thumbnail implements Parcelable {
 

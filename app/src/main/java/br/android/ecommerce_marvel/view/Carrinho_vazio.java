@@ -34,10 +34,8 @@ public class Carrinho_vazio extends AppCompatActivity {
     }
 
     private void voltarActionBar() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //mostrar botão
-        getSupportActionBar().setHomeButtonEnabled(true); //ativar botão
-        // getSupportActionBar().setSubtitle("Detalhamento Comics");
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -1,21 +1,15 @@
 package br.android.ecommerce_marvel.view;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ProgressBar;
-
 
 import java.util.ArrayList;
-import java.util.List;
 
 import br.android.ecommerce_marvel.R;
 import br.android.ecommerce_marvel.controller.ComicService;
@@ -70,7 +64,6 @@ public class ComicActivity extends AppCompatActivity {
         requestComics.enqueue(new Callback<ComicDTO>() {
 
             @Override
-            //OBTEVE UMA RESPOSTA
             public void onResponse(Call<ComicDTO> call, retrofit2.Response<ComicDTO> response) {
                 if (!response.isSuccessful()) {
                     Log.i(TAG, "Erro: " + response.code());
@@ -101,7 +94,6 @@ public class ComicActivity extends AppCompatActivity {
                                 } else if (quantidadeItens() > 0) {
                                     Intent i = new Intent(getApplicationContext(), CheckoutActivity.class);
                                     startActivity(i);
-                                    //finish();
 
 
                                 }

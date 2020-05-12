@@ -37,7 +37,6 @@ public class Comics implements Parcelable {
 
     private String thumb;
 
-    //12% das revistas em quadrinhos carregadas devem ser marcadas como raras (aleatoriamente no próprio fonte ao carregar o REST)
     private boolean raro;
 
 

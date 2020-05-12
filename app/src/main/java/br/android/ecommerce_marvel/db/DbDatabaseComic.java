@@ -4,14 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-
 import java.util.ArrayList;
-
 import br.android.ecommerce_marvel.model.Comics;
 import br.android.ecommerce_marvel.model.Item;
 
-//CONTÉM CONTEÚDOS DE MANIPULAÇÃO DOS DADOS NO BANCO
+
 public class DbDatabaseComic implements DAO {
 
     private SQLiteDatabase read;
@@ -33,13 +30,11 @@ public class DbDatabaseComic implements DAO {
         return instance;
     }
 
-    //inserir dados no banco
+
     @Override
     public void inserirDados(Comics comics, int quant) {
 
         ContentValues valores = new ContentValues();
-        //getWritableDatabase p/ leitura e escrita de dados
-        // db = criarBanco.getWritableDatabase();
 
         valores.put(DbOpenHelper.ID, comics.getId());
         valores.put(DbOpenHelper.TITLE, comics.getTitle());
@@ -54,9 +49,7 @@ public class DbDatabaseComic implements DAO {
 
     }
 
-    //define quantidade com soma
     public void atualizarQTDE(Comics c, int qtde) {
-        // db = criarBanco.getWritableDatabase();
         if (nTemId(c.getId())) {
 
             inserirDados(c, qtde);
@@ -80,12 +73,8 @@ public class DbDatabaseComic implements DAO {
         }
     }
 
-    //select
     @Override
     public ArrayList<Item> carregarDados() {
-
-        //getReadable database leitura de dados.
-        // SQLiteDatabase db = criarBanco.getReadableDatabase();
         ArrayList<Item> aux = new ArrayList<>();
 
         String sql = "SELECT * FROM " + DbOpenHelper.TABELA;
@@ -107,11 +96,9 @@ public class DbDatabaseComic implements DAO {
             } while (cursor.moveToNext());
         }
 
-        // read.close();
         return aux;
     }
 
-    //select onde id
     public boolean nTemId(int id) {
 
         Cursor rawQuery = read.rawQuery("SELECT id FROM " + DbOpenHelper.TABELA + " WHERE id = ?", new String[]{String.valueOf(id)});
@@ -120,25 +107,18 @@ public class DbDatabaseComic implements DAO {
         return count == 0;
     }
 
-    //deletar registros especificos
     public void deletarRegistros(int id) {
-        //db = criarBanco.getReadableDatabase();
         read.delete(DbOpenHelper.TABELA, "id=?", new String[]{id + ""});
-        // read.close();
-
     }
 
-    //deletar ao finalizar compras
+
     public void deletarTodosRegistros() {
-        //db = criarBanco.getWritableDatabase();
         write.execSQL("DELETE FROM " + DbOpenHelper.TABELA);
-        // write.close();
-
     }
 
-    //atualizar quantidade digitada
+
     public void atualizarLista(Item i, int qtde) {
-        //db = criarBanco.getReadableDatabase();
+
         String sqlUpdate = "UPDATE " + DbOpenHelper.TABELA + " SET " + DbOpenHelper.QTDE + " = " + qtde
                 + " WHERE " + DbOpenHelper.ID + " = " + i.getComics().getId();
 

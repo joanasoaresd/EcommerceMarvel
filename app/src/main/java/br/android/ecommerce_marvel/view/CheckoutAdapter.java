@@ -94,20 +94,15 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
                 public void onClick(View v) {
                     databaseComic.deletarRegistros(listaItem.get(getAdapterPosition()).getComics().getId());
                     listaItem = databaseComic.carregarDados();
-                    //total.setText(String.format("$ %.2f " , somaTotal()));
                     somaTotal(total);
                     notifyDataSetChanged();
 
                     if (listaItem.size() == 0) {
                         databaseComic.carregarDados();
                         Context c = bt_del.getContext();
-                        //  somaTotal(total);
                         Intent i = new Intent(c, Carrinho_vazio.class);
                         c.startActivity(i);
                         ((Activity) c).finish();
-
-                        // notifyDataSetChanged();
-                        //total = 0 set total...
 
                     }
                 }

@@ -75,8 +75,8 @@ public class CheckoutActivity extends AppCompatActivity {
     }
 
     private void voltarActionBar() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //mostrar botão
-        getSupportActionBar().setHomeButtonEnabled(true); //ativar botão
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setSubtitle("Checkout Comics");
     }
 
