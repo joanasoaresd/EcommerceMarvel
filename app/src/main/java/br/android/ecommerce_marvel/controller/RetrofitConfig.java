@@ -3,7 +3,7 @@ package br.android.ecommerce_marvel.controller;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
-import static br.android.ecommerce_marvel.controller.ComicService.BASE_URL;
+import static br.android.ecommerce_marvel.controller.IComicService.BASE_URL;
 
 public class RetrofitConfig {
     public static final String PUBLIC_KEY = "e41cecfc987a8e484709341de94276f4";

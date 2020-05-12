@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Data {
+public class DataDTO {
 
 
     private int offset;
@@ -16,13 +16,13 @@ public class Data {
     private int count;
 
     @JsonProperty(value = "results")
-    private ArrayList<Comics> results;
+    private ArrayList<ComicsDTO> results;
 
-    private static final int PORCENTAGEM_DOS_RAROS = (12 * 20) / 100;
-    private int numeroDeQuadrinhosRaros;
-    private ArrayList<Integer> listaNumerosRandom;
+    private static final int PERCENT_RARE = (12 * 20) / 100;
+    private int qtyRare;
+    private ArrayList<Integer> listNumbersRandom;
 
-    public Data(int offset, int limit, int total, int count, ArrayList<Comics> results) {
+    public DataDTO(int offset, int limit, int total, int count, ArrayList<ComicsDTO> results) {
         this.offset = offset;
         this.limit = limit;
         this.total = total;
@@ -42,40 +42,39 @@ public class Data {
 
 
     public ArrayList<Integer> getRandomNoRepeatingInteger() {
-        this.listaNumerosRandom = new ArrayList<>();
-        numeroDeQuadrinhosRaros = PORCENTAGEM_DOS_RAROS;
+        this.listNumbersRandom = new ArrayList<>();
+        qtyRare = PERCENT_RARE;
 
-        while (listaNumerosRandom.size() < numeroDeQuadrinhosRaros) {
+        while (listNumbersRandom.size() < qtyRare) {
             int random = getRandomInt();
 
-            if (!listaNumerosRandom.contains(random)) {
-                listaNumerosRandom.add(random);
+            if (!listNumbersRandom.contains(random)) {
+                listNumbersRandom.add(random);
             }
         }
-        System.out.println("LISTA DE NUMEROS: " + listaNumerosRandom);
-        return listaNumerosRandom;
+        return listNumbersRandom;
     }
 
     public void getListRandom() {
-        listaNumerosRandom = getRandomNoRepeatingInteger();
+        listNumbersRandom = getRandomNoRepeatingInteger();
         for (int i = 0; i < results.size(); i++) {
-            for (int j = 0; j < listaNumerosRandom.size(); j++) {
-                if (i == listaNumerosRandom.get(j)) {
-                    results.get(i).setRaro(true);
+            for (int j = 0; j < listNumbersRandom.size(); j++) {
+                if (i == listNumbersRandom.get(j)) {
+                    results.get(i).setRare(true);
                 }
             }
         }
     }
 
     public int getNumeroDeQuadrinhosRaros() {
-        return numeroDeQuadrinhosRaros;
+        return qtyRare;
     }
 
     public void setNumeroDeQuadrinhosRaros(int numeroDeQuadrinhosRaros) {
-        this.numeroDeQuadrinhosRaros = numeroDeQuadrinhosRaros;
+        this.qtyRare = numeroDeQuadrinhosRaros;
     }
 
-    public Data() {
+    public DataDTO() {
         super();
     }
 
@@ -112,13 +111,13 @@ public class Data {
     }
 
     @JsonProperty(value = "results")
-    public ArrayList<Comics> getResults() {
+    public ArrayList<ComicsDTO> getResults() {
         getListRandom();
         return results;
     }
 
     @JsonProperty(value = "results")
-    public void setResults(ArrayList<Comics> results) {
+    public void setResults(ArrayList<ComicsDTO> results) {
         this.results = results;
     }
 

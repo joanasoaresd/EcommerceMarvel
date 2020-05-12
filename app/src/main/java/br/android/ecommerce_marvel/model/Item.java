@@ -2,27 +2,27 @@ package br.android.ecommerce_marvel.model;
 
 public class Item {
 
-    private Comics comics;
-    private int quantidade;
+    private ComicsDTO comics;
+    private int qty;
 
-    public Item(Comics comics, int qtde) {
+    public Item(ComicsDTO comics, int qty) {
         this.comics = comics;
-        this.quantidade = qtde;
+        this.qty = qty;
     }
 
-    public Comics getComics() {
+    public ComicsDTO getComics() {
         return comics;
     }
 
-    public void setComics(Comics comics) {
+    public void setComics(ComicsDTO comics) {
         this.comics = comics;
     }
 
-    public int getQuantidade() {
-        return quantidade;
+    public int getQty() {
+        return qty;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setQty(int qty) {
+        this.qty = qty;
     }
 }

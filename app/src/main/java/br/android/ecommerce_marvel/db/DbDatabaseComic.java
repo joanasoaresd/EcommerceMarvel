@@ -7,23 +7,23 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-import br.android.ecommerce_marvel.model.Comics;
+import br.android.ecommerce_marvel.model.ComicsDTO;
 import br.android.ecommerce_marvel.model.Item;
 import br.android.ecommerce_marvel.utils.LoggerUtils;
 
 
-public class DbDatabaseComic implements DAO {
+public class DbDatabaseComic implements IDAO {
 
     private SQLiteDatabase read;
     private SQLiteDatabase write;
-    private static DbOpenHelper criarBanco;
+    private static DbOpenHelper createDatabase;
     private static DbDatabaseComic instance;
-    private static final String TAG = "BANCO";
+    private static final String TAG = "DATABASE";
 
     private DbDatabaseComic(Context context) {
-        criarBanco = new DbOpenHelper(context);
-        this.read = criarBanco.getReadableDatabase();
-        this.write = criarBanco.getWritableDatabase();
+        createDatabase = new DbOpenHelper(context);
+        this.read = createDatabase.getReadableDatabase();
+        this.write = createDatabase.getWritableDatabase();
         LoggerUtils.log(TAG, "Instância");
     }
 
@@ -36,7 +36,7 @@ public class DbDatabaseComic implements DAO {
 
 
     @Override
-    public void inserirDados(Comics comics, int quant) {
+    public void insertData(ComicsDTO comics, int qty) {
 
         ContentValues valores = new ContentValues();
 
@@ -46,29 +46,29 @@ public class DbDatabaseComic implements DAO {
         valores.put(DbOpenHelper.PAGE_COUNT, comics.getPageCount());
         valores.put(DbOpenHelper.PRICE, comics.getPrice());
         valores.put(DbOpenHelper.THUMBNAIL, comics.getThumb());
-        valores.put(DbOpenHelper.QTDE, quant);
-        valores.put(DbOpenHelper.RARO, comics.getRaro());
+        valores.put(DbOpenHelper.QTY, qty);
+        valores.put(DbOpenHelper.RARE, comics.getRare());
 
-        write.insert(DbOpenHelper.TABELA, null, valores);
+        write.insert(DbOpenHelper.TABLE, null, valores);
 
     }
 
-    public void atualizarQTDE(Comics c, int qtde) {
-        if (nTemId(c.getId())) {
+    public void updateQty(ComicsDTO c, int qty) {
+        if (hasNoId(c.getId())) {
 
-            inserirDados(c, qtde);
+            insertData(c, qty);
 
         } else {
 
-            String sql = " SELECT qtde FROM " + DbOpenHelper.TABELA + " WHERE " + DbOpenHelper.ID + " = " + c.getId();
+            String sql = " SELECT qtde FROM " + DbOpenHelper.TABLE + " WHERE " + DbOpenHelper.ID + " = " + c.getId();
             Cursor cursor1 = write.rawQuery(sql, null);
 
             if (cursor1.moveToFirst()) {
 
                 int valorCursor = cursor1.getInt(0);
-                int soma = valorCursor + qtde;
+                int soma = valorCursor + qty;
 
-                String sqlUpdate = "UPDATE " + DbOpenHelper.TABELA + " SET " + DbOpenHelper.QTDE + " = " + soma
+                String sqlUpdate = "UPDATE " + DbOpenHelper.TABLE + " SET " + DbOpenHelper.QTY + " = " + soma
                         + " WHERE " + DbOpenHelper.ID + " = " + c.getId();
 
                 write.execSQL(sqlUpdate);
@@ -78,10 +78,10 @@ public class DbDatabaseComic implements DAO {
     }
 
     @Override
-    public ArrayList<Item> carregarDados() {
+    public ArrayList<Item> loadData() {
         ArrayList<Item> aux = new ArrayList<>();
 
-        String sql = "SELECT * FROM " + DbOpenHelper.TABELA;
+        String sql = "SELECT * FROM " + DbOpenHelper.TABLE;
 
         Cursor cursor = read.rawQuery(sql, null);
 
@@ -93,9 +93,9 @@ public class DbDatabaseComic implements DAO {
                 double price = cursor.getDouble(cursor.getColumnIndex(DbOpenHelper.PRICE));
                 String desc = cursor.getString(cursor.getColumnIndex(DbOpenHelper.DESCRIPTION));
                 String thumbnail = cursor.getString(cursor.getColumnIndex(DbOpenHelper.THUMBNAIL));
-                boolean rare = cursor.getInt(cursor.getColumnIndex(DbOpenHelper.RARO)) > 0;
-                int qtde = cursor.getInt(cursor.getColumnIndex(DbOpenHelper.QTDE));
-                aux.add(new Item(new Comics(id, title, desc, pageCount, price, thumbnail, rare), qtde));
+                boolean rare = cursor.getInt(cursor.getColumnIndex(DbOpenHelper.RARE)) > 0;
+                int qty = cursor.getInt(cursor.getColumnIndex(DbOpenHelper.QTY));
+                aux.add(new Item(new ComicsDTO(id, title, desc, pageCount, price, thumbnail, rare), qty));
 
             } while (cursor.moveToNext());
         }
@@ -103,27 +103,27 @@ public class DbDatabaseComic implements DAO {
         return aux;
     }
 
-    public boolean nTemId(int id) {
+    public boolean hasNoId(int id) {
 
-        Cursor rawQuery = read.rawQuery("SELECT id FROM " + DbOpenHelper.TABELA + " WHERE id = ?", new String[]{String.valueOf(id)});
+        Cursor rawQuery = read.rawQuery("SELECT id FROM " + DbOpenHelper.TABLE + " WHERE id = ?", new String[]{String.valueOf(id)});
         int count = rawQuery.getCount();
 
         return count == 0;
     }
 
-    public void deletarRegistros(int id) {
-        read.delete(DbOpenHelper.TABELA, "id=?", new String[]{id + ""});
+    public void deleteRecords(int id) {
+        read.delete(DbOpenHelper.TABLE, "id=?", new String[]{id + ""});
     }
 
 
-    public void deletarTodosRegistros() {
-        write.execSQL("DELETE FROM " + DbOpenHelper.TABELA);
+    public void deleteAllRecords() {
+        write.execSQL("DELETE FROM " + DbOpenHelper.TABLE);
     }
 
 
-    public void atualizarLista(Item i, int qtde) {
+    public void updateList(Item i, int qty) {
 
-        String sqlUpdate = "UPDATE " + DbOpenHelper.TABELA + " SET " + DbOpenHelper.QTDE + " = " + qtde
+        String sqlUpdate = "UPDATE " + DbOpenHelper.TABLE + " SET " + DbOpenHelper.QTY + " = " + qty
                 + " WHERE " + DbOpenHelper.ID + " = " + i.getComics().getId();
 
         read.execSQL(sqlUpdate);

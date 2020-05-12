@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Comics implements Parcelable {
+public class ComicsDTO implements Parcelable {
 
 
     @JsonProperty(value = "id")
@@ -28,56 +28,56 @@ public class Comics implements Parcelable {
     private int pageCount;
 
     @JsonProperty(value = "prices")
-    private ArrayList<Price> prices;
+    private ArrayList<PriceDTO> prices;
 
     @JsonProperty(value = "thumbnail")
-    private Thumbnail thumbnail;
+    private ThumbnailDTO thumbnail;
 
     private double price;
 
     private String thumb;
 
-    private boolean raro;
+    private boolean rare;
 
 
-    public Comics() {
+    public ComicsDTO() {
         super();
     }
 
-    public Comics(int id, String title, String description, int pageCount, double price, String thumbnail, boolean raro) {
+    public ComicsDTO(int id, String title, String description, int pageCount, double price, String thumbnail, boolean rare) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.pageCount = pageCount;
         this.price = price;
         this.thumb = thumbnail;
-        this.raro = raro;
+        this.rare = rare;
     }
 
-    public Comics(int id, String title, String description, int pageCount, double price, boolean raro) {
+    public ComicsDTO(int id, String title, String description, int pageCount, double price, boolean rare) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.pageCount = pageCount;
         this.price = price;
-        this.raro = raro;
+        this.rare = rare;
     }
 
-    public boolean getRaro() {
-        return raro;
+    public boolean getRare() {
+        return rare;
     }
 
-    public void setRaro(boolean raro) {
-        this.raro = raro;
+    public void setRare(boolean rare) {
+        this.rare = rare;
     }
 
     public String getThumb() {
         return thumb;
     }
 
-    public String mostrarRaro() {
+    public String showRare() {
         String text = " Comum";
-        if (getRaro() == true) {
+        if (getRare() == true) {
             text = " Raro";
             return text;
         }
@@ -85,27 +85,27 @@ public class Comics implements Parcelable {
     }
 
 
-    protected Comics(Parcel in) {
+    protected ComicsDTO(Parcel in) {
         id = in.readInt();
         title = in.readString();
         description = in.readString();
         pageCount = in.readInt();
-        thumbnail = in.readParcelable(Thumbnail.class.getClassLoader());
+        thumbnail = in.readParcelable(ThumbnailDTO.class.getClassLoader());
         prices = new ArrayList<>();
-        in.readList(prices, Price.class.getClassLoader());
+        in.readList(prices, PriceDTO.class.getClassLoader());
 
     }
 
 
-    public static final Creator<Comics> CREATOR = new Creator<Comics>() {
+    public static final Creator<ComicsDTO> CREATOR = new Creator<ComicsDTO>() {
         @Override
-        public Comics createFromParcel(Parcel in) {
-            return new Comics(in);
+        public ComicsDTO createFromParcel(Parcel in) {
+            return new ComicsDTO(in);
         }
 
         @Override
-        public Comics[] newArray(int size) {
-            return new Comics[size];
+        public ComicsDTO[] newArray(int size) {
+            return new ComicsDTO[size];
         }
     };
 
@@ -125,11 +125,11 @@ public class Comics implements Parcelable {
         this.id = id;
     }
 
-    public Thumbnail getThumbnail() {
+    public ThumbnailDTO getThumbnail() {
         return thumbnail;
     }
 
-    public void setThumbnail(Thumbnail thumbnail) {
+    public void setThumbnail(ThumbnailDTO thumbnail) {
         this.thumbnail = thumbnail;
     }
 
@@ -157,11 +157,11 @@ public class Comics implements Parcelable {
         this.pageCount = pageCount;
     }
 
-    public ArrayList<Price> getPrices() {
+    public ArrayList<PriceDTO> getPrices() {
         return prices;
     }
 
-    public void setPrices(ArrayList<Price> prices) {
+    public void setPrices(ArrayList<PriceDTO> prices) {
         this.prices = prices;
     }
 

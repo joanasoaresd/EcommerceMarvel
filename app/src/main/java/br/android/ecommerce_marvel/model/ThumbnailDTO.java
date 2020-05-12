@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
-public class Thumbnail implements Parcelable {
+public class ThumbnailDTO implements Parcelable {
 
     private static final String PORTRAIT_FANTASTIC = "portrait_fantastic";
     private static final String PORTRAIT_UNCANNY = "portrait_uncanny";
@@ -16,27 +16,27 @@ public class Thumbnail implements Parcelable {
     private String path;
     private String extension;
 
-    public Thumbnail(@JsonProperty("path") String path, @JsonProperty("extension") String extension) {
+    public ThumbnailDTO(@JsonProperty("path") String path, @JsonProperty("extension") String extension) {
         this.path = path;
         this.extension = extension;
     }
 
 
-    protected Thumbnail(Parcel in) {
+    protected ThumbnailDTO(Parcel in) {
         path = in.readString();
         extension = in.readString();
     }
 
 
-    public static final Creator<Thumbnail> CREATOR = new Creator<Thumbnail>() {
+    public static final Creator<ThumbnailDTO> CREATOR = new Creator<ThumbnailDTO>() {
         @Override
-        public Thumbnail createFromParcel(Parcel in) {
-            return new Thumbnail(in);
+        public ThumbnailDTO createFromParcel(Parcel in) {
+            return new ThumbnailDTO(in);
         }
 
         @Override
-        public Thumbnail[] newArray(int size) {
-            return new Thumbnail[size];
+        public ThumbnailDTO[] newArray(int size) {
+            return new ThumbnailDTO[size];
         }
     };
 

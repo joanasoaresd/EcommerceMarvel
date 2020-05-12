@@ -17,13 +17,13 @@ public class SplashScreenActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                mostraMain();
+                showMain();
             }
         }, 3000);
 
     }
 
-    private void mostraMain() {
+    private void showMain() {
 
         Intent intent = new Intent(SplashScreenActivity.this, ComicActivity.class);
         startActivity(intent);

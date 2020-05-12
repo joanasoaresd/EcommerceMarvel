@@ -25,7 +25,7 @@ import br.android.ecommerce_marvel.model.Item;
 public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHolder> {
 
     private Item item;
-    private ArrayList<Item> listaItem;
+    private ArrayList<Item> listItem;
     private Context context;
     DbDatabaseComic databaseComic;
     TextView total;
@@ -33,7 +33,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
 
     public CheckoutAdapter(Context context, ArrayList<Item> itens, DbDatabaseComic database, TextView total) {
         this.context = context;
-        this.listaItem = itens;
+        this.listItem = itens;
         this.databaseComic = database;
         this.total = total;
 
@@ -51,56 +51,56 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull CheckoutAdapter.ViewHolder viewHolder, int i) {
 
-        item = this.listaItem.get(i);
+        item = this.listItem.get(i);
 
-        viewHolder.qtde.setText("" + item.getQuantidade());
-        viewHolder.tituloComic.setText(item.getComics().getTitle());
-        viewHolder.preco.setText(String.format("$ %.2f ", item.getComics().getPrice()));
+        viewHolder.qty.setText("" + item.getQty());
+        viewHolder.titleComic.setText(item.getComics().getTitle());
+        viewHolder.price.setText(String.format("$ %.2f ", item.getComics().getPrice()));
         Glide.with(viewHolder.imageComic.getContext()).load(item.getComics().getThumb()).error(R.drawable.not_found).into(viewHolder.imageComic);
     }
 
     @Override
     public int getItemCount() {
-        return this.listaItem.size();
+        return this.listItem.size();
     }
 
-    public void somaTotal(TextView total) {
-        double soma = 0;
-        for (int i = 0; i < this.listaItem.size(); i++) {
-            double valor = this.listaItem.get(i).getComics().getPrice() * this.listaItem.get(i).getQuantidade();
-            soma = valor + soma;
+    public void sumTotal(TextView total) {
+        double sum = 0;
+        for (int i = 0; i < this.listItem.size(); i++) {
+            double value = this.listItem.get(i).getComics().getPrice() * this.listItem.get(i).getQty();
+            sum = value + sum;
 
         }
-        total.setText(String.format("$ %.2f ", soma));
+        total.setText(String.format("$ %.2f ", sum));
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageComic;
-        private TextView tituloComic, preco;
-        private EditText qtde;
+        private TextView titleComic, price;
+        private EditText qty;
         private ImageButton bt_del;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             this.imageComic = (ImageView) itemView.findViewById(R.id.iv_thumb_checkout);
-            this.tituloComic = (TextView) itemView.findViewById(R.id.tv_titlecheckout);
-            this.preco = (TextView) itemView.findViewById(R.id.tv_pricecheckout);
-            this.qtde = (EditText) itemView.findViewById(R.id.et_qtdeCheckout);
-            bt_del = (ImageButton) itemView.findViewById(R.id.bt_apagar);
+            this.titleComic = (TextView) itemView.findViewById(R.id.tv_titlecheckout);
+            this.price = (TextView) itemView.findViewById(R.id.tv_pricecheckout);
+            this.qty = (EditText) itemView.findViewById(R.id.et_qtdeCheckout);
+            bt_del = (ImageButton) itemView.findViewById(R.id.bt_delete);
 
             bt_del.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    databaseComic.deletarRegistros(listaItem.get(getAdapterPosition()).getComics().getId());
-                    listaItem = databaseComic.carregarDados();
-                    somaTotal(total);
+                    databaseComic.deleteRecords(listItem.get(getAdapterPosition()).getComics().getId());
+                    listItem = databaseComic.loadData();
+                    sumTotal(total);
                     notifyDataSetChanged();
 
-                    if (listaItem.size() == 0) {
-                        databaseComic.carregarDados();
+                    if (listItem.size() == 0) {
+                        databaseComic.loadData();
                         Context c = bt_del.getContext();
-                        Intent i = new Intent(c, Carrinho_vazio.class);
+                        Intent i = new Intent(c, CartIsEmptyActivity.class);
                         c.startActivity(i);
                         ((Activity) c).finish();
 
@@ -108,20 +108,20 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
                 }
             });
 
-            qtde.setOnClickListener(new View.OnClickListener() {
+            qty.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
-                    int numero = Integer.parseInt(qtde.getText().toString());
+                    int numero = Integer.parseInt(qty.getText().toString());
                     if (numero <= 0) {
                         Toast.makeText(context, "Não é possível inserir esta quantidade.", Toast.LENGTH_LONG).show();
-                        listaItem = databaseComic.carregarDados();
+                        listItem = databaseComic.loadData();
                         notifyDataSetChanged();
 
                     } else {
-                        databaseComic.atualizarLista(listaItem.get(getAdapterPosition()), numero);
-                        listaItem = databaseComic.carregarDados();
-                        somaTotal(total);
+                        databaseComic.updateList(listItem.get(getAdapterPosition()), numero);
+                        listItem = databaseComic.loadData();
+                        sumTotal(total);
                         notifyDataSetChanged();
                     }
                 }

@@ -23,58 +23,58 @@ public class CheckoutActivity extends AppCompatActivity {
     private DbDatabaseComic databaseComic;
     private RecyclerView recyclerViewCheckout;
     private CheckoutAdapter checkoutAdapter;
-    private ArrayList<Item> listaCheckout;
-    private TextView valorTotal;
-    private Button bt_finalizar_compra;
+    private ArrayList<Item> listCheckout;
+    private TextView total_sum;
+    private Button bt_purchase_completed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.checkout_activity);
+        setContentView(R.layout.activity_checkout);
 
-        configurar();
-        gerarLista();
-        voltarActionBar();
+        configuration();
+        generateList();
+        comeBackActionBar();
 
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        this.listaCheckout = databaseComic.carregarDados();
+        this.listCheckout = databaseComic.loadData();
     }
 
-    private void gerarLista() {
+    private void generateList() {
         this.databaseComic = DbDatabaseComic.getInstance(getApplicationContext());
-        listaCheckout = new ArrayList<>();
+        listCheckout = new ArrayList<>();
         onResume();
-        this.checkoutAdapter = new CheckoutAdapter(getApplicationContext(), this.listaCheckout, this.databaseComic, this.valorTotal);
+        this.checkoutAdapter = new CheckoutAdapter(getApplicationContext(), this.listCheckout, this.databaseComic, this.total_sum);
         this.recyclerViewCheckout.setAdapter(checkoutAdapter);
         this.recyclerViewCheckout.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        this.checkoutAdapter.somaTotal(this.valorTotal);
+        this.checkoutAdapter.sumTotal(this.total_sum);
 
-        bt_finalizar_compra.setOnClickListener(new View.OnClickListener() {
+        bt_purchase_completed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(CheckoutActivity.this, "Compra realizada com sucesso!", Toast.LENGTH_SHORT).show();
-                databaseComic.deletarTodosRegistros();
-                gerarLista();
+                databaseComic.deleteAllRecords();
+                generateList();
                 checkoutAdapter.notifyDataSetChanged();
-                Intent intent = new Intent(getApplicationContext(), CompraFinalizada.class);
+                Intent intent = new Intent(getApplicationContext(), CompletedPurchaseActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
     }
 
-    private void configurar() {
+    private void configuration() {
         this.recyclerViewCheckout = findViewById(R.id.rv_checkout);
-        this.bt_finalizar_compra = findViewById(R.id.bt_finalizar_compra);
-        this.valorTotal = findViewById(R.id.tv_valor_total);
+        this.bt_purchase_completed = findViewById(R.id.bt_finalizar_compra);
+        this.total_sum = findViewById(R.id.tv_valor_total);
 
     }
 
-    private void voltarActionBar() {
+    private void comeBackActionBar() {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setSubtitle("Checkout Comics");

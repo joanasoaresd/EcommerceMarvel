@@ -7,32 +7,32 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Price implements Parcelable {
+public class PriceDTO implements Parcelable {
 
     @JsonProperty(value = "type")
     private String type;
     @JsonProperty(value = "price")
     private double price;
 
-    public Price(@JsonProperty("price") double price, @JsonProperty("type") String type) {
+    public PriceDTO(@JsonProperty("price") double price, @JsonProperty("type") String type) {
         this.type = type;
         this.price = price;
     }
 
-    protected Price(Parcel in) {
+    protected PriceDTO(Parcel in) {
         type = in.readString();
         price = in.readDouble();
     }
 
-    public static final Creator<Price> CREATOR = new Creator<Price>() {
+    public static final Creator<PriceDTO> CREATOR = new Creator<PriceDTO>() {
         @Override
-        public Price createFromParcel(Parcel in) {
-            return new Price(in);
+        public PriceDTO createFromParcel(Parcel in) {
+            return new PriceDTO(in);
         }
 
         @Override
-        public Price[] newArray(int size) {
-            return new Price[size];
+        public PriceDTO[] newArray(int size) {
+            return new PriceDTO[size];
         }
     };
 

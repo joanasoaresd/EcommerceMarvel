@@ -15,33 +15,33 @@ import com.bumptech.glide.Glide;
 
 import br.android.ecommerce_marvel.R;
 import br.android.ecommerce_marvel.db.DbDatabaseComic;
-import br.android.ecommerce_marvel.model.Comics;
+import br.android.ecommerce_marvel.model.ComicsDTO;
 
 public class DetailsComicsActivity extends AppCompatActivity {
 
-    private Comics comics;
-    private Button btComprar, btcarrinho;
-    private ImageButton bt_add_qtde, bt_diminuir_qtd;
+    private ComicsDTO comics;
+    private Button bt_buy, bt_cart;
+    private ImageButton bt_add_qty, bt_decrement_qty;
     DbDatabaseComic dbDatabaseComic;
-    private TextView tv_qtdecontador;
-    private int contador = 1;
+    private TextView tv_qty_count;
+    private int count = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detalhamento);
+        setContentView(R.layout.activity_details);
 
         dbDatabaseComic = DbDatabaseComic.getInstance(getApplicationContext());
 
-        configuracao();
-        resgatar();
-        voltarActionBar();
+        configuration();
+        rescue();
+        comeBackActionBar();
 
     }
 
-    private void resgatar() {
+    private void rescue() {
         Intent i = getIntent();
-        comics = i.getParcelableExtra("comicSelecionado");
+        comics = i.getParcelableExtra("selectedComic");
 
         loadingImage(comics.getThumbnail().getPortraitUncanny());
         loadingID(comics.getId());
@@ -50,30 +50,30 @@ public class DetailsComicsActivity extends AppCompatActivity {
         loadingDescr(comics.getDescription());
         loadingPrice(comics.getPrices().get(0).getPrice());
 
-        bt_add_qtde.setOnClickListener(new View.OnClickListener() {
+        bt_add_qty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                contador++;
-                tv_qtdecontador.setText("" + contador);
+                count++;
+                tv_qty_count.setText("" + count);
             }
         });
 
-        bt_diminuir_qtd.setOnClickListener(new View.OnClickListener() {
+        bt_decrement_qty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                contador--;
-                if (contador <= 0) {
-                    contador = 1;
-                    tv_qtdecontador.setText("" + contador);
+                count--;
+                if (count <= 0) {
+                    count = 1;
+                    tv_qty_count.setText("" + count);
                 } else
-                    tv_qtdecontador.setText("" + contador);
+                    tv_qty_count.setText("" + count);
             }
         });
 
-        btComprar.setOnClickListener(new View.OnClickListener() {
+        bt_buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addCarrinho(new Comics(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrices().get(0).getPrice(), comics.getThumbnail().getPortraitFantastic(), comics.getRaro()), contador);
+                addToCart(new ComicsDTO(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrices().get(0).getPrice(), comics.getThumbnail().getPortraitFantastic(), comics.getRare()), count);
                 Intent intent = new Intent(getApplicationContext(), CheckoutActivity.class);
                 startActivity(intent);
                 finish();
@@ -81,33 +81,33 @@ public class DetailsComicsActivity extends AppCompatActivity {
             }
         });
 
-        btcarrinho.setOnClickListener(new View.OnClickListener() {
+        bt_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addCarrinho(new Comics(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrices().get(0).getPrice(), comics.getThumbnail().getPortraitFantastic(), comics.getRaro()), contador);
+                addToCart(new ComicsDTO(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrices().get(0).getPrice(), comics.getThumbnail().getPortraitFantastic(), comics.getRare()), count);
                 Toast.makeText(getApplicationContext(), "Quadrinho adicionado ao carrinho!", Toast.LENGTH_SHORT).show();
 
             }
         });
     }
 
-    private void addCarrinho(Comics c, int quant) {
-        dbDatabaseComic.atualizarQTDE(new Comics(c.getId(), c.getTitle(), c.getDescription(), c.getPageCount(), c.getPrice(), c.getThumb(), c.getRaro()), quant);
+    private void addToCart(ComicsDTO c, int quant) {
+        dbDatabaseComic.updateQty(new ComicsDTO(c.getId(), c.getTitle(), c.getDescription(), c.getPageCount(), c.getPrice(), c.getThumb(), c.getRare()), quant);
 
     }
 
-    private void configuracao() {
-        btComprar = findViewById(R.id.bt_buy);
-        btcarrinho = findViewById(R.id.bt_carrinho);
-        bt_add_qtde = findViewById(R.id.bt_qtdeDetails);
-        tv_qtdecontador = findViewById(R.id.tv_qtdDetails);
-        bt_diminuir_qtd = findViewById(R.id.ib_qtdDetailsMenos);
+    private void configuration() {
+        bt_buy = findViewById(R.id.bt_buy);
+        bt_cart = findViewById(R.id.bt_cart);
+        bt_add_qty = findViewById(R.id.bt_qtyDetails);
+        tv_qty_count = findViewById(R.id.tv_qtyDetails);
+        bt_decrement_qty = findViewById(R.id.ib_qtyDetailsMinus);
     }
 
-    private void voltarActionBar() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //mostrar botão
-        getSupportActionBar().setHomeButtonEnabled(true); //ativar botão
-        getSupportActionBar().setSubtitle("Detalhamento Comics");
+    private void comeBackActionBar() {
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setSubtitle("Details Comics");
 
     }
 
@@ -132,7 +132,7 @@ public class DetailsComicsActivity extends AppCompatActivity {
     }
 
     private void loadingPage(int page) {
-        TextView tvPage = findViewById(R.id.tv_NumPaginas);
+        TextView tvPage = findViewById(R.id.tv_NumPgeDetails);
         String pagina = page + " páginas";
         tvPage.setText(pagina);
     }
@@ -153,7 +153,7 @@ public class DetailsComicsActivity extends AppCompatActivity {
     }
 
     private void loadingImage(String imageUrl) {
-        ImageView imageComic = findViewById(R.id.fotoImagemView);
+        ImageView imageComic = findViewById(R.id.ImagemView);
         Glide.with(this)
                 .load(comics.getThumbnail().getPortraitUncanny())
                 .error(R.drawable.not_found)

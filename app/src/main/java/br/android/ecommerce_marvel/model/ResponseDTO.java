@@ -4,16 +4,16 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ComicDTO {
+public class ResponseDTO {
     private int code;
     private String status;
     private String copyright;
     private String attributionText;
     private String attributionHTML;
-    private Data data;
+    private DataDTO data;
     private String etag;
 
-    public ComicDTO(int code, String status, String copyright, String attributionText, String attributionHTML, Data data, String etag) {
+    public ResponseDTO(int code, String status, String copyright, String attributionText, String attributionHTML, DataDTO data, String etag) {
         this.code = code;
         this.status = status;
         this.copyright = copyright;
@@ -23,7 +23,7 @@ public class ComicDTO {
         this.etag = etag;
     }
 
-    public ComicDTO() {
+    public ResponseDTO() {
         super();
     }
 
@@ -68,12 +68,12 @@ public class ComicDTO {
     }
 
     @JsonProperty(value = "data")
-    public Data getData() {
+    public DataDTO getData() {
         return data;
     }
 
     @JsonProperty(value = "data")
-    public void setData(Data data) {
+    public void setData(DataDTO data) {
         this.data = data;
     }
 

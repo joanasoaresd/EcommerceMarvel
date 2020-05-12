@@ -35,7 +35,7 @@
             android:layout_marginTop="200dp">
 
             <TextView
-                android:id="@+id/tv_price_inicial"
+                android:id="@+id/tv_price_comic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -66,7 +66,7 @@
 
 
         <TextView
-            android:id="@+id/tv_raro"
+            android:id="@+id/tv_rare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"

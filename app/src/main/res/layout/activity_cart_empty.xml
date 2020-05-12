@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#242121"
-    tools:context=".view.Carrinho_vazio">
+    tools:context=".view.CartIsEmptyActivity">
 
 
     <Button
-        android:id="@+id/bt_voltar_inicial"
+        android:id="@+id/bt_home_page"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
