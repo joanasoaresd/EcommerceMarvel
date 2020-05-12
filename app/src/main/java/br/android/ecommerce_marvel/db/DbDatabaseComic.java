@@ -4,9 +4,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import java.util.ArrayList;
+
 import br.android.ecommerce_marvel.model.Comics;
 import br.android.ecommerce_marvel.model.Item;
+import br.android.ecommerce_marvel.utils.LoggerUtils;
 
 
 public class DbDatabaseComic implements DAO {
@@ -15,12 +18,13 @@ public class DbDatabaseComic implements DAO {
     private SQLiteDatabase write;
     private static DbOpenHelper criarBanco;
     private static DbDatabaseComic instance;
+    private static final String TAG = "BANCO";
 
     private DbDatabaseComic(Context context) {
         criarBanco = new DbOpenHelper(context);
         this.read = criarBanco.getReadableDatabase();
         this.write = criarBanco.getWritableDatabase();
-        System.out.println("Instanciaa");
+        LoggerUtils.log(TAG, "Instância");
     }
 
     public static DbDatabaseComic getInstance(Context context) {

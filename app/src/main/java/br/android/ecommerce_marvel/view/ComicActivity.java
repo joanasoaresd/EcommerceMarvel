@@ -18,6 +18,7 @@ import br.android.ecommerce_marvel.db.DbDatabaseComic;
 import br.android.ecommerce_marvel.model.ComicDTO;
 import br.android.ecommerce_marvel.model.Comics;
 import br.android.ecommerce_marvel.model.Item;
+import br.android.ecommerce_marvel.utils.LoggerUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -28,6 +29,7 @@ import static br.android.ecommerce_marvel.controller.RetrofitConfig.TS;
 public class ComicActivity extends AppCompatActivity {
 
     private static final String TAG = "COMICS";
+    private static final String TAAG = "CONTADOR";
     private RecyclerView recyclerView;
     private ComicAdapter comicAdapter;
     ArrayList<Comics> comicsList;
@@ -66,7 +68,7 @@ public class ComicActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ComicDTO> call, retrofit2.Response<ComicDTO> response) {
                 if (!response.isSuccessful()) {
-                    Log.i(TAG, "Erro: " + response.code());
+                    LoggerUtils.log(TAG, "Erro: " + response.code());
 
                 } else {
                     ArrayList<Comics> resposta = response.body().getData().getResults();
@@ -75,13 +77,13 @@ public class ComicActivity extends AppCompatActivity {
                     recyclerView.setLayoutManager(new GridLayoutManager(ComicActivity.this, 2));
                     for (int i = 0; i < resposta.size(); i++) {
                         Comics c = resposta.get(i);
-                        Log.i(TAG, "ID: " + c.getId());
-                        Log.i(TAG, "Title: " + c.getTitle());
-                        Log.i(TAG, "Descrição: " + c.getDescription());
-                        Log.i(TAG, "Páginas: " + c.getPageCount());
-                        Log.i(TAG, String.format("Preço: $ %.2f", c.getPrices().get(0).getPrice()));
-                        Log.i(TAG, "Imagem: " + c.getThumbnail().getPortraitFantastic());
-                        Log.i(TAG, "É Raro? " + c.getRaro());
+                        LoggerUtils.log(TAG, "ID: " + c.getId());
+                        LoggerUtils.log(TAG, "Title: " + c.getTitle());
+                        LoggerUtils.log(TAG, "Descrição: " + c.getDescription());
+                        LoggerUtils.log(TAG, "Páginas: " + c.getPageCount());
+                        LoggerUtils.log(TAG, String.format("Preço: $ %.2f", c.getPrices().get(0).getPrice()));
+                        LoggerUtils.log(TAG, "Imagem: " + c.getThumbnail().getPortraitFantastic());
+                        LoggerUtils.log(TAG, "É Raro? " + c.getRaro());
                         comicsList.add(c);
                         comicAdapter.notifyDataSetChanged();
                         fab.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +108,7 @@ public class ComicActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ComicDTO> call, Throwable t) {
-                Log.e(TAG, "Erro: " + t.getMessage());
+                LoggerUtils.log(TAG, "Erro: " + t.getMessage());
 
             }
         });
@@ -118,7 +120,7 @@ public class ComicActivity extends AppCompatActivity {
             contador += 1;
 
         }
-        System.out.println("cont " + contador);
+        LoggerUtils.log(TAAG,"cont " + contador);
         return contador;
     }
 

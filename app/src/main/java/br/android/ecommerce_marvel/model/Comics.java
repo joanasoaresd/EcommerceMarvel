@@ -76,9 +76,9 @@ public class Comics implements Parcelable {
     }
 
     public String mostrarRaro() {
-        String text = "Comum";
+        String text = " Comum";
         if (getRaro() == true) {
-            text = "Raro";
+            text = " Raro";
             return text;
         }
         return text;
