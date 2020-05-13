@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.Random;
 
+import br.android.ecommerce_marvel.utils.LoggerUtils;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DataDTO {
 
@@ -19,6 +21,7 @@ public class DataDTO {
     private ArrayList<ComicsDTO> results;
 
     private static final int PERCENT_RARE = (12 * 20) / 100;
+    private static final String TAG = "RANDOM";
     private int qtyRare;
     private ArrayList<Integer> listNumbersRandom;
 
@@ -35,7 +38,7 @@ public class DataDTO {
         Random random = new Random();
         int max = results.size();
         int randomNumbers = random.nextInt(max);
-        System.out.println("Random " + randomNumbers);
+        LoggerUtils.log(TAG, "NUMBERS RANDOM: " + randomNumbers);
         return randomNumbers;
 
     }

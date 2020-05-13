@@ -24,7 +24,6 @@ import br.android.ecommerce_marvel.model.Item;
 
 public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHolder> {
 
-    private Item item;
     private ArrayList<Item> listItem;
     private Context context;
     DbDatabaseComic databaseComic;
@@ -51,7 +50,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull CheckoutAdapter.ViewHolder viewHolder, int i) {
 
-        item = this.listItem.get(i);
+        Item item = this.listItem.get(i);
 
         viewHolder.qty.setText("" + item.getQty());
         viewHolder.titleComic.setText(item.getComics().getTitle());
@@ -76,9 +75,10 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageComic;
-        private TextView titleComic, price;
+        private TextView titleComic;
+        private TextView price;
         private EditText qty;
-        private ImageButton bt_del;
+        private ImageButton delete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -87,9 +87,9 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
             this.titleComic = (TextView) itemView.findViewById(R.id.tv_titlecheckout);
             this.price = (TextView) itemView.findViewById(R.id.tv_pricecheckout);
             this.qty = (EditText) itemView.findViewById(R.id.et_qtdeCheckout);
-            bt_del = (ImageButton) itemView.findViewById(R.id.bt_delete);
+            this.delete = (ImageButton) itemView.findViewById(R.id.bt_delete);
 
-            bt_del.setOnClickListener(new View.OnClickListener() {
+            delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     databaseComic.deleteRecords(listItem.get(getAdapterPosition()).getComics().getId());
@@ -97,9 +97,9 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
                     sumTotal(total);
                     notifyDataSetChanged();
 
-                    if (listItem.size() == 0) {
+                    if (listItem.isEmpty()) {
                         databaseComic.loadData();
-                        Context c = bt_del.getContext();
+                        Context c = delete.getContext();
                         Intent i = new Intent(c, CartIsEmptyActivity.class);
                         c.startActivity(i);
                         ((Activity) c).finish();

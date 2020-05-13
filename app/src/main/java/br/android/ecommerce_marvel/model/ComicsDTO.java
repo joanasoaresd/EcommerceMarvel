@@ -75,9 +75,9 @@ public class ComicsDTO implements Parcelable {
         return thumb;
     }
 
-    public String showRare() {
+    public String showRare(boolean isRare) {
         String text = " Comum";
-        if (getRare() == true) {
+        if (isRare) {
             text = " Raro";
             return text;
         }

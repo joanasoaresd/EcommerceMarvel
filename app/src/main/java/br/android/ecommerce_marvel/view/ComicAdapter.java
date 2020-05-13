@@ -20,7 +20,6 @@ import br.android.ecommerce_marvel.model.ComicsDTO;
 public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> {
 
     private ArrayList<ComicsDTO> comics;
-    private ComicsDTO comic;
 
 
     public ComicsDTO getComicItem(int position) {
@@ -46,11 +45,11 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
-        comic = this.comics.get(i);
+        ComicsDTO comic = this.comics.get(i);
 
         viewHolder.titleComic.setText(comic.getTitle());
         viewHolder.price.setText(String.format("$ %.2f ", comic.getPrices().get(0).getPrice()));
-        viewHolder.rare.setText(comic.showRare());
+        viewHolder.rare.setText(comic.showRare(comic.getRare()));
 
         Glide.with(viewHolder.imageComic.getContext())
                 .load(comic.getThumbnail().getLandscapeIncredible())
@@ -66,7 +65,9 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imageComic;
-        private TextView titleComic, price, rare;
+        private TextView titleComic;
+        private TextView price;
+        private TextView rare;
 
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);

@@ -69,7 +69,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
     private void configuration() {
         this.recyclerViewCheckout = findViewById(R.id.rv_checkout);
-        this.bt_purchase_completed = findViewById(R.id.bt_finalizar_compra);
+        this.bt_purchase_completed = findViewById(R.id.bt_purchase_completed);
         this.total_sum = findViewById(R.id.tv_value_total);
 
     }

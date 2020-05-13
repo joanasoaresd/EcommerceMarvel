@@ -20,10 +20,12 @@ import br.android.ecommerce_marvel.model.ComicsDTO;
 public class DetailsComicsActivity extends AppCompatActivity {
 
     private ComicsDTO comics;
-    private Button bt_buy, bt_cart;
-    private ImageButton bt_add_qty, bt_decrement_qty;
+    private Button buy;
+    private Button cart;
+    private ImageButton addQty;
+    private ImageButton decrementQty;
     DbDatabaseComic dbDatabaseComic;
-    private TextView tv_qty_count;
+    private TextView qtyCount;
     private int count = 1;
 
     @Override
@@ -50,27 +52,27 @@ public class DetailsComicsActivity extends AppCompatActivity {
         loadingDescr(comics.getDescription());
         loadingPrice(comics.getPrices().get(0).getPrice());
 
-        bt_add_qty.setOnClickListener(new View.OnClickListener() {
+        addQty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 count++;
-                tv_qty_count.setText("" + count);
+                qtyCount.setText("" + count);
             }
         });
 
-        bt_decrement_qty.setOnClickListener(new View.OnClickListener() {
+        decrementQty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 count--;
                 if (count <= 0) {
                     count = 1;
-                    tv_qty_count.setText("" + count);
+                    qtyCount.setText("" + count);
                 } else
-                    tv_qty_count.setText("" + count);
+                    qtyCount.setText("" + count);
             }
         });
 
-        bt_buy.setOnClickListener(new View.OnClickListener() {
+        buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addToCart(new ComicsDTO(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrices().get(0).getPrice(), comics.getThumbnail().getPortraitFantastic(), comics.getRare()), count);
@@ -81,7 +83,7 @@ public class DetailsComicsActivity extends AppCompatActivity {
             }
         });
 
-        bt_cart.setOnClickListener(new View.OnClickListener() {
+        cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addToCart(new ComicsDTO(comics.getId(), comics.getTitle(), comics.getDescription(), comics.getPageCount(), comics.getPrices().get(0).getPrice(), comics.getThumbnail().getPortraitFantastic(), comics.getRare()), count);
@@ -97,11 +99,11 @@ public class DetailsComicsActivity extends AppCompatActivity {
     }
 
     private void configuration() {
-        bt_buy = findViewById(R.id.bt_buy);
-        bt_cart = findViewById(R.id.bt_cart);
-        bt_add_qty = findViewById(R.id.bt_qtyDetails);
-        tv_qty_count = findViewById(R.id.tv_qtyDetails);
-        bt_decrement_qty = findViewById(R.id.ib_qtyDetailsMinus);
+        buy = findViewById(R.id.bt_buy);
+        cart = findViewById(R.id.bt_cart);
+        addQty = findViewById(R.id.bt_qtyDetails);
+        qtyCount = findViewById(R.id.tv_qtyDetails);
+        decrementQty = findViewById(R.id.ib_qtyDetailsMinus);
     }
 
     private void comeBackActionBar() {
@@ -155,7 +157,7 @@ public class DetailsComicsActivity extends AppCompatActivity {
     private void loadingImage(String imageUrl) {
         ImageView imageComic = findViewById(R.id.ImagemView);
         Glide.with(this)
-                .load(comics.getThumbnail().getPortraitUncanny())
+                .load(imageUrl)
                 .error(R.drawable.not_found)
                 .into(imageComic);
     }

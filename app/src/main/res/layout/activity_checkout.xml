@@ -25,7 +25,7 @@
             android:elevation="16dp">
 
             <Button
-                android:id="@+id/bt_finalizar_compra"
+                android:id="@+id/bt_purchase_completed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
