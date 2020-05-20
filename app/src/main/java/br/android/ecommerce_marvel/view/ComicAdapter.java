@@ -1,9 +1,7 @@
 package br.android.ecommerce_marvel.view;
 
 import android.content.Context;
-
 import android.content.Intent;
-
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,26 +9,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.bumptech.glide.Glide;
-import java.util.ArrayList;
-import br.android.ecommerce_marvel.R;
-import br.android.ecommerce_marvel.db.DbDatabaseComic;
-import br.android.ecommerce_marvel.model.Comics;
-import br.android.ecommerce_marvel.model.Item;
 
+import com.bumptech.glide.Glide;
+
+import java.util.ArrayList;
+
+import br.android.ecommerce_marvel.R;
+import br.android.ecommerce_marvel.model.ComicsDTO;
 
 public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> {
 
-    private ArrayList<Comics> comics;
-    private Comics comic;
+    private ArrayList<ComicsDTO> comics;
 
 
-    public Comics getComicItem(int position){
+    public ComicsDTO getComicItem(int position) {
         return comics.get(position);
 
     }
 
-    public ComicAdapter(ArrayList<Comics> comicsList) {
+    public ComicAdapter(ArrayList<ComicsDTO> comicsList) {
         this.comics = comicsList;
 
     }
@@ -48,21 +45,14 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
 
+        ComicsDTO comic = this.comics.get(i);
 
-        //comic é um elemento da lista comics
-        comic = this.comics.get(i);
+        viewHolder.titleComic.setText(comic.getTitle());
+        viewHolder.price.setText(String.format("$ %.2f ", comic.getPrices().get(0).getPrice()));
+        viewHolder.rare.setText(comic.showRare(comic.getRare()));
 
-        viewHolder.tituloComic.setText(comic.getTitle());
-        viewHolder.preco.setText(String.format("$ %.2f ", comic.getPrices().get(0).getPrice()));
-        viewHolder.raro.setText(comic.mostrarRaro());
-
-<<<<<<< HEAD
         Glide.with(viewHolder.imageComic.getContext())
                 .load(comic.getThumbnail().getLandscapeIncredible())
-=======
-            Glide.with(viewHolder.imageComic.getContext())
-                .load(comic.getThumbnail().getPortraitUncanny())
->>>>>>> develop
                 .error(R.drawable.not_found)
                 .into(viewHolder.imageComic);
     }
@@ -75,15 +65,17 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView imageComic;
-        private TextView tituloComic, preco, raro;
+        private TextView titleComic;
+        private TextView price;
+        private TextView rare;
 
         public ViewHolder(@NonNull final View itemView) {
             super(itemView);
 
             this.imageComic = (ImageView) itemView.findViewById(R.id.ib_ImagemComic);
-            this.tituloComic = (TextView) itemView.findViewById(R.id.tv_TitleComic);
-            this.preco = (TextView) itemView.findViewById(R.id.tv_price_inicial);
-            this.raro = (TextView) itemView.findViewById(R.id.tv_raro);
+            this.titleComic = (TextView) itemView.findViewById(R.id.tv_TitleComic);
+            this.price = (TextView) itemView.findViewById(R.id.tv_price_comic);
+            this.rare = (TextView) itemView.findViewById(R.id.tv_rare);
 
 
             imageComic.setOnClickListener(new View.OnClickListener() {
@@ -92,8 +84,7 @@ public class ComicAdapter extends RecyclerView.Adapter<ComicAdapter.ViewHolder> 
                 public void onClick(View v) {
                     Context context = imageComic.getContext();
                     Intent i = new Intent(context, DetailsComicsActivity.class);
-                    //comic selecionado na posição
-                    i.putExtra("comicSelecionado", getComicItem(getAdapterPosition()));
+                    i.putExtra("selectedComic", getComicItem(getAdapterPosition()));
                     context.startActivity(i);
                 }
 

@@ -15,24 +15,27 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
+
 import br.android.ecommerce_marvel.R;
 import br.android.ecommerce_marvel.db.DbDatabaseComic;
 import br.android.ecommerce_marvel.model.Item;
 
 public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHolder> {
 
-    private Item item;
-    private ArrayList<Item> listaItem;
+    private ArrayList<Item> listItem;
     private Context context;
     DbDatabaseComic databaseComic;
     TextView total;
 
-
+    public CheckoutAdapter() {
+        super();
+    }
 
     public CheckoutAdapter(Context context, ArrayList<Item> itens, DbDatabaseComic database, TextView total) {
         this.context = context;
-        this.listaItem = itens;
+        this.listItem = itens;
         this.databaseComic = database;
         this.total = total;
 
@@ -50,83 +53,82 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull CheckoutAdapter.ViewHolder viewHolder, int i) {
 
-        item = this.listaItem.get(i);
+        Item item = this.listItem.get(i);
 
-        viewHolder.qtde.setText(""+item.getQuantidade());
-        viewHolder.tituloComic.setText(item.getComics().getTitle());
-        viewHolder.preco.setText(String.format("$ %.2f " , item.getComics().getPrice()));
+        viewHolder.qty.setText("" + item.getQty());
+        viewHolder.titleComic.setText(item.getComics().getTitle());
+        viewHolder.price.setText(String.format("$ %.2f ", item.getComics().getPrice()));
         Glide.with(viewHolder.imageComic.getContext()).load(item.getComics().getThumb()).error(R.drawable.not_found).into(viewHolder.imageComic);
     }
 
     @Override
     public int getItemCount() {
-        return this.listaItem.size();
+        return this.listItem.size();
     }
 
-    public void somaTotal(TextView total){
-        double soma = 0;
-        for (int i = 0; i < this.listaItem.size(); i++) {
-            double valor = this.listaItem.get(i).getComics().getPrice() * this.listaItem.get(i).getQuantidade();
-            soma = valor+soma;
+    public double sumTotal(ArrayList<Item> items) {
+        double sum = 0;
+        for (int i = 0; i < items.size(); i++) {
+            double value = items.get(i).getComics().getPrice() * items.get(i).getQty();
+            sum = value + sum;
 
-        }  total.setText(String.format("$ %.2f " , soma));
+        }
+        return sum;
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageComic;
-        private TextView tituloComic, preco;
-        private EditText qtde;
-        private ImageButton bt_del;
+        private TextView titleComic;
+        private TextView price;
+        private EditText qty;
+        private ImageButton delete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             this.imageComic = (ImageView) itemView.findViewById(R.id.iv_thumb_checkout);
-            this.tituloComic = (TextView) itemView.findViewById(R.id.tv_titlecheckout);
-            this.preco = (TextView) itemView.findViewById(R.id.tv_pricecheckout);
-            this.qtde = (EditText) itemView.findViewById(R.id.et_qtdeCheckout);
-            bt_del = (ImageButton) itemView.findViewById(R.id.bt_apagar);
+            this.titleComic = (TextView) itemView.findViewById(R.id.tv_titlecheckout);
+            this.price = (TextView) itemView.findViewById(R.id.tv_pricecheckout);
+            this.qty = (EditText) itemView.findViewById(R.id.et_qtdeCheckout);
+            this.delete = (ImageButton) itemView.findViewById(R.id.bt_delete);
 
-            bt_del.setOnClickListener(new View.OnClickListener() {
+            delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    databaseComic.deletarRegistros(listaItem.get(getAdapterPosition()).getComics().getId());
-                    listaItem = databaseComic.carregarDados();
-                    //total.setText(String.format("$ %.2f " , somaTotal()));
-                    somaTotal(total);
+                    databaseComic.deleteRecords(listItem.get(getAdapterPosition()).getComics().getId());
+                    listItem = databaseComic.loadData();
+                    total.setText(String.format("$ %.2f ", sumTotal(listItem)));
                     notifyDataSetChanged();
 
-                     if(listaItem.size() == 0) {
-                        databaseComic.carregarDados();
-                        Context c = bt_del.getContext();
-                       //  somaTotal(total);
-                        Intent i = new Intent(c, Carrinho_vazio.class);
+                    if (listItem.isEmpty()) {
+                        databaseComic.loadData();
+                        Context c = delete.getContext();
+                        Intent i = new Intent(c, CartIsEmptyActivity.class);
                         c.startActivity(i);
-                        ((Activity)c).finish();
+                        ((Activity) c).finish();
 
-                       // notifyDataSetChanged();
-                         //total = 0 set total...
-
-                     }
-                     }
+                    }
+                }
             });
 
-            qtde.setOnClickListener(new View.OnClickListener() {
+            qty.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
-                    int numero = Integer.parseInt(qtde.getText().toString());
+                    int numero = Integer.parseInt(qty.getText().toString());
                     if (numero <= 0) {
                         Toast.makeText(context, "Não é possível inserir esta quantidade.", Toast.LENGTH_LONG).show();
-                        listaItem = databaseComic.carregarDados();
+                        listItem = databaseComic.loadData();
                         notifyDataSetChanged();
 
-                    } else{
-                        databaseComic.atualizarLista(listaItem.get(getAdapterPosition()), numero);
-                        listaItem = databaseComic.carregarDados();
-                        somaTotal(total);
+                    } else {
+                        databaseComic.updateList(listItem.get(getAdapterPosition()), numero);
+                        listItem = databaseComic.loadData();
+                        total.setText(String.format("$ %.2f ", sumTotal(listItem)));
                         notifyDataSetChanged();
-                }}
+                    }
+                }
             });
         }
     }

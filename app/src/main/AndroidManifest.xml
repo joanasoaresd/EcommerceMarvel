@@ -11,13 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.Carrinho_vazio"
+        <activity android:name=".view.CartIsEmptyActivity"
             android:parentActivityName=".view.ComicActivity"></activity>
         <activity android:name=".view.DetailsComicsActivity"
             android:parentActivityName=".view.ComicActivity"/>
         <activity android:name=".view.ComicActivity"/>
         <activity android:name=".view.CheckoutActivity"></activity>
-        <activity android:name=".view.CompraFinalizada"
+        <activity android:name=".view.CompletedPurchaseActivity"
             android:parentActivityName=".view.ComicActivity"></activity>
         <activity android:name=".view.SplashScreenActivity">
         <intent-filter>
