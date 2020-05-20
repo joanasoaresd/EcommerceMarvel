@@ -24,8 +24,8 @@ public class CheckoutActivity extends AppCompatActivity {
     private RecyclerView recyclerViewCheckout;
     private CheckoutAdapter checkoutAdapter;
     private ArrayList<Item> listCheckout;
-    private TextView total_sum;
-    private Button bt_purchase_completed;
+    private TextView totalSum;
+    private Button btPurchaseCompleted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +48,12 @@ public class CheckoutActivity extends AppCompatActivity {
         this.databaseComic = DbDatabaseComic.getInstance(getApplicationContext());
         listCheckout = new ArrayList<>();
         onResume();
-        this.checkoutAdapter = new CheckoutAdapter(getApplicationContext(), this.listCheckout, this.databaseComic, this.total_sum);
+        this.checkoutAdapter = new CheckoutAdapter(getApplicationContext(), this.listCheckout, this.databaseComic, this.totalSum);
         this.recyclerViewCheckout.setAdapter(checkoutAdapter);
         this.recyclerViewCheckout.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        this.checkoutAdapter.sumTotal(this.total_sum);
+        this.totalSum.setText(String.format("$ %.2f ", checkoutAdapter.sumTotal(listCheckout)));
 
-        bt_purchase_completed.setOnClickListener(new View.OnClickListener() {
+        btPurchaseCompleted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(CheckoutActivity.this, "Compra realizada com sucesso!", Toast.LENGTH_SHORT).show();
@@ -69,8 +69,8 @@ public class CheckoutActivity extends AppCompatActivity {
 
     private void configuration() {
         this.recyclerViewCheckout = findViewById(R.id.rv_checkout);
-        this.bt_purchase_completed = findViewById(R.id.bt_purchase_completed);
-        this.total_sum = findViewById(R.id.tv_value_total);
+        this.btPurchaseCompleted = findViewById(R.id.bt_purchase_completed);
+        this.totalSum = findViewById(R.id.tv_value_total);
 
     }
 

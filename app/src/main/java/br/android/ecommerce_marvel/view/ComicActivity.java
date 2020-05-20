@@ -28,7 +28,6 @@ import static br.android.ecommerce_marvel.controller.RetrofitConfig.TS;
 public class ComicActivity extends AppCompatActivity {
 
     private static final String TAG = "COMICS";
-    private static final String TAAG = "CONTADOR";
     private RecyclerView recyclerView;
     private ComicAdapter comicAdapter;
     ArrayList<ComicsDTO> comicsList;
@@ -88,11 +87,11 @@ public class ComicActivity extends AppCompatActivity {
                         fab.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                if (qtyItems() == 0) {
+                                if (listCheckout.isEmpty()) {
                                     Intent i = new Intent(getApplicationContext(), CartIsEmptyActivity.class);
                                     startActivity(i);
 
-                                } else if (qtyItems() > 0) {
+                                } else {
                                     Intent i = new Intent(getApplicationContext(), CheckoutActivity.class);
                                     startActivity(i);
 
@@ -111,16 +110,6 @@ public class ComicActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    private int qtyItems() {
-        int count = 0;
-        for (int i = 0; i < listCheckout.size(); i++) {
-            count += 1;
-
-        }
-        LoggerUtils.log(TAAG, "count " + count);
-        return count;
     }
 
     public void initialize() {

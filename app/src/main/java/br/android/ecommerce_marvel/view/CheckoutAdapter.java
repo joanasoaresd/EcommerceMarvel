@@ -29,6 +29,9 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
     DbDatabaseComic databaseComic;
     TextView total;
 
+    public CheckoutAdapter() {
+        super();
+    }
 
     public CheckoutAdapter(Context context, ArrayList<Item> itens, DbDatabaseComic database, TextView total) {
         this.context = context;
@@ -63,15 +66,16 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
         return this.listItem.size();
     }
 
-    public void sumTotal(TextView total) {
+    public double sumTotal(ArrayList<Item> items) {
         double sum = 0;
-        for (int i = 0; i < this.listItem.size(); i++) {
-            double value = this.listItem.get(i).getComics().getPrice() * this.listItem.get(i).getQty();
+        for (int i = 0; i < items.size(); i++) {
+            double value = items.get(i).getComics().getPrice() * items.get(i).getQty();
             sum = value + sum;
 
         }
-        total.setText(String.format("$ %.2f ", sum));
+        return sum;
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageComic;
@@ -94,7 +98,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
                 public void onClick(View v) {
                     databaseComic.deleteRecords(listItem.get(getAdapterPosition()).getComics().getId());
                     listItem = databaseComic.loadData();
-                    sumTotal(total);
+                    total.setText(String.format("$ %.2f ", sumTotal(listItem)));
                     notifyDataSetChanged();
 
                     if (listItem.isEmpty()) {
@@ -121,7 +125,7 @@ public class CheckoutAdapter extends RecyclerView.Adapter<CheckoutAdapter.ViewHo
                     } else {
                         databaseComic.updateList(listItem.get(getAdapterPosition()), numero);
                         listItem = databaseComic.loadData();
-                        sumTotal(total);
+                        total.setText(String.format("$ %.2f ", sumTotal(listItem)));
                         notifyDataSetChanged();
                     }
                 }
