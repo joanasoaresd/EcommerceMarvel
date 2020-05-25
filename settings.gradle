@@ -1,1 +1,4 @@
 include ':app'
+include ':marvel-model'
+include ':marvel-controller'
+include ':marvel-view'
