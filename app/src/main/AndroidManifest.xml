@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.android.ecommerce_marvel">
+    package="br.android.marvel_view">
 
     <application
         android:allowBackup="true"
@@ -11,23 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.CartIsEmptyActivity"
-            android:parentActivityName=".view.ComicActivity"></activity>
-        <activity android:name=".view.DetailsComicsActivity"
-            android:parentActivityName=".view.ComicActivity"/>
-        <activity android:name=".view.ComicActivity"/>
-        <activity android:name=".view.CheckoutActivity"></activity>
-        <activity android:name=".view.CompletedPurchaseActivity"
-            android:parentActivityName=".view.ComicActivity"></activity>
-        <activity android:name=".view.SplashScreenActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+        <activity android:name="br.android.marvel_app.app.main">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
+
 
 </manifest>

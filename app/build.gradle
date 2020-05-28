@@ -57,6 +57,10 @@ dependencies {
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.10'
     implementation 'org.jetbrains:annotations-java5:15.0'
 
+    implementation project(':ecommerce-marvel-model')
+    implementation project(':ecommerce-marvel-controller')
+    implementation project(':ecommerce-marvel-view')
+
 
 }
 

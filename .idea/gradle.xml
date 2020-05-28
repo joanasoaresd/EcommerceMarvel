@@ -11,9 +11,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/marvel-controller" />
-            <option value="$PROJECT_DIR$/marvel-model" />
-            <option value="$PROJECT_DIR$/marvel-view" />
+            <option value="$PROJECT_DIR$/ecommerce-marvel-controller" />
+            <option value="$PROJECT_DIR$/ecommerce-marvel-model" />
+            <option value="$PROJECT_DIR$/ecommerce-marvel-view" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
