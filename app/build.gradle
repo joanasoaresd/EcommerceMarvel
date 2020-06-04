@@ -27,13 +27,18 @@ android {
 
         }
         debug {
+            debuggable true
             buildConfigField "boolean", "LOGGER", "true"
-
+        }
+        development.initWith(buildTypes.debug)
+        development {
+            debuggable false
+            buildConfigField "boolean", "LOGGER", "false"
         }
     }
     flavorDimensions "view"
     productFlavors {
-        regular{
+        regular {
             dimension = "view"
             applicationIdSuffix ".regular"
             versionNameSuffix "-regular"
