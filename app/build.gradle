@@ -23,13 +23,52 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "boolean", "LOGGER", "false"
+
         }
+        debug {
+            buildConfigField "boolean", "LOGGER", "true"
+
+        }
+    }
+    flavorDimensions "view"
+    productFlavors {
+        regular{
+            dimension = "view"
+            applicationIdSuffix ".regular"
+            versionNameSuffix "-regular"
+        }
+        special {
+            dimension = "view"
+            applicationIdSuffix ".especial"
+            versionNameSuffix "-especial"
+
+        }
+    }
+
+    sourceSets {
+
+        regular {
+            java.srcDirs = ['src/regular/', 'src/main/']
+            res.srcDirs = ['src/regular/res', 'src/main/res']
+        }
+
+        special {
+            java.srcDirs = ['src/special/', 'src/main/']
+            res.srcDirs = ['src/special/res', 'src/main/res']
+        }
+
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:appcompat-v7:24.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'android.arch.navigation:navigation-fragment:1.0.0'

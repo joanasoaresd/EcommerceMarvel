@@ -1,4 +1,4 @@
-package br.android.marvel_app.app;
+package br.android.marvel_app.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,8 @@ public class main  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Intent i = new Intent(getApplicationContext(), SplashScreenActivity.class);
         startActivity(i);
+
+      
 
 
 

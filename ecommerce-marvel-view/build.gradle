@@ -18,7 +18,38 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "boolean", "LOGGER", "true"
         }
+    }
+    flavorDimensions "view"
+    productFlavors {
+        regular{
+            dimension = "view"
+
+        }
+        special {
+            dimension = "view"
+
+
+        }
+    }
+
+    sourceSets {
+
+        regular {
+            java.srcDirs = ['src/regular/', 'src/main/']
+            res.srcDirs = ['src/regular/res', 'src/main/res']
+        }
+
+        special {
+            java.srcDirs = ['src/special/', 'src/main/']
+            res.srcDirs = ['src/special/res', 'src/main/res']
+        }
+
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
     }
 
 }
