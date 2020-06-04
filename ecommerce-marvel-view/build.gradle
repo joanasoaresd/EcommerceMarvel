@@ -24,7 +24,7 @@ android {
     flavorDimensions "view"
     productFlavors {
         regular{
-            dimension = "view"
+
 
         }
         special {
