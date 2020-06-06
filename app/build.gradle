@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "br.android.ecommerce_marvel"
         minSdkVersion 29
@@ -19,21 +19,35 @@ android {
         }
     }
 
+
+    def getMyVersionCode = { ->
+        def code = project.hasProperty('versionCode') ? versionCode.toInteger() : 1
+        println "VersionCode is set to $code"
+        return code
+    }
+
     buildTypes {
+        String versionCode = getMyVersionCode()
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "boolean", "LOGGER", "false"
+            buildConfigField "int", "VERSION", versionCode
+
 
         }
         debug {
             debuggable true
             buildConfigField "boolean", "LOGGER", "true"
+            buildConfigField "int", "VERSION", versionCode
+
         }
         development.initWith(buildTypes.debug)
         development {
             debuggable false
             buildConfigField "boolean", "LOGGER", "false"
+            buildConfigField "int", "VERSION", versionCode
+
         }
     }
     flavorDimensions "view"
@@ -69,6 +83,7 @@ android {
         targetCompatibility = 1.8
     }
 }
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

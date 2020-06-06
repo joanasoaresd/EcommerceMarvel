@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         minSdkVersion 19
@@ -21,12 +21,12 @@ android {
             buildConfigField "boolean", "LOGGER", "false"
         }
         debug.initWith(buildTypes.debug)
-        debug{
+        debug {
             debuggable true
             buildConfigField "boolean", "LOGGER", "true"
         }
         development.initWith(buildTypes.debug)
-        development{
+        development {
             debuggable false
             buildConfigField "boolean", "LOGGER", "false"
         }
@@ -46,7 +46,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-jackson:2.3.0'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
 
 
 }
