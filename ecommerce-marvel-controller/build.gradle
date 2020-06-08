@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         minSdkVersion 19
@@ -18,10 +18,22 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "boolean", "LOGGER", "false"
+        }
+        debug {
+            debuggable true
+            buildConfigField "boolean", "LOGGER", "true"
+        }
+        development.initWith(buildTypes.debug)
+        development {
+            debuggable false
+            buildConfigField "boolean", "LOGGER", "false"
         }
     }
 
+
 }
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

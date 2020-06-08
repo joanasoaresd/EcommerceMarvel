@@ -10,7 +10,7 @@ public class LoggerUtils {
     }
 
     public static void log(String tag, String msg) {
-        if (BuildConfig.DEBUG) {
+        if (BuildConfig.LOGGER) {
             Log.d(tag, msg);
         }
     }
