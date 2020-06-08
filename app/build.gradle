@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-//apply plugin: "de.mannodermaus.android-junit5"
 
 android {
     compileSdkVersion 29
@@ -57,6 +56,10 @@ dependencies {
     implementation 'com.android.support:design:22.2.1'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.10'
     implementation 'org.jetbrains:annotations-java5:15.0'
+
+    implementation project(':ecommerce-marvel-model')
+    implementation project(':ecommerce-marvel-controller')
+    implementation project(':ecommerce-marvel-view')
 
 
 }

@@ -1,1 +1,4 @@
+include ':ecommerce-marvel-view'
+include ':ecommerce-marvel-model'
+include ':ecommerce-marvel-controller'
 include ':app'
